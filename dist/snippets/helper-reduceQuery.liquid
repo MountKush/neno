@@ -1,0 +1,12 @@
+{% assign queryArray = query | split: ',' %}
+
+{% capture newQuery %}
+  {% for queryItem in queryArray %}
+    {% if queryItem contains object %}
+      {{ queryItem }}
+      {% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{{ newQuery }}

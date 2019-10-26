@@ -1,0 +1,23 @@
+{% assign linklist = linklists[section.settings.footer_menu] %}
+
+<script id="footer-data" type="application/json">
+{
+  "linklist": {% render 'helper-linklist' linklist: linklist %}
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer Menu",
+      "info": "Select your footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

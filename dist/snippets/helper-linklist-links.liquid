@@ -1,0 +1,4 @@
+{%- for link in links -%}
+  {% render 'helper-linklist-link' link: link %}
+  {% unless forloop.last %},{% endunless %}
+{%- endfor -%}

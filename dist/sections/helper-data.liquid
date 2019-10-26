@@ -1,0 +1,24 @@
+{% comment %}
+[
+  title,
+  products: [
+    title,
+    image
+  ]
+]
+{% endcomment %}
+
+{% capture query %}
+  title,
+  products.
+    image,
+  products.
+    collections.title,
+  products.
+    collections.id,
+  id
+{% endcapture %}
+
+
+
+{% render 'helper-collection' collection: collection, query: query  %}

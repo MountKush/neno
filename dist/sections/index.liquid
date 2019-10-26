@@ -1,0 +1,161 @@
+<script>
+{
+  test: true
+}
+</script>
+
+
+{% schema %}
+{
+  "name": {
+    "de": "Fußzeile",
+    "en": "Index",
+    "es": "Pie de página",
+    "fr": "Pied de page",
+    "it": "Footer",
+    "ja": "フッター",
+    "pt-BR": "Rodapé"
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": {
+        "de": "Menü",
+        "en": "Menu",
+        "es": "Menú",
+        "fr": "Menu",
+        "it": "Menu",
+        "ja": "メニュー",
+        "pt-BR": "Menu"
+      }
+    },
+    {
+      "type": "link_list",
+      "id": "footer_linklist",
+      "label": {
+        "de": "Hauptmenü",
+        "en": "Primary menu",
+        "es": "Menú primario",
+        "fr": "Menu principal",
+        "it": "Menu principale",
+        "ja": "プライマリメニュー",
+        "pt-BR": "Menu principal"
+      },
+      "default": "footer",
+      "info": {
+        "de": "Dieses Menü zeigt keine Dropdowns an",
+        "en": "This menu won't show dropdown items",
+        "es": "Este menú no mostrará elementos desplegables",
+        "fr": "Ce menu n'affichera pas les éléments des menus déroulants",
+        "it": "Questo menu non mostrerà elementi a discesa",
+        "ja": "このメニューにはドロップダウンアイテムは表示されません",
+        "pt-BR": "Este menu não mostra itens de menus suspensos"
+      }
+    },
+    {
+      "type": "link_list",
+      "id": "footer_linklist_two",
+      "label": {
+        "de": "Extra Menü",
+        "en": "Additional menu",
+        "es": "Menú adicional",
+        "fr": "Menu supplémentaire",
+        "it": "Menu aggiuntivo",
+        "ja": "追加メニュー",
+        "pt-BR": "Menu adicional"
+      },
+      "default": "main-menu",
+      "info": {
+        "de": "Dieses Menü zeigt keine Dropdowns an",
+        "en": "This menu won't show dropdown items",
+        "es": "Este menú no mostrará elementos desplegables",
+        "fr": "Ce menu n'affichera pas les éléments des menus déroulants",
+        "it": "Questo menu non mostrerà elementi a discesa",
+        "ja": "このメニューにはドロップダウンアイテムは表示されません",
+        "pt-BR": "Este menu não mostra itens de menus suspensos"
+      }
+    },
+    {
+      "type": "header",
+      "content": {
+        "de": "Newsletter",
+        "en": "Newsletter",
+        "es": "Boletín",
+        "fr": "Newsletter",
+        "it": "Newsletter",
+        "ja": "ニュースレター",
+        "pt-BR": "Newsletter"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_newsletter_enable",
+      "label": {
+        "de": "Newsletter Signup anzeigen",
+        "en": "Show newsletter signup",
+        "es": "Mostrar suscripción al boletín",
+        "fr": "Afficher l'inscription à la newsletter",
+        "it": "Mostra iscrizione alla Newsletter",
+        "ja": "ニュースレターのサインアップを表示する",
+        "pt-BR": "Exibir assinatura da newsletter"
+      },
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "footer_newsletter_subheading",
+      "label": {
+        "de": "Unter-Überschrift",
+        "en": "Subheading",
+        "es": "Subtítulo",
+        "fr": "Sous-titre",
+        "it": "Sottotitolo",
+        "ja": "小見出し",
+        "pt-BR": "Subtítulo"
+      },
+      "default": {
+        "de": "<p>Eine kurze Beschreibung zum Inhalt des Newsletters</p>",
+        "en": "<p>A short sentence describing what someone will receive by subscribing</p>",
+        "es": "<p>Una frase corta que describe lo que las personas recibirán al suscribirse</p>",
+        "fr": "<p>Petite phrase qui décrit ce qu'on reçoit en s'inscrivant</p>",
+        "it": "<p>Una breve frase che descrive ciò che qualcuno riceverà effettuando l'iscrizione</p>",
+        "ja": "<p>購読している人が何を受け取ることができるかについて説明する短い文章</p>",
+        "pt-BR": "<p>Uma frase curta que descreve o que alguém receberá ao assinar</p>"
+      }
+    },
+    {
+      "type": "header",
+      "content": {
+        "de": "Zahlungsarten",
+        "en": "Payment methods",
+        "es": "Métodos de pago",
+        "fr": "Moyens de paiement",
+        "it": "Metodi di pagamento",
+        "ja": "お支払い方法",
+        "pt-BR": "Formas de pagamento"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": {
+        "de": "Zahlungs-Buttons anzeigen",
+        "en": "Show payment icons",
+        "es": "Mostrar iconos de pago",
+        "fr": "Afficher les icônes de paiement",
+        "it": "Mostra le icone di pagamento",
+        "ja": "支払いアイコンを表示する",
+        "pt-BR": "Exibir ícones de pagamento"
+      },
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Index boooy",
+      "category": "Advanced layout",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

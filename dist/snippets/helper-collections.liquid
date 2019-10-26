@@ -1,0 +1,4 @@
+{%- for collection in collections -%}
+  {% render 'helper-collection' collection: collection %}
+  {% unless forloop.last %},{% endunless %}
+{%- endfor -%}

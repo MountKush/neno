@@ -1,0 +1,6 @@
+{
+  "handle": {{ linklist.handle | json }},
+  "levels": {{ linklist.levels | json }},
+  "links": [{% render 'helper-linklist-links' links: linklist.links %}],
+  "title": {{ linklist.title | json }}
+}

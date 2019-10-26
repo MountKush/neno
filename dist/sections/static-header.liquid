@@ -1,0 +1,22 @@
+{% assign linklist = linklists[section.settings.main_menu] %}
+
+<script id="header-data" type="application/json">
+{
+  "linklist": {% render 'helper-linklist' linklist: linklist %}
+}
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu",
+      "info": "Select your main menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

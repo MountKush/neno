@@ -1,0 +1,35 @@
+<script id="section-data" type="application/json">
+{
+  "linklist": {% render 'helper-linklist' linklist: linklists['main-menu'] %}
+}
+</script>
+
+{% schema %}
+{
+  "name": {
+    "de": "Warenkorb-Seite",
+    "en": "Cart page",
+    "es": "Página de carrito",
+    "fr": "Page du panier",
+    "it": "Pagina del carrello",
+    "ja": "カートページ",
+    "pt-BR": "Página do carrinho"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "cart_notes_enable",
+      "label": {
+        "de": "Warenkorb-Notifikationen erlauben",
+        "en": "Enable cart notes",
+        "es": "Habilitar notas de carrito",
+        "fr": "Activer les notes de panier",
+        "it": "Abilita note carrello",
+        "ja": "カートメモを有効にする",
+        "pt-BR": "Ativar observações sobre o carrinho"
+      },
+      "default": false
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,4 @@
+{%- for image in images -%}
+  {% render 'helper-image' image: image %}
+  {% unless forloop.last %},{% endunless %}
+{%- endfor -%}

@@ -1,0 +1,9 @@
+{% comment %}
+{
+  "product": {% if object.available != blank %} {% render 'helper-product' product: object %} {% else %} null {% endif %},
+  "collection": {% if object.products_count != blank %} {% render 'helper-collection' collection: object %} {% else %} null {% endif %},
+  "page": {% if object.author != blank %} {% render 'helper-page' page: object %} {% else %} null {% endif %},
+  "blog": {% if object.moderated? != blank %} {% render 'helper-blog' blog: object %} {% else %} null {% endif %}
+}
+{% endcomment %}
+null

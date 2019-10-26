@@ -1,0 +1,38 @@
+{% if product != blank %}
+{
+  {% comment %}
+  "available": {{ product.available | json }},
+  "collections": [{% render 'helper-collections' collections: product.collections %}],
+  "compare_at_price_max": {{ product.compare_at_price_max | json }},
+  "compare_at_price_min": {{ product.compare_at_price_min | json }},
+  "compare_at_price_varies": {{ product.compare_at_price_varies | json }},
+  "content": {{ product.content | json }},
+  "description": {{ product.description | json }},
+  "featured_image": {% render 'helper-image' image: product.featured_image %},
+  "first_available_variant": {{ product.first_available_variant | json }},
+  "handle": {{ product.handle | json }},
+  "has_only_default_variant": {{ product.has_only_default_variant | json }},
+  "id": {{ product.id | json }},
+  "images": [{% render 'helper-images' images: product.images %}],
+  "options": {{ product.options | json }},
+  "options_by_name": {{ product.options_by_name | json }},
+  "options_with_values": {{ product.options_with_values | json }},
+  "price": {{ product.price | json }},
+  "price_max": {{ product.price_max | json }},
+  "price_min": {{ product.price_min | json }},
+  "price_varies": {{ product.price_varies | json }},
+  "selected_variant": {{ product.selected_variant | json }},
+  "selected_or_first_available_variant": {{ product.selected_or_first_available_variant | json }},
+  "tags": {{ product.tags | json }},
+  "template_suffix": {{ product.template_suffix | json }},
+  "title": {{ product.title | json }},
+  "type": {{ product.type | json }},
+  "url": {{ product.url | json }},
+  "variants": [{% render 'helper-variants' variants: product.variants %}],
+  "vendor": {{ product.vendor | json }}
+  {% endcomment %}
+null
+}
+{% else %}
+null
+{% endif %}
