@@ -5,7 +5,7 @@
     "title": {{ collection.title | json }},
     "description": {{ collection.description | json }},
     "products": [
-      {% for product in collection.products %}
+      {% for product in collection.products limit:8 %}
         {
           "available": {{ product.available | json }},
           "featuredImage": {% render 'helper-image' image: product.featured_image %},
