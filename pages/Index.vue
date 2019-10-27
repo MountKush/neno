@@ -19,6 +19,7 @@ main(class='container-index')
         v-if='section.type === "dynamic-collection"'
         :settings='section.settings'
       )
+  UserFeedback
 </template>
 
 
@@ -27,13 +28,15 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import ImageWithText from '~comp/compositions/ImageWithText.vue'
 import ImageWithTextOverlay from '~comp/compositions/ImageWithTextOverlay.vue'
 import FeaturedCollection from '~comp/compositions/FeaturedCollection.vue'
+import UserFeedback from '~comp/compositions/UserFeedback.vue'
 
 
 export default {
   components: {
     ImageWithText,
     ImageWithTextOverlay,
-    FeaturedCollection
+    FeaturedCollection,
+    UserFeedback
   },
   data () {
     return {}
