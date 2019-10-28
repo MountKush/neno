@@ -1,6 +1,6 @@
 <template lang='pug'>
 main(class='vue-app')
-  NavigationBar
+  AppNavigationBar(class='vue-app__navigation-bar')
   transition(
     name='fade'
     mode='out-in'
@@ -15,11 +15,11 @@ main(class='vue-app')
 <script>
 import { mapActions } from 'vuex'
 import AppFooter from '~comp/footer/Index.vue'
-import NavigationBar from '~comp/navigationBar/Index.vue'
+import AppNavigationBar from '~comp/app/AppNavigationBar.vue'
 
 export default {
   components: {
-    NavigationBar,
+    AppNavigationBar,
     AppFooter
   },
   data () {
@@ -48,12 +48,12 @@ export default {
 .vue-app
   display: grid
 
-  &__nav-bar
-    height: $unit*6
+  &__navigation-bar
+    height: $unit*7
 
   &__error,
   &__view
-    min-height: calc(100vh - #{$unit*6})
+    min-height: calc(100vh - #{$unit*7})
 
 .fade-enter-active,
 .fade-leave-active

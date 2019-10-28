@@ -37,10 +37,11 @@ export default {
 
 <style lang='sass' scoped>
 .container-feedback
-  padding: $unit*7 0
-  background: $pri-cl
+  margin: 0 $unit*4
 
 .feedback
+  padding: $unit*5 0
+  background: $pri-cl
 
   & h3
     font-size: $fs1

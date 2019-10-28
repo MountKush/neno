@@ -1,0 +1,182 @@
+{% comment %}
+  Export data
+{% endcomment %}
+<script class="section-data" type="application/json">
+{
+  "type": "dynamic-content-tiles",
+  "id": {{ section.id | json }},
+  "settings": {},
+  "blocks": [
+    {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'tile' %}
+        {
+          {% if block.shopify_attributes %}
+            "shopifyAttributes": {{ block.shopify_attributes | json }},
+          {% endif %}
+          "type": {{ block.type | json }},
+          "title": {{ block.settings.title | json }},
+          "text": {{ block.settings.text | json }},
+          "buttonLabel": {{ block.settings.button_label | json }},
+          "buttonLink": {{ block.settings.button_link | json }},
+          "image": {{ block.settings.image | json }}
+        }
+      {% endcase %}
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Content tiles",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "画像",
+            "pt-BR": "Imagem"
+          }
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": {
+            "de": "Fotoausrichtung",
+            "en": "Image alignment",
+            "es": "Alineación de imagen",
+            "fr": "Alignement de l'image",
+            "it": "Allineamento immagine",
+            "ja": "画像アラインメント",
+            "pt-BR": "Alinhamento da imagem"
+          },
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": {
+                "de": "Links",
+                "en": "Left",
+                "es": "Izquierda",
+                "fr": "Gauche",
+                "it": "Sinistra",
+                "ja": "左",
+                "pt-BR": "Esquerda"
+              }
+            },
+            {
+              "value": "right",
+              "label": {
+                "de": "Rechts",
+                "en": "Right",
+                "es": "Derecha",
+                "fr": "Droite",
+                "it": "Destra",
+                "ja": "右",
+                "pt-BR": "Direita"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "de": "Titel",
+            "en": "Heading",
+            "es": "Título",
+            "fr": "En-tête",
+            "it": "Heading",
+            "ja": "見出し",
+            "pt-BR": "Título"
+          },
+          "default": {
+            "de": "Foto mit Text",
+            "en": "Image with text",
+            "es": "Imagen con texto",
+            "fr": "Image avec du texte",
+            "it": "Immagine con testo",
+            "ja": "テキスト付き画像",
+            "pt-BR": "Imagem com texto"
+          }
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": {
+            "de": "Text",
+            "en": "Text",
+            "es": "Texto",
+            "fr": "Texte",
+            "it": "Testo",
+            "ja": "テキスト",
+            "pt-BR": "Texto"
+          },
+          "default": {
+            "de": "<p>Kombinieren Sie große Schrift mit einem Foto, um einen Fokus auf Ihr ausgewähltes Produkt, die Kategorie oder einen Blogpost zu legen. Dazu Details zur Verfügbarkeit, Stil oder ein Review.</p>",
+            "en": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "es": "<p>Vincula un texto largo con una imagen para dar visibilidad a tu producto, colección o publicación de blog elegida. Agrega detalles sobre disponibilidad, estilo, o incluso ofrece una reseña.</p>",
+            "fr": "<p>Ajoutez une image à un long texte pour mettre l'accent sur un produit de votre choix, une collection, ou un article de blog. Ajoutez des détails sur la disponibilité, le style, ou mettez un commentaire client en avant.</p>",
+            "it": "<p>Associa un testo di grandi dimensioni a un'immagine per dare importanza al prodotto, alla collezione o all'articolo del blog di tua scelta. Aggiungi dettagli sulla disponibilità, sullo stile o fornisci una recensione.</p>",
+            "ja": "<p>あなたが選んだ商品、コレクション、またはブログ投稿に注目を集めるため、大きなテキストと画像を組み合わせます。可用性、スタイル、またはレビュー提供についての詳細を追加します。</p>",
+            "pt-BR": "<p>Emparelhe textos grandes com uma imagem para dar foco ao produto, coleção ou postagem do blog escolhido. Adicione detalhes sobre disponibilidade, estilo ou até mesmo um comentário.</p>"
+          }
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": {
+            "de": "Button-Etikett",
+            "en": "Button label",
+            "es": "Etiqueta de botón",
+            "fr": "Texte du bouton",
+            "it": "Etichetta pulsante",
+            "ja": "ボタンラベル",
+            "pt-BR": "Etiqueta do botão"
+          }
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": {
+            "de": "Button-Link",
+            "en": "Button link",
+            "es": "Enlace de botón",
+            "fr": "Lien du bouton",
+            "it": "Link pulsante",
+            "ja": "ボタンリンク",
+            "pt-BR": "Link do botão"
+          }
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Tiles",
+      "category": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "pt-BR": "Imagem"
+      }
+    }
+  ]
+}
+{% endschema %}

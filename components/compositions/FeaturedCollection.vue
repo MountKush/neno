@@ -51,13 +51,14 @@ export default {
 <style lang='sass' scoped>
 .container
   padding: $unit*7 0
+  background: $pri-cl
 
 .featured-collection
   display: grid
   grid-gap: $unit*5
 
   &__slider
-    background: $white
+    background: $pri-cl
 
   &__card
     width: 320px

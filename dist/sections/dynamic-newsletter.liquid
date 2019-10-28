@@ -1,0 +1,51 @@
+{% comment %}
+  Export data
+{% endcomment %}
+<script class="section-data" type="application/json">
+{
+  "type": "dynamic-newsletter",
+  "id": {{ section.id | json }},
+  "settings": {
+    "title": {{ section.settings.title | json }},
+    "text": {{ section.settings.text | json }},
+    "image": {{ section.settings.image | json }}
+  },
+  "blocks": []
+}
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text overlay"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Encource customers to sign up for your newsletter.</p>"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

@@ -1,17 +1,26 @@
 <template lang='pug'>
-section(class='container')
-  div(class='hero')
+section(class='container-text-columns')
+  div(class='text-columns')
     HeroHeader(
       :title='settings.title'
-      :text='settings.text'
-      :buttonText='settings.buttonText'
-      :buttonLink='settings.buttonLink'
-      class='hero__header'
+      class='text-columns__header'
     )
-    img(
-      v-lazy='settings.image'
-      class='hero__image'
-    )
+    ul(class='text-columns__list')
+      li(
+        v-for='(block, index) in blocks'
+        :key='block + index'
+        class='text-columns__item'
+      )
+        div(class='text-columns__column')
+          img(
+            v-lazy='block.image'
+            class='column__image'
+          )
+          h3(class='column__title') {{ block.title }}
+          div(
+            v-html='block.text'
+            class='column__text'
+          )
 </template>
 
 
@@ -28,6 +37,10 @@ export default {
     settings: {
       type: Object,
       required: true
+    },
+    blocks: {
+      type: Array,
+      required: true
     }
   },
   data () {
@@ -40,19 +53,40 @@ export default {
 
 
 <style lang='sass' scoped>
-.container
+.container-text-columns
 
-.hero
+.text-columns
+  @extend %content
   display: grid
-  align-items: center
-  +mq-m
-    grid-template-columns: repeat(2, 1fr)
+  grid-gap: $unit*10
+  padding: $unit*10 0 $unit*20 0
 
   &__header
 
+  &__list
+    display: grid
+    grid-gap: $unit*5
+    grid-template-columns: repeat(3, 1fr)
 
+  &__item
+
+  &__column
+    max-width: 320px
+
+
+.column
 
   &__image
-    width: 100%
+    width: $unit*7
+    height: $unit*7
+    background: $pri-cl
+    padding: $unit
+
+  &__title
+    font-weight: $fw-bold
+    margin: $unit*2 0
+
+  &__text
+
 
 </style>

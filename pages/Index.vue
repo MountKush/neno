@@ -9,6 +9,7 @@ main(class='container-index')
       ImageWithText(
         v-if='section.type === "dynamic-feature-row"'
         :settings='section.settings'
+        :blocks='section.blocks'
       )
       ImageWithTextOverlay(
         v-if='section.type === "dynamic-hero"'
@@ -19,6 +20,16 @@ main(class='container-index')
         v-if='section.type === "dynamic-collection"'
         :settings='section.settings'
       )
+      ContentTiles(
+        v-if='section.type === "dynamic-content-tiles"'
+        :settings='section.settings'
+        :blocks='section.blocks'
+      )
+      Newsletter(
+        v-if='section.type === "dynamic-newsletter"'
+        :settings='section.settings'
+      )
+
   UserFeedback
 </template>
 
@@ -29,14 +40,17 @@ import ImageWithText from '~comp/compositions/ImageWithText.vue'
 import ImageWithTextOverlay from '~comp/compositions/ImageWithTextOverlay.vue'
 import FeaturedCollection from '~comp/compositions/FeaturedCollection.vue'
 import UserFeedback from '~comp/compositions/UserFeedback.vue'
-
+import ContentTiles from '~comp/compositions/ContentTiles.vue'
+import Newsletter from '~comp/compositions/Newsletter.vue'
 
 export default {
   components: {
     ImageWithText,
     ImageWithTextOverlay,
     FeaturedCollection,
-    UserFeedback
+    UserFeedback,
+    ContentTiles,
+    Newsletter
   },
   data () {
     return {}
@@ -55,8 +69,5 @@ export default {
 
 .index
   display: grid
-  grid-gap: $unit*5 0
-  +mq-m
-    // grid-gap: $unit*20 0
 
 </style>

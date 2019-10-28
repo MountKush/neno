@@ -49,6 +49,7 @@ export default {
   position: relative
 
 .slider
+  background: inherit
   cursor: grab
   overflow-x: auto
   -webkit-overflow-scrolling: touch
