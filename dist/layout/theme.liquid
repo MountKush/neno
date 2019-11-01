@@ -11,9 +11,16 @@
   </head>
   <body>
     <div id='vue-app'></div>
-    {% section 'static-header' %}
-    {{ content_for_layout }}
-    {% section 'static-footer' %}
+    <div style='display: none;'>
+      {% section 'static-header' %}
+      {{ content_for_layout }}
+      {% section 'static-footer' %}
+    </div>
     {% render 'app-scripts' %}
+    <style>
+      #preview-bar-iframe {
+        display: none !important;
+      }
+    </style>
   </body>
 </html>

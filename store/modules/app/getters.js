@@ -10,6 +10,7 @@ export default {
     const { path } = rootState.route
     const { themeData } = state
     const sections = themeData[path]
+    console.log('sections: ', sections)
     return sections || []
   }
 }

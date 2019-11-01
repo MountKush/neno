@@ -49,4 +49,28 @@ export default {
       console.error(e)
     }
   },
+
+
+  async fetchSection ({ commit, state, rootState }, {sectionId}) {
+    try {
+      console.log('fetchSection')
+      const { path } = rootState.route
+      const { themeData } = state
+
+
+      const url = `/?section_id=${sectionId}`
+      const { data } = await axios.get(url)
+      const parser = new DOMParser()
+      const parsedHtml = parser.parseFromString(data, 'text/html')
+      // Get section data
+      const sectionScript = parsedHtml.querySelectorAll('.section-data')
+      sectionScript.forEach(script => {
+        const sectionData = JSON.parse(script.textContent)
+        commit('SET_THEME_DATA', { data: sectionData, path })
+      })
+    }
+    catch (e) {
+      console.error(e)
+    }
+  },
 }

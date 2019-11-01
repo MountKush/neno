@@ -10,24 +10,29 @@ main(class='container-index')
         v-if='section.type === "dynamic-feature-row"'
         :settings='section.settings'
         :blocks='section.blocks'
+        :class='`shopify-section-${section.id}`'
       )
       ImageWithTextOverlay(
         v-if='section.type === "dynamic-hero"'
         :settings='section.settings'
         :blocks='section.blocks'
+        :class='`shopify-section-${section.id}`'
       )
       FeaturedCollection(
         v-if='section.type === "dynamic-collection"'
         :settings='section.settings'
+        :class='`shopify-section-${section.id}`'
       )
       ContentTiles(
         v-if='section.type === "dynamic-content-tiles"'
         :settings='section.settings'
         :blocks='section.blocks'
+        :class='`shopify-section-${section.id}`'
       )
       Newsletter(
         v-if='section.type === "dynamic-newsletter"'
         :settings='section.settings'
+        :class='`shopify-section-${section.id}`'
       )
 
   UserFeedback

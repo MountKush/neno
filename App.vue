@@ -32,11 +32,13 @@ export default {
   methods: {
     ...mapActions({
       initData: 'app/initData',
-      fetchData: 'app/fetchData'
+      fetchData: 'app/fetchData',
+      themeEditor: 'shopifyThemeEditor/init'
     })
   },
   created () {
     this.initData()
+    this.themeEditor()
   }
 }
 </script>
