@@ -60,12 +60,12 @@ export default {
   &__track
     display: grid
     grid-auto-flow: column
-    grid-gap: $unit*4
+    grid-gap: $unit*2
     width: fit-content
     padding: 0 5% $unit*5 5%
     position: relative
     z-index: 1
-    +mq-s
+    +mq-l
       padding: 0 12.5% $unit*5 12.5%
 
     &.is-dragging

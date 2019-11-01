@@ -58,6 +58,7 @@ export default {
 
 .hero
   @extend %flex--column-center
+  background: $pri-cl
 
 .u-height
 

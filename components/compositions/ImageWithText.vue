@@ -58,10 +58,11 @@ export default {
 .text-columns
   @extend %content
   display: grid
-  grid-gap: $unit*10
-  padding: $unit*10 0 $unit*20 0
+  // grid-gap: $unit*10
+  padding: $unit*7 0
 
   &__header
+    display: none
 
   &__list
     display: grid

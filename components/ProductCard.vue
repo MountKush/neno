@@ -57,21 +57,24 @@ export default {
   // box-shadow: 0 0 $unit*3 rgba(34, 34, 34, 0.05)
   // padding: $unit $unit $unit*4 $unit
   // padding: $unit
-  background: $white
+  // background: $white
+  // padding: $unit
 
   &__image
+    // padding: $unit*5 $unit*3 0 $unit*3
+    // padding: $unit*2
+    // padding-bottom: 0
 
   &__title
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
-    font-size: 12px
-    color: $black
-    margin-top: $unit*2
+    // margin: $unit $unit*2 0 $unit*2
+    // padding: $unit*2
+    margin: $unit 0 
 
   &__price
-    font-size: 12px
-    color: $dark
+    // margin: 0 $unit*2
 
   &__tag
     position: absolute

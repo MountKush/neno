@@ -48,7 +48,9 @@ export default {
 
 <style lang='sass' scoped>
 .container-content-tiles
-  padding: $unit*4
+  padding: $unit*2 0
+  +mq-s
+    padding: $unit*4
   // background: $pri-cl
 
 .content-tiles
@@ -56,8 +58,10 @@ export default {
 
   &__list
     display: grid
-    grid-gap: $unit*4
-    +mq-m
+    grid-gap: $unit*2
+    +mq-s
+      grid-gap: $unit*4
+    +mq(1280)
       grid-auto-flow: dense
       grid-template-columns: 1fr 1fr
       grid-auto-columns: 1fr 1fr

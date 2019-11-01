@@ -73,10 +73,12 @@ export default {
   &__body
     grid-row: 1 / 3
     grid-column: 1 / 2
-    padding: $unit*10 0
+    padding: $unit*10
     position: relative
     z-index: 4
     align-self: center
+    justify-self: center
+    max-width: 900px
 
   &__display
     grid-row: 1 / 3

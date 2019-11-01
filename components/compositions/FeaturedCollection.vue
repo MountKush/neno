@@ -52,6 +52,7 @@ export default {
 .container
   padding: $unit*7 0
   background: $pri-cl
+  // background: $white
 
 .featured-collection
   display: grid
@@ -59,8 +60,11 @@ export default {
 
   &__slider
     background: $pri-cl
+    // background: $white
 
   &__card
-    width: 320px
+    // width: 320px
+    // width: 41vw
+    width: 280px
 
 </style>
