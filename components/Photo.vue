@@ -5,13 +5,13 @@ div(class='container-image-ratio-sizer')
     class='image-ratio-sizer'
   )
     svg(
-      :viewBox='image.aspectRatio'
+      :viewBox='`0 0 ${aspectRatio} 1`'
       class='image-ratio-sizer__svg'
     )
     transition(mode='in-out')
       img(
-        :key='image.src'
-        v-lazy='image.src'
+        :key='src'
+        v-lazy='src'
         class='image-ratio-sizer__image'
       )
 </template>
@@ -23,8 +23,12 @@ div(class='container-image-ratio-sizer')
 export default {
   components: {},
   props: {
-    image: {
-      type: Object,
+    src: {
+      type: String,
+      required: true
+    },
+    aspectRatio: {
+      type: Number,
       required: true
     }
   },

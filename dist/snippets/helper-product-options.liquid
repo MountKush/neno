@@ -1,0 +1,14 @@
+{%- for option in options_with_values -%}
+  {
+    "name": {{ option.name | json }},
+    "position": {{ option.position | json }},
+    "selectedValue": {{ option.selected_value | json }},
+    "values": [
+      {%- for value in option.values -%}
+        {{ value | json }}
+        {% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+  {% unless forloop.last %},{% endunless %}
+{%- endfor -%}

@@ -30,15 +30,15 @@ main(
 <script>
 import { mapState, mapGetters } from 'vuex'
 import ProductDisplay from '~comp/productDisplay/Index.vue'
-import ProductDetail from '~comp/productDetail/Index.vue'
-import ProductSimilar from '~comp/productSimilar/Index.vue'
+// import ProductDetail from '~comp/productDetail/Index.vue'
+// import ProductSimilar from '~comp/productSimilar/Index.vue'
 
 
 export default {
   components: {
     ProductDisplay,
-    ProductDetail,
-    ProductSimilar
+    // ProductDetail,
+    // ProductSimilar
   },
   data () {
     return {}

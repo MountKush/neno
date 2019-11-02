@@ -1,10 +1,16 @@
 <template lang='pug'>
 div(class='container-display')
 
-  div(class='display')
+  div(
+    v-dragscroll.x='!isTouchDevice'
+    class='display'
+  )
 
     Photo(
-      :image='{ src: variant.image.src, aspectRatio: "0 0 268 357" }'
+      v-for='(image, index) in images'
+      :key='image + index'
+      :src='image.src'
+      :aspectRatio='image.aspect_ratio'
       class='display__image'
     )
 
@@ -13,23 +19,33 @@ div(class='container-display')
 
 
 <script>
+import { dragscroll } from 'vue-dragscroll'
 import Photo from '~comp/Photo.vue'
 
+
 export default {
+  directives: {
+    'dragscroll': dragscroll
+  },
   components: {
     Photo
   },
   props: {
-    variant: {
-      type: Object,
+    images: {
+      type: Array,
       required: true
     }
   },
   data () {
-    return {}
+    return {
+      isTouchDevice: false,
+    }
   },
   computed: {},
-  methods: {}
+  methods: {},
+  created () {
+    this.isTouchDevice = 'ontouchstart' in document.documentElement
+  }
 }
 </script>
 
@@ -38,7 +54,17 @@ export default {
 .container-display
 
 .display
-  box-shadow: 0 $unit*3 $unit*4 rgba(34, 34, 34, 0.075)
-  padding: $unit
+  // box-shadow: 0 $unit*3 $unit*4 rgba(34, 34, 34, 0.075)
+  // padding: $unit
+  // scroll-snap-type: x mandatory
+  display: grid
+  grid-auto-flow: column
+  grid-auto-columns: 33vw
+  overflow-x: auto
+  width: 33vw
+
+  &__image
+    // scroll-snap-align: start
+    width: 100%
 
 </style>

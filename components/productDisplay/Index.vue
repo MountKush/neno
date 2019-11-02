@@ -4,35 +4,31 @@ div(class='container-product-display')
   div(class='product-display')
 
     Display(
-      :variant='activeVariant'
+      v-if='activeVariant'
+      :images='product.images'
       class='product-display__product'
     )
 
-    div(class='product-display__wrapper')
+    Detail(
+      :product='product'
+      :variant='activeVariant'
+      class='product-display__detail'
+    )
 
-      Detail(
-        :product='product'
-        :variant='activeVariant'
-        class='product-display__detail'
-      )
+    Controller(
+      :product='product'
+      :variants='product.variants'
+      :options='product.options_with_values'
+      @setActiveVariant='setActiveVariant'
+      @quantity='setQuantity'
+      class='product-display__controller'
+    )
 
-      div(class='product-display__divider divider-0')
-
-      Controller(
-        :product='product'
-        :variants='variants'
-        @activeVariant='setActiveVariant'
-        @quantity='setQuantity'
-        class='product-display__controller'
-      )
-
-      div(class='product-display__divider divider-1')
-
-      Submit(
-        :variant='activeVariant'
-        :quantity='quantity'
-        class='product-display__submit'
-      )
+    Submit(
+      :variant='activeVariant'
+      :quantity='quantity'
+      class='product-display__submit'
+    )
 
     //- div(class='product-display__divider divider-2')
     //-
@@ -71,26 +67,30 @@ export default {
     }
   },
   computed: {
-    variants () {
-      const { variants } = this.product
-
-      return variants.map(variant => {
-        const { id, available, image, price, compareAtPrice } = variant
-        const options = variant.title.split('/').map(item => item.trim())
-        return { id, available, image, price, compareAtPrice, options }
-      })
-    }
   },
   methods: {
-    setActiveVariant (variant) {
+    setActiveVariant (position) {
+      const { variants } = this.product
+      const variant = variants.find(variant => {
+        const optionPosition = `option${position}`
+        return variant['option1'] === position['1'] &&
+          variant['option2'] === position['2'] &&
+          variant['option3'] === position['3']
+      })
       this.activeVariant = variant
-      console.log('activeVariant: ', this.activeVariant)
     },
 
 
     setQuantity (value) {
       this.quantity = value
     }
+  },
+  created () {
+    const init = () => {
+      const variant = this.product.variants.find(variant => variant.id === this.product.selectedOrFirstAvailableVariant)
+      if (variant) this.activeVariant = variant
+    }
+    init()
   }
 }
 </script>
@@ -106,11 +106,11 @@ export default {
   display: grid
   grid-gap: $unit*5 0
   +mq-s
-    grid-template-rows: min-content auto
+    grid-template-rows: min-content auto min-content
     grid-template-columns: 1.5fr 1fr
     grid-gap: 0 $unit*5
   +mq-m
-    grid-template-rows: min-content auto
+    grid-template-rows: min-content auto min-content
     grid-template-columns: 1.25fr 1fr
     grid-gap: 0 $unit*10
 

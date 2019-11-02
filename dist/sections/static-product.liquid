@@ -3,7 +3,18 @@
   "type": "static-product",
   "id": {{ section.id | json }},
   "settings": {
-    "product": {% render 'helper-product' product: product %}
+    "product": {
+      "available": {{ product.available | json }},
+      "featuredImage": {% render 'helper-image' image: product.featured_image %},
+      "handle": {{ product.title | json }},
+      "images": [{% render 'helper-images' images: product.images %}],
+      "options_with_values": [{% render 'helper-product-options', options_with_values: product.options_with_values %}],
+      "price": {{ product.price | json }},
+      "title": {{ product.title | json }},
+      "selectedOrFirstAvailableVariant": {{ product.selected_or_first_available_variant.id | json }},
+      "url": {{ product.url | json }},
+      "variants": [{% render 'helper-variants', variants: product.variants %}]
+    }
   },
   "blocks": []
 }

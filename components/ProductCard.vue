@@ -2,12 +2,14 @@
 div(class='container-product')
 
   router-link(
-    :to='{ name: "product", params: { id: product.handle } }'
+    :to='product.url'
     class='product'
   )
 
     Photo(
-      :image='{ src: product.featuredImage.src, aspectRatio: "0 0 268 357" }'
+      :src='product.featuredImage.src'
+      :aspectRatio='product.featuredImage.aspect_ratio'
+      :image='{ src: product.featuredImage.src, aspectRatio: `0 0 ${product.featuredImage.aspect_ratio} 1` }'
       class='product__image'
     )
     h3(
@@ -71,7 +73,7 @@ export default {
     text-overflow: ellipsis
     // margin: $unit $unit*2 0 $unit*2
     // padding: $unit*2
-    margin: $unit 0 
+    margin: $unit 0
 
   &__price
     // margin: 0 $unit*2
