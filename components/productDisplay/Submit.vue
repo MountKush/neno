@@ -108,7 +108,7 @@ export default {
     &.valid
       background: $success
       cursor: pointer
-      box-shadow: 0 24px 32px rgba(33, 206, 156, 0.25)
+      // box-shadow: 0 24px 32px rgba(33, 206, 156, 0.25)
 
     &.sending
       cursor: default
@@ -116,7 +116,7 @@ export default {
     &.error
       background: $error
       cursor: default
-      box-shadow: 0 24px 32px rgba(255, 0, 0, 0.25)
+      // box-shadow: 0 24px 32px rgba(255, 0, 0, 0.25)
 
 
 </style>

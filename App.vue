@@ -1,6 +1,7 @@
 <template lang='pug'>
 main(class='vue-app')
   AppNavigationBar(class='vue-app__navigation-bar')
+  AppPredictiveSearch
   transition(
     name='fade'
     mode='out-in'
@@ -13,19 +14,26 @@ main(class='vue-app')
 
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import AppFooter from '~comp/footer/Index.vue'
 import AppNavigationBar from '~comp/app/AppNavigationBar.vue'
+import AppPredictiveSearch from '~comp/compositions/PredictiveSearch.vue'
+
 
 export default {
   components: {
     AppNavigationBar,
+    AppPredictiveSearch,
     AppFooter
   },
   data () {
     return {}
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      drawer: state => state.app.drawer
+    })
+  },
   watch: {
     '$route': 'fetchData'
   },

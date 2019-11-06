@@ -1,60 +1,50 @@
 <template lang='pug'>
 div(class='container-product-detail')
-
   div(class='product-detail')
 
-    Controller(
-      :sections='sections'
-      :activeSection='activeSection'
-      @handleClick='setActiveSection'
-      class='product-detail__controller'
-    )
-
-    a(
-      @click='setActiveSection("Description")'
-      :class='{ active: activeSection === "Description" }'
-      class='product-detail__section'
-    ) Description
-
     Description(
-      v-show='activeSection === "Description"'
       :product='product'
       class='product-detail__description'
     )
-
-    //- a(
-    //-   @click='setActiveSection("Reviews")'
-    //-   :class='{ active: activeSection === "Reviews" }'
-    //-   class='product-detail__section'
-    //- ) Reviews
-    //-
-    //- Reviews(
-    //-   v-show='activeSection === "Reviews"'
-    //-   :product='product'
-    //-   class='product-detail__reviews'
-    //- )
-
     a(
-      @click='setActiveSection("Shipping & Return")'
-      :class='{ active: activeSection === "Shipping & Return" }'
-      class='product-detail__section'
-    ) Shipping &amp; Return
+      @click='openDrawer({ id: "product-description" })'
+    ) Read more
 
-    ShippingReturn(
-      v-show='activeSection === "Shipping & Return"'
+    ul(class='text-columns__list')
+      li(
+        v-for='(block, index) in blocks'
+        :key='block + index'
+        class='text-columns__item'
+      )
+        button(
+          @click='openDrawer({ id: block.page.handle })'
+          class='product-detail__button'
+        )
+          span(class='product-detail__button-label') {{ block.buttonLabel }}
+          span(class='product-detail__button-icon') +
+        ProductDetailOverlay(
+          :drawerId='block.page.handle'
+          :product='product'
+          :content='block.page.content'
+          @openDrawer='openDrawer({ id: block.page.handle })'
+          @closeDrawer='closeDrawer'
+        )
+
+    ProductDetailOverlay(
+      :drawerId='"product-description"'
       :product='product'
-      class='product-detail__shipping-return'
+      :content='product.description'
+      @closeDrawer='closeDrawer'
     )
-
-
 </template>
 
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import Controller from './Controller.vue'
 import Description from './Description.vue'
 import Reviews from './Reviews.vue'
-import ShippingReturn from './ShippingReturn.vue'
+import ProductDetailOverlay from '~comp/modules/ProductDetailOverlay.vue'
 
 
 export default {
@@ -62,29 +52,33 @@ export default {
     Controller,
     Description,
     Reviews,
-    ShippingReturn
+    ProductDetailOverlay
   },
   props: {
     product: {
       type: Object,
       required: true
+    },
+    blocks: {
+      type: Array,
+      required: true
     }
   },
   data () {
     return {
-      sections: [
-        'Description',
-        // 'Reviews',
-        'Shipping & Return'
-      ],
-      activeSection: 'Description',
+      openDrawerHandle: ''
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      drawer: state => state.app.drawer
+    })
+  },
   methods: {
-    setActiveSection (section) {
-      this.activeSection = section
-    }
+    ...mapMutations({
+      closeDrawer: 'app/CLOSE_DRAWER',
+      openDrawer: 'app/OPEN_DRAWER'
+    })
   }
 }
 </script>
@@ -92,38 +86,42 @@ export default {
 
 <style lang='sass' scoped>
 .container-product-detail
-  @extend %container
+  // @extend %container
 
 
 .product-detail
-  @extend %content
+  // @extend %content
   display: grid
   grid-gap: $unit*3
-  +mq-m
-    grid-template-rows: auto minmax($unit*34, auto)
-    grid-gap: $unit*4 0
+
+  &__button
+    display: flex
+    width: 100%
+    padding: $unit*3 $unit
+    box-shadow: inset 0 1px 0 0 #E5E5E5
+    background: transparent
+    justify-content: space-between
+    align-items: center
+
+    &-label
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+    &-icon
+      margin-left: $unit
 
   &__controller
     display: none
-    +mq-m
-      display: unset
-      grid-row: 1 / 2
 
   &__description,
   &__reviews,
   &__shipping-return
     height: $unit*34
     overflow: auto
-    +mq-m
-      height: unset
-      overflow: unset
-      grid-row: 2 / 3
 
   &__section
     position: relative
-
-    +mq-m
-      display: none
 
     &::after
       content: '+'
@@ -134,6 +132,4 @@ export default {
 
       &::after
         content: ''
-
-
 </style>

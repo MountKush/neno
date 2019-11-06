@@ -1,0 +1,79 @@
+<script class="section-data" type="application/json">
+{
+  "type": "static-search",
+  "id": {{ section.id | json }},
+  "settings": {
+    "search": {
+      "results": [
+        {% assign products = search.results | where: 'object_type', 'product' %}
+        {% for product in products %}
+          {
+            "product": {
+              "available": {{ product.available | json }},
+              "description": {{ product.description | json }},
+              "featuredImage": {% render 'helper-image' image: product.featured_image %},
+              "handle": {{ product.title | json }},
+              "images": [{% render 'helper-images' images: product.images %}],
+              "options_with_values": [{% render 'helper-product-options', options_with_values: product.options_with_values %}],
+              "price": {{ product.price | json }},
+              "title": {{ product.title | json }},
+              "selectedOrFirstAvailableVariant": {{ product.selected_or_first_available_variant.id | json }},
+              "url": {{ product.url | json }},
+              "variants": [{% render 'helper-variants', variants: product.variants %}]
+            }
+          }
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "resultsCount": {{ search.results_count | json }},
+      "terms": {{ search.terms | json }}
+    }
+  },
+  "blocks": []
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Product pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_quantity_selector",
+      "label": "Show quantity selector",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_labels",
+      "label": "Show variant labels",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "page",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

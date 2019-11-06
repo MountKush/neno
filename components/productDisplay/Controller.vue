@@ -17,18 +17,21 @@ div(class='container-controller')
       )
 
     //- quantity select
-    div(class='controller__quantity')
-      a(
-        class='controller__quantity-button'
-        @click='quantity--'
-      ) -
-      p(
-        class='controller__quantity-count'
-      ) {{ quantity }}
-      a(
-        class='controller__quantity-button'
-        @click='quantity++'
-      ) +
+    div
+      header
+        h3 Qty:
+      div(class='controller__quantity')
+        a(
+          class='controller__quantity-button'
+          @click='quantity--'
+        ) -
+        p(
+          class='controller__quantity-count'
+        ) {{ quantity }}
+        a(
+          class='controller__quantity-button'
+          @click='quantity++'
+        ) +
 
 </template>
 
@@ -93,8 +96,11 @@ export default {
 <style lang='sass' scoped>
 header
   display: flex
+  margin-bottom: $unit
 
   & h3
+    font-weight: $fw-bold
+    
   & p
 
 

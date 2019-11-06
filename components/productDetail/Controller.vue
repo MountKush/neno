@@ -10,8 +10,6 @@ div(class='container-controller')
       :class='{ active: activeSection === item }'
       class='controller__button'
     ) {{ item }}
-
-
 </template>
 
 

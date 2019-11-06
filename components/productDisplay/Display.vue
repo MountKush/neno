@@ -6,10 +6,10 @@ div(class='container-display')
     class='display'
   )
 
-    Photo(
-      v-for='(image, index) in images'
+    img(
+      v-for='(image, index) in images.filter((a, i) => i === 0)'
       :key='image + index'
-      :src='image.src'
+      v-lazy='image.src'
       :aspectRatio='image.aspect_ratio'
       class='display__image'
     )
@@ -56,15 +56,16 @@ export default {
 .display
   // box-shadow: 0 $unit*3 $unit*4 rgba(34, 34, 34, 0.075)
   // padding: $unit
-  // scroll-snap-type: x mandatory
-  display: grid
-  grid-auto-flow: column
-  grid-auto-columns: 33vw
-  overflow-x: auto
-  width: 33vw
+  scroll-snap-type: x mandatory
+  display: flex
+  flex-grow: 0
+
 
   &__image
-    // scroll-snap-align: start
+    scroll-snap-align: start
     width: 100%
+    object-fit: contain
+    object-position: top
+    flex-shrink: 0
 
 </style>

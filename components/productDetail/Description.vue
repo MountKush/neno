@@ -1,8 +1,10 @@
 <template lang='pug'>
 div(class='container-description')
 
-  div(class='description')
-    p(class='description__copy') {{ product.description }}
+  div(
+    v-html='product.description'
+    class='description'
+  )
 
 </template>
 

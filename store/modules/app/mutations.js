@@ -26,5 +26,21 @@ export default {
   DELETE_THEME_DATA (state, { path }) {
     console.log('DELETE_THEME_DATA')
     Vue.delete(state.themeData, path)
-  }
+  },
+
+
+  OPEN_DRAWER (state, { id }) {
+    state.drawer = id
+  },
+
+
+  CLOSE_DRAWER (state) {
+    state.drawer = ''
+  },
+
+
+  SET_PREDICTIVE_SEARCH (state, { products, query }) {
+    console.log('SET_PREDICTIVE_SEARCH: ', products)
+    Vue.set(state, 'predictiveSearch', { products, query })
+  },
 }

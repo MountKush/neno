@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { predictiveSearch } from '~/utils/predictive-search'
 
 
 export default {
@@ -73,4 +74,36 @@ export default {
       console.error(e)
     }
   },
+
+
+  async search ({ commit, state, rootState }, {query}) {
+    try {
+      console.log('search: ', query)
+      const { themeData } = state
+
+      const url = `https://feed-me-sugar.myshopify.com/search?section_id=static-search&type=product&q=${query}`
+      const res = await axios.get(url)
+      console.log('res: ', res)
+      const data = res.data
+      const parser = new DOMParser()
+      const parsedHtml = parser.parseFromString(data, 'text/html')
+      // Get section data
+      const sectionScript = parsedHtml.querySelectorAll('.section-data')
+      const sectionData = []
+      sectionScript.forEach(script => sectionData.push(JSON.parse(script.textContent)))
+      return sectionData
+    }
+    catch (e) {
+      console.error(e)
+    }
+  },
+
+
+  async predictiveSearch ({ commit }, query) {
+    const res = await predictiveSearch(query)
+    console.log('query result: ', res)
+    const products = res.resources && res.resources.results && res.resources.results.products
+    commit('SET_PREDICTIVE_SEARCH', { products: products || [], query: res.query })
+    return
+  }
 }

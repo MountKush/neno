@@ -12,9 +12,16 @@ div(class='container-newsletter')
       @submit.prevent='newsletterSubscribe'
       class='newsletter__form'
     )
+      //- input(
+      //-   v-model='email'
+      //-   v-validate='"required|email"'
+      //-   name='email'
+      //-   type='email'
+      //-   placeholder='Your email'
+      //-   class='newsletter__form-input'
+      //- )
       input(
         v-model='email'
-        v-validate='"required|email"'
         name='email'
         type='email'
         placeholder='Your email'

@@ -1,6 +1,7 @@
 <template lang='pug'>
 form(
-  @submit.prevent='blur'
+  @submit.stop.prevent='blur'
+  action='/search'
   class='search-form'
 )
   IconSearch(class='search-form__icon')
@@ -22,6 +23,7 @@ form(
 <script>
 import IconSearch from '~/assets/svg/icon-search.svg'
 import IconCancel from '~/assets/svg/icon-cancel.svg'
+import { mapActions, mapMutations } from 'vuex'
 
 
 export default {
@@ -37,12 +39,34 @@ export default {
   },
   computed: {},
   methods: {
-    clearSearch () { this.search = '' },
+    clearSearch () {
+      this.search = ''
+      this.closeDrawer()
+    },
 
 
-    blur () {
+    async blur () {
+      console.log('submitted: ', this.search)
+      // this.$router.push(`/search?q=${this.search}`)
       this.$refs.search.blur()
-    }
+      // this.fetchSection({sectionId: 'static-search'})
+      // const data = await this.fetchQuery({query:this.search})
+      this.predictiveSearch(this.search)
+      this.openDrawer({ id: 'predictive-search' })
+    },
+
+
+    ...mapActions({
+      fetchSection: 'app/fetchSection',
+      fetchQuery: 'app/search',
+      predictiveSearch: 'app/predictiveSearch'
+    }),
+
+
+    ...mapMutations({
+      closeDrawer: 'app/CLOSE_DRAWER',
+      openDrawer: 'app/OPEN_DRAWER'
+    })
   }
 }
 </script>

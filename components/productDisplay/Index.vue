@@ -9,26 +9,33 @@ div(class='container-product-display')
       class='product-display__product'
     )
 
-    Detail(
-      :product='product'
-      :variant='activeVariant'
-      class='product-display__detail'
-    )
+    div(class='product-display__wrapper')
 
-    Controller(
-      :product='product'
-      :variants='product.variants'
-      :options='product.options_with_values'
-      @setActiveVariant='setActiveVariant'
-      @quantity='setQuantity'
-      class='product-display__controller'
-    )
+      Detail(
+        :product='product'
+        :variant='activeVariant'
+        class='product-display__detail'
+      )
 
-    Submit(
-      :variant='activeVariant'
-      :quantity='quantity'
-      class='product-display__submit'
-    )
+      Controller(
+        :product='product'
+        :variants='product.variants'
+        :options='product.options_with_values'
+        @setActiveVariant='setActiveVariant'
+        @quantity='setQuantity'
+        class='product-display__controller'
+      )
+
+      Submit(
+        :variant='activeVariant'
+        :quantity='quantity'
+        class='product-display__submit'
+      )
+      ProductDetail(
+        :product='product'
+        :blocks='blocks'
+        class='product-display__description'
+      )
 
     //- div(class='product-display__divider divider-2')
     //-
@@ -44,6 +51,7 @@ import Controller from './Controller.vue'
 import Display from './Display.vue'
 import Submit from './Submit.vue'
 import Share from './Share.vue'
+import ProductDetail from '~comp/productDetail/Index.vue'
 
 
 export default {
@@ -52,12 +60,17 @@ export default {
     Controller,
     Display,
     Submit,
-    Share
+    Share,
+    ProductDetail
   },
   props: {
     product: {
       type: Object,
       required: true
+    },
+    blocks: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -99,36 +112,31 @@ export default {
 <style lang='sass' scoped>
 
 .container-product-display
-  @extend %container
 
 .product-display
   @extend %content
   display: grid
   grid-gap: $unit*5 0
-  +mq-s
-    grid-template-rows: min-content auto min-content
-    grid-template-columns: 1.5fr 1fr
+  +mq-m
+    grid-template-rows: min-content
+    grid-template-columns: 1fr 1fr
     grid-gap: 0 $unit*5
   +mq-m
-    grid-template-rows: min-content auto min-content
-    grid-template-columns: 1.25fr 1fr
-    grid-gap: 0 $unit*10
+    // grid-template-rows: min-content auto min-content
+    // // grid-template-columns: 1.25fr 1fr
+    // grid-gap: 0 $unit*10
 
   &__product
-    +mq-xs
-      grid-row: 1 / -1
-      grid-column: 1 / 2
+      max-height: 600px
+      display: flex
 
   &__wrapper
     display: grid
-    grid-gap: $unit*5 0
-    +mq-s
-      grid-template-rows: repeat(5, auto)
-      grid-gap: $unit*5 0
-
-
+    grid-gap: $unit*2 0
+    align-self: start
 
   &__detail
+    grid-row: 1 / 2
     +mq-m
       // grid-row: 1 / 2
       // grid-column: 2 / 3
@@ -139,7 +147,15 @@ export default {
       // grid-column: 2 / 3
 
   &__submit
-    +mq-m
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    +mq-s
+      position: relative
+      bottom: unset
+      width: unset
+      left: unset
       // grid-row: 5 / 6
       // grid-column: 2 / 3
 

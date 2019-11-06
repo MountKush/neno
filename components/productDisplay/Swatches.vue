@@ -51,6 +51,7 @@ export default {
     display: grid
     grid-auto-flow: column
     grid-auto-rows: 1fr
+    grid-auto-columns: min-content
     grid-gap: $unit
 
 
