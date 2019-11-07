@@ -23,7 +23,8 @@ form(
 <script>
 import IconSearch from '~/assets/svg/icon-search.svg'
 import IconCancel from '~/assets/svg/icon-cancel.svg'
-import { mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
+import { debounce } from 'lodash'
 
 
 export default {
@@ -37,35 +38,69 @@ export default {
       search: ''
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      predictiveSearch: state => state.app.predictiveSearch
+    })
+  },
+  watch: {
+    search (search) {
+      if (search) this.handleSearch(search)
+      else this.clearPredictiveSearch()
+    },
+
+
+    predictiveSearch (predictiveSearch) {
+      if (predictiveSearch.products.length === 0) {
+        console.log('no products returned')
+        this.closeDrawer()
+      } else {
+        console.log('products returned')
+        this.openDrawer({ id: 'predictive-search' })
+      }
+    },
+
+
+    $route (to, from) {
+      this.clearSearch()
+    }
+  },
   methods: {
     clearSearch () {
       this.search = ''
-      this.closeDrawer()
     },
+
+
+    handleSearch: debounce(function (search) {
+      console.log('search: ', search)
+      this.fetchPredictiveSearch(search)
+    }, 500),
 
 
     async blur () {
       console.log('submitted: ', this.search)
-      // this.$router.push(`/search?q=${this.search}`)
+      if (!this.search) return
+      this.$router.push(`/search?q=${this.search}`)
       this.$refs.search.blur()
+      this.clearSearch()
       // this.fetchSection({sectionId: 'static-search'})
       // const data = await this.fetchQuery({query:this.search})
-      this.predictiveSearch(this.search)
-      this.openDrawer({ id: 'predictive-search' })
+      // this.predictiveSearch(this.search)
+      // this.openDrawer({ id: 'predictive-search' })
     },
 
 
     ...mapActions({
       fetchSection: 'app/fetchSection',
       fetchQuery: 'app/search',
-      predictiveSearch: 'app/predictiveSearch'
+      fetchPredictiveSearch: 'app/predictiveSearch'
     }),
 
 
     ...mapMutations({
       closeDrawer: 'app/CLOSE_DRAWER',
-      openDrawer: 'app/OPEN_DRAWER'
+      openDrawer: 'app/OPEN_DRAWER',
+      clearPredictiveSearch: 'app/CLEAR_PREDICTIVE_SEARCH'
     })
   }
 }

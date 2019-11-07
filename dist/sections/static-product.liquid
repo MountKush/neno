@@ -8,6 +8,7 @@
       "description": {{ product.description | json }},
       "featuredImage": {% render 'helper-image' image: product.featured_image %},
       "handle": {{ product.title | json }},
+      "id": {{ product.id | json }},
       "images": [{% render 'helper-images' images: product.images %}],
       "options_with_values": [{% render 'helper-product-options', options_with_values: product.options_with_values %}],
       "price": {{ product.price | json }},

@@ -113,7 +113,7 @@ import { mapState, mapMutations } from 'vuex'
 import IconCheckMark from '~/assets/svg/icon-check-mark.svg'
 import IconSortBy from '~/assets/svg/icon-sort-by.svg'
 import IconFilter from '~/assets/svg/icon-filter.svg'
-import moment from 'moment'
+// import moment from 'moment'
 import _ from 'lodash'
 
 
@@ -246,7 +246,7 @@ export default {
 
 
     sortByRecent ({ products }) {
-      return products.sort((a, b) => moment(a.publishedAt).unix() - moment(b.publishedAt).unix())
+      return [] // products.sort((a, b) => moment(a.publishedAt).unix() - moment(b.publishedAt).unix())
     },
 
 

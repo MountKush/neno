@@ -7,9 +7,9 @@ div(class='container-product')
   )
 
     Photo(
-      :src='product.featuredImage.src'
-      :aspectRatio='product.featuredImage.aspect_ratio'
-      :image='{ src: product.featuredImage.src, aspectRatio: `0 0 ${product.featuredImage.aspect_ratio} 1` }'
+      :src='src'
+      :aspectRatio='aspectRatio'
+      :image='{ src, aspectRatio: `0 0 ${aspectRatio} 1` }'
       class='product__image'
     )
     h3(
@@ -37,6 +37,14 @@ export default {
     product: {
       type: Object,
       required: true
+    },
+    src: {
+      type: String,
+      required: true
+    },
+    aspectRatio: {
+      type: Number,
+      default: 1
     }
   },
   data () {

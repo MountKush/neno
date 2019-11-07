@@ -6,6 +6,8 @@ ul(class='productGridList')
     class='productGridList__item'
   )
     ProductCard(
+      :src='product.featuredImage.src'
+      :aspectRatio='product.featuredImage.aspectRatio'
       :product='product'
       class='productGridList__card'
     )

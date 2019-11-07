@@ -43,4 +43,10 @@ export default {
     console.log('SET_PREDICTIVE_SEARCH: ', products)
     Vue.set(state, 'predictiveSearch', { products, query })
   },
+
+
+  CLEAR_PREDICTIVE_SEARCH (state) {
+    console.log('CLEAR_PREDICTIVE_SEARCH')
+    Vue.set(state, 'predictiveSearch', { products: [], query: '' })
+  }
 }

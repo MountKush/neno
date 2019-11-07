@@ -3,7 +3,7 @@ import Index from '../pages/index.vue'
 // const Account = () => import('~/views/Account.vue')
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
-// const Collection = () => import('~/views/Collection.vue')
+import Collection from '~/pages/Collection.vue'
 // const Collections = () => import('~/views/Collections.vue')
 import Cart from '~/pages/Cart.vue'
 // const Menu = () => import('~/views/Menu.vue')
@@ -38,11 +38,16 @@ export const routes = [
   //   name: 'products',
   //   component: Products
   // },
-  // {
-  //   path: '/collection/:id',
-  //   name: 'collection',
-  //   component: Collection
-  // },
+  {
+    path: '/collections/:id',
+    name: 'collection',
+    component: Collection
+  },
+  {
+    path: '/collections/:collectionId/products/:productId',
+    name: 'product',
+    component: Product
+  },
   // {
   //   path: '/collections',
   //   name: 'collections',

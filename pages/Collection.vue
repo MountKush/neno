@@ -1,42 +1,71 @@
 <template lang='pug'>
-div(class='container-collection')
+div(
+  :key='this.$route.fullPath'
+  class='container-collection'
+)
+  div(
+    v-for='(section, index) in themeData'
+    :key='section + index'
+  )
 
+    div(
+      v-if='section.type === "static-collection"'
+      class='collection'
+    )
+      h1() {{ section.settings.collection.title }}
 
-  div(class='collection')
-    Hero(
-      :header='{ title: collection.title, copy: collection.description }'
-      class='collection__hero'
+    //- ProductDisplay(
+    //-   v-if='section.type === "static-collection"'
+    //-   :product='section.settings.product'
+    //-   :blocks='section.blocks'
+    //-   class='product__display'
+    //- )
+
+    ProductSortFilter(
+      v-if='section.type === "static-collection"'
+      :products='section.settings.collection.products'
+      class='collection__sort-filter'
     )
 
-    ul(class='collection__list')
-      ProductSortFilter(
-        v-if='products'
-        :products='products'
-        class='collection__sort-filter'
-      )
-      li(
-        v-for='(product, index) in sortByAndFilteredProducts'
-        :key='product.id + index'
-        class='collection__item'
-      )
-        ProductCard(
-          :product='product'
-          class='collection__product'
-        )
+    ProductsGrid(
+      v-if='section.type === "static-collection"'
+      :products='section.settings.collection.products'
+      class='collection__products'
+    )
+
+    //- ul(
+    //-   v-if='section.type === "static-collection"'
+    //-   class='collection__list'
+    //- )
+    //-   //- ProductSortFilter(
+    //-   //-   v-if='products'
+    //-   //-   :products='products'
+    //-   //-   class='collection__sort-filter'
+    //-   //- )
+    //-   li(
+    //-     v-for='(product, index) in section.settings.collection.products'
+    //-     :key='product.id + index'
+    //-     class='collection__item'
+    //-   )
+    //-     ProductCard(
+    //-       :src='product.featuredImage.src'
+    //-       :aspectRatio='product.featuredImage.aspectRatio'
+    //-       :product='product'
+    //-       class='collection__product'
+    //-     )
 </template>
 
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Hero from '~comp/Hero.vue'
-import ProductCard from '~comp/ProductCard.vue'
+import ProductsGrid from '~comp/modules/ProductsGrid.vue'
 import ProductSortFilter from '~comp/productSortFilter/Index.vue'
 
 
 export default {
   components: {
-    Hero,
-    ProductCard,
+    ProductsGrid,
     ProductSortFilter
   },
   props: {},
@@ -64,6 +93,11 @@ export default {
     },
 
 
+    ...mapGetters({
+      themeData: 'app/themeData'
+    }),
+
+
     ...mapState({
       collectionId: state => state.route.params.id,
       collections: state => state.catalog.collections,
@@ -82,14 +116,12 @@ export default {
   display: grid
   grid-gap: $unit*5 0
 
-  &__list
+  &__products
     @extend %content
     display: grid
-    grid-template-columns: repeat(1, 1fr)
+    grid-template-columns: repeat(2, 1fr)
     grid-auto-rows: 1fr
     grid-gap: $unit*2
-    +mq-xs
-      grid-template-columns: repeat(2, 1fr)
     +mq-s
       grid-template-columns: repeat(3, 1fr)
     +mq-m

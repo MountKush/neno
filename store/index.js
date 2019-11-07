@@ -6,7 +6,7 @@ import Vuex from 'vuex'
 import app from './modules/app'
 import shopifyThemeEditor from './modules/shopify-theme-editor'
 // import auth from './modules/auth'
-// import catalog from './modules/catalog'
+import catalog from './modules/catalog'
 // import checkout from './modules/checkout'
 // import account from './modules/account'
 
@@ -18,7 +18,7 @@ export default new Vuex.Store({
     app,
     shopifyThemeEditor,
     // auth,
-    // catalog,
+    catalog,
     // checkout,
     // account
   },

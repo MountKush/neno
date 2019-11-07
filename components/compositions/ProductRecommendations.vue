@@ -3,25 +3,26 @@ div(class='container')
 
   div(class='featured-collection')
     SectionHeader(
-      :title='settings.title'
-      :text='settings.collection.description'
-      :showViewAll='settings.showViewAll'
-      buttonLabel='See all'
-      :buttonLink='settings.collection.url'
+      :title='"Recommended Products"'
+      text=''
+      :showViewAll='false'
+      buttonLabel=''
+      buttonLink=''
     )
     Slider(class='featured-collection__slider')
       ProductCard(
-        v-for='(product, index) in settings.collection.products'
+        v-for='(product, index) in products'
         :key='product + index'
         :product='product'
-        :src='product.featuredImage.src'
-        :aspectRatio='product.featuredImage.aspectRatio'
+        :src='product.featured_image'
+        :aspectRatio='1'
         class='featured-collection__card'
       )
 </template>
 
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 import SectionHeader from '~comp/modules/SectionHeader.vue'
 import ProductsGrid from '~comp/modules/ProductsGrid.vue'
 import Slider from '~comp/slot/Slider.vue'
@@ -36,16 +37,30 @@ export default {
     ProductCard
   },
   props: {
-    settings: {
+    product: {
       type: Object,
       required: true
     }
   },
   data () {
-    return {}
+    return {
+      products: []
+    }
   },
   computed: {},
-  methods: {}
+  methods: {
+    async init () {
+      this.products = await this.fetchProductRecommendations(this.product.id)
+    },
+
+
+    ...mapActions({
+      fetchProductRecommendations: 'catalog/fetchProductRecommendations'
+    })
+  },
+  mounted () {
+    this.init()
+  }
 }
 </script>
 

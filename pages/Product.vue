@@ -14,6 +14,11 @@ main(
       class='product__display'
     )
 
+    ProductRecommendations(
+      v-if='section.type === "static-product"'
+      :product='section.settings.product'
+    )
+
     //- ProductDetail(
     //-   v-if='section.type === "static-product"'
     //-   :product='section.settings.product'
@@ -32,14 +37,14 @@ main(
 <script>
 import { mapState, mapGetters } from 'vuex'
 import ProductDisplay from '~comp/productDisplay/Index.vue'
-import ProductDetail from '~comp/productDetail/Index.vue'
+import ProductRecommendations from '~comp/compositions/ProductRecommendations.vue'
 // import ProductSimilar from '~comp/productSimilar/Index.vue'
 
 
 export default {
   components: {
     ProductDisplay,
-    ProductDetail,
+    ProductRecommendations,
     // ProductSimilar
   },
   data () {

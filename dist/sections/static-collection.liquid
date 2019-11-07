@@ -1,0 +1,72 @@
+{% capture collection %}
+  {
+    "title": {{ collection.title | json }},
+    "description": {{ collection.description | json }},
+    "products": [
+      {% for product in collection.products limit:8 %}
+        {
+          "available": {{ product.available | json }},
+          "featuredImage": {% render 'helper-image' image: product.featured_image %},
+          "handle": {{ product.title | json }},
+          "price": {{ product.price | json }},
+          "title": {{ product.title | json }},
+          "url": {{ product.url | within: collection | json }}
+        }
+        {% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "url": {{ collection.url | json }}
+  }
+{% endcapture %}
+
+<script class="section-data" type="application/json">
+{
+  "type": "static-collection",
+  "id": {{ section.id | json }},
+  "settings": {
+    "title": {{ section.settings.title | json }},
+    "collection": {{ collection }},
+    "showVendor": {{ section.settings.show_vendor | json }},
+    "showViewAll": {{ section.settings.show_view_all | json }}
+  },
+  "blocks": []
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendors",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

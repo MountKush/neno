@@ -14,7 +14,7 @@ main(class='vue-app')
 
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import AppFooter from '~comp/footer/Index.vue'
 import AppNavigationBar from '~comp/app/AppNavigationBar.vue'
 import AppPredictiveSearch from '~comp/compositions/PredictiveSearch.vue'
@@ -35,9 +35,19 @@ export default {
     })
   },
   watch: {
-    '$route': 'fetchData'
+    $route (to, from) {
+      console.log('to: ', to)
+      console.log('from: ', from)
+      this.fetchData()
+      this.closeDrawer()
+    }
   },
   methods: {
+    ...mapMutations({
+      closeDrawer: 'app/CLOSE_DRAWER'
+    }),
+
+
     ...mapActions({
       initData: 'app/initData',
       fetchData: 'app/fetchData',
@@ -47,6 +57,11 @@ export default {
   created () {
     this.initData()
     this.themeEditor()
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.closeDrawer()
+    console.log('????')
+    next()
   }
 }
 </script>
