@@ -21,17 +21,7 @@ div(class='container-footer')
     //-     ) {{ nav.text }}
 
     //- copyright
-    p(class='footer__copyright')
-      | &copy; {{ currentYear }} Feed Me Sugar
-      | | Built by &nbsp;
-      a(
-        href='https://jumastevens.io'
-        target='_blank'
-        class='footer__built-by'
-      ) Juma Stevens
-
-
-
+    p(class='footer__copyright') &copy; {{ currentYear }} Feed Me Sugar
 </template>
 
 
@@ -63,7 +53,7 @@ export default {
 <style lang='sass' scoped>
 .container-footer
   @extend %container
-
+  background: $black
 
 .footer
   @extend %content
@@ -85,8 +75,5 @@ export default {
   &__copyright
     margin-top: $unit*5
     font-size: 12px
-    color: $dark
-
-  &__built-by
-    font-size: 12px
+    color: $white
 </style>

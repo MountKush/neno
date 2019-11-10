@@ -9,7 +9,6 @@ div(class='container-product')
     Photo(
       :src='src'
       :aspectRatio='aspectRatio'
-      :image='{ src, aspectRatio: `0 0 ${aspectRatio} 1` }'
       class='product__image'
     )
     h3(

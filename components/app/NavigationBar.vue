@@ -18,7 +18,7 @@ div(class='container-navigation-bar')
     SearchForm(class='navigation-bar__search-form')
 
     router-link(
-      :to='{ name: "search" }'
+      :to='{ name: "index" }'
       class='navigation-bar__store-finder'
     )
       IconStore(class='navigation-bar__store-finder-icon')
@@ -50,7 +50,7 @@ div(class='container-navigation-bar')
     //-
     //- account
     router-link(
-      :to='{ name: "account" }'
+      :to='{ name: "index" }'
       class='navigation-bar__account'
     )
       IconAccount(

@@ -151,6 +151,7 @@ export default {
     bottom: 0
     left: 0
     width: 100%
+    z-index: 10
     +mq-s
       position: relative
       bottom: unset

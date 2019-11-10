@@ -6,11 +6,11 @@ div(class='container-display')
     class='display'
   )
 
-    img(
+    Photo(
       v-for='(image, index) in images.filter((a, i) => i === 0)'
       :key='image + index'
-      v-lazy='image.src'
-      :aspectRatio='image.aspect_ratio'
+      :src='image.src'
+      :aspectRatio='image.aspectRatio'
       class='display__image'
     )
 
@@ -59,6 +59,8 @@ export default {
   scroll-snap-type: x mandatory
   display: flex
   flex-grow: 0
+  width: 100%
+  max-height: inherit
 
 
   &__image
@@ -67,5 +69,6 @@ export default {
     object-fit: contain
     object-position: top
     flex-shrink: 0
+    max-height: inherit
 
 </style>

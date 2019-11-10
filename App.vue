@@ -15,8 +15,8 @@ main(class='vue-app')
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import AppFooter from '~comp/footer/Index.vue'
-import AppNavigationBar from '~comp/app/AppNavigationBar.vue'
+import AppFooter from '~comp/app/Footer.vue'
+import AppNavigationBar from '~comp/app/NavigationBar.vue'
 import AppPredictiveSearch from '~comp/compositions/PredictiveSearch.vue'
 
 
@@ -36,10 +36,10 @@ export default {
   },
   watch: {
     $route (to, from) {
-      console.log('to: ', to)
-      console.log('from: ', from)
-      this.fetchData()
-      this.closeDrawer()
+      if (to.path !== from.path) {
+        this.fetchData()
+        this.closeDrawer()
+      }
     }
   },
   methods: {

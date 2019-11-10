@@ -13,9 +13,13 @@ div(
       IconCart(class='bag__icon')
 
       div(
-        :class='{ empty: lineItemsQuantityTotal === 0, pulse }'
         class='bag__quantity'
       )
+
+      //- div(
+      //-   :class='{ empty: lineItemsQuantityTotal === 0, pulse }'
+      //-   class='bag__quantity'
+      //- )
 
 </template>
 
@@ -35,9 +39,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      lineItemsQuantityTotal: 'checkout/lineItemsQuantityTotal'
-    })
+    // ...mapGetters({
+    //   lineItemsQuantityTotal: 'checkout/lineItemsQuantityTotal'
+    // })
   },
   watch: {
     lineItemsQuantityTotal () {

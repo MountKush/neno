@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { parseScriptJson } from '~/utils/parseScriptJson'
 import { predictiveSearch } from '~/utils/predictive-search'
 
 
@@ -7,6 +8,7 @@ export default {
     try {
       console.log('initData')
       const { path } = rootState.route
+      console.log('path: ', path)
       // Get section data
       const sectionScript = document.querySelectorAll('.section-data')
       sectionScript.forEach(script => {
@@ -28,23 +30,29 @@ export default {
   async fetchData ({ commit, state, rootState }) {
     try {
       console.log('fetchData')
-      const { path } = rootState.route
+      const { path, fullPath, query } = rootState.route
       const { themeData } = state
-      if (themeData[path]) {
-        console.log('already have data')
-        return
+      // if (themeData[path]) {
+      //   console.log('already have data')
+      //   return
+      // }
+
+      const config = {
+        method: 'get',
+        url: path,
+        params: {
+          ...query,
+          view: 'endpoint'
+        }
       }
 
-      const url = `https://feed-me-sugar.myshopify.com${path}?view=endpoint`
-      const { data } = await axios.get(url)
-      const parser = new DOMParser()
-      const parsedHtml = parser.parseFromString(data, 'text/html')
-      // Get section data
-      const sectionScript = parsedHtml.querySelectorAll('.section-data')
-      sectionScript.forEach(script => {
-        const sectionData = JSON.parse(script.textContent)
-        commit('SET_THEME_DATA', { data: sectionData, path })
-      })
+      console.log('config: ', config)
+
+      const { data } = await axios(config)
+      const json = parseScriptJson({ data, scriptName: '.section-data' })
+      json.forEach(json =>
+        commit('SET_THEME_DATA', { data: json, path })
+      )
     }
     catch (e) {
       console.error(e)
@@ -61,14 +69,10 @@ export default {
 
       const url = `/?section_id=${sectionId}`
       const { data } = await axios.get(url)
-      const parser = new DOMParser()
-      const parsedHtml = parser.parseFromString(data, 'text/html')
-      // Get section data
-      const sectionScript = parsedHtml.querySelectorAll('.section-data')
-      sectionScript.forEach(script => {
-        const sectionData = JSON.parse(script.textContent)
-        commit('SET_THEME_DATA', { data: sectionData, path })
-      })
+      const json = parseScriptJson({ data, scriptName: '.section-data' })
+      json.forEach(json =>
+        commit('SET_THEME_DATA', { data: json, path })
+      )
     }
     catch (e) {
       console.error(e)
@@ -85,13 +89,7 @@ export default {
       const res = await axios.get(url)
       console.log('res: ', res)
       const data = res.data
-      const parser = new DOMParser()
-      const parsedHtml = parser.parseFromString(data, 'text/html')
-      // Get section data
-      const sectionScript = parsedHtml.querySelectorAll('.section-data')
-      const sectionData = []
-      sectionScript.forEach(script => sectionData.push(JSON.parse(script.textContent)))
-      return sectionData
+      return parseScriptJson({ data, scriptName: '.section-data' })
     }
     catch (e) {
       console.error(e)

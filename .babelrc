@@ -3,8 +3,9 @@
     "@babel/preset-env",
   ],
   "plugins": [
-    "syntax-dynamic-import",
+    "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-regenerator",
-    "@babel/plugin-proposal-object-rest-spread"
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }

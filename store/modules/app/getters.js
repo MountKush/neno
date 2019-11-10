@@ -10,14 +10,12 @@ export default {
     const { path } = rootState.route
     const { themeData } = state
     const sections = themeData[path]
-    console.log('sections: ', sections)
     return sections || []
   },
 
 
   predictiveSearch (state) {
     const { predictiveSearch } = state
-    console.log('predictiveSearch: ', predictiveSearch)
     const data = {
       products: [],
       query: ''

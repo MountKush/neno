@@ -1,107 +1,39 @@
 <template lang='pug'>
 div(
-  :key='this.$route.fullPath'
   class='container-collection'
 )
   div(
-    v-for='(section, index) in themeData'
-    :key='section + index'
+    v-if='settings'
+    class='collection'
   )
-
-    div(
-      v-if='section.type === "static-collection"'
-      class='collection'
-    )
-      h1() {{ section.settings.collection.title }}
-
-    //- ProductDisplay(
-    //-   v-if='section.type === "static-collection"'
-    //-   :product='section.settings.product'
-    //-   :blocks='section.blocks'
-    //-   class='product__display'
-    //- )
-
-    ProductSortFilter(
-      v-if='section.type === "static-collection"'
-      :products='section.settings.collection.products'
-      class='collection__sort-filter'
-    )
-
-    ProductsGrid(
-      v-if='section.type === "static-collection"'
-      :products='section.settings.collection.products'
+    Products(
+      :settings='settings'
       class='collection__products'
     )
-
-    //- ul(
-    //-   v-if='section.type === "static-collection"'
-    //-   class='collection__list'
-    //- )
-    //-   //- ProductSortFilter(
-    //-   //-   v-if='products'
-    //-   //-   :products='products'
-    //-   //-   class='collection__sort-filter'
-    //-   //- )
-    //-   li(
-    //-     v-for='(product, index) in section.settings.collection.products'
-    //-     :key='product.id + index'
-    //-     class='collection__item'
-    //-   )
-    //-     ProductCard(
-    //-       :src='product.featuredImage.src'
-    //-       :aspectRatio='product.featuredImage.aspectRatio'
-    //-       :product='product'
-    //-       class='collection__product'
-    //-     )
 </template>
 
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import Hero from '~comp/Hero.vue'
-import ProductsGrid from '~comp/modules/ProductsGrid.vue'
-import ProductSortFilter from '~comp/productSortFilter/Index.vue'
-
+import { mapGetters } from 'vuex'
+import Products from '~comp/compositions/Products.vue'
 
 export default {
   components: {
-    ProductsGrid,
-    ProductSortFilter
+    Products
   },
   props: {},
   data () {
-    return {
-      hero: {
-        header: {
-          title: '',
-          copy: ''
-        }
-      }
-    }
+    return {}
   },
   computed: {
-    collection () {
-      console.log('collection: ', this.collections[this.collectionId])
-      return this.collections[this.collectionId]
-    },
-
-
-    products () {
-      const products = {}
-      this.collection.products.forEach(product => products[product.id] = product)
-      return products
+    settings () {
+      const section = this.themeData.find(section => section.type === 'static-collection')
+      return section && section.settings
     },
 
 
     ...mapGetters({
       themeData: 'app/themeData'
-    }),
-
-
-    ...mapState({
-      collectionId: state => state.route.params.id,
-      collections: state => state.catalog.collections,
-      sortByAndFilteredProducts: state => state.catalog.sortByAndFilteredProducts,
     })
   },
   methods: {}
@@ -116,21 +48,8 @@ export default {
   display: grid
   grid-gap: $unit*5 0
 
-  &__products
-    @extend %content
-    display: grid
-    grid-template-columns: repeat(2, 1fr)
-    grid-auto-rows: 1fr
-    grid-gap: $unit*2
-    +mq-s
-      grid-template-columns: repeat(3, 1fr)
-    +mq-m
-      grid-template-columns: repeat(4, 1fr)
-
   &__sort-filter
     grid-column: 1 / -1
     +mq(520)
       grid-column: unset
-
-
 </style>

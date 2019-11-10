@@ -4,7 +4,7 @@ import Index from '../pages/index.vue'
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
 import Collection from '~/pages/Collection.vue'
-// const Collections = () => import('~/views/Collections.vue')
+// const Collection = () => import('~/pages/Collection.vue')
 import Cart from '~/pages/Cart.vue'
 // const Menu = () => import('~/views/Menu.vue')
 // const Search = () => import('~/views/Search.vue')

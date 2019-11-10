@@ -17,9 +17,15 @@
       {% section 'static-footer' %}
     </div>
     {% render 'app-scripts' %}
+    {% comment %}
+      * Hide Shopify Preview Bar
+    {% endcomment %}
     <style>
       #preview-bar-iframe {
         display: none !important;
+      }
+      html {
+        padding: 0 !important;
       }
     </style>
   </body>

@@ -1,23 +1,53 @@
-{% capture collection %}
+{% capture _collection %}
   {
-    "title": {{ collection.title | json }},
-    "description": {{ collection.description | json }},
-    "products": [
-      {% for product in collection.products limit:8 %}
+    "allVendors": [
+      {% for product_vendor in collection.all_vendors %}
         {
-          "available": {{ product.available | json }},
-          "featuredImage": {% render 'helper-image' image: product.featured_image %},
-          "handle": {{ product.title | json }},
-          "price": {{ product.price | json }},
-          "title": {{ product.title | json }},
-          "url": {{ product.url | within: collection | json }}
+          "title": {{ product_vendor | json }},
+          "url": {{ product_vendor | url_for_vendor | json }}
         }
         {% unless forloop.last %},{% endunless %}
       {% endfor %}
     ],
+    "description": {{ collection.description | json }},
+    {% comment %} set limit to 24 because it's divisable by 2/3/4{% endcomment %}
+    {% paginate collection.products by 5 %}
+      "paginate": {
+        "next": {{ paginate.next.url | json }},
+        "pageSize": {{ paginate.page_size | json }}
+      },
+      "products": [
+        {% for product in collection.products %}
+          {
+            "available": {{ product.available | json }},
+            "featuredImage": {% render 'helper-image' image: product.featured_image %},
+            "handle": {{ product.title | json }},
+            "price": {{ product.price | json }},
+            "title": {{ product.title | json }},
+            "url": {{ product.url | within: collection | json }}
+          }
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+    {% endpaginate %}
+    "title": {{ collection.title | json }},
     "url": {{ collection.url | json }}
   }
 {% endcapture %}
+
+
+{% capture sort_options %}
+  [
+    {% for option in collection.sort_options %}
+      {
+        "value": {{ option.value | json }},
+        "name": {{ option.name | json }}
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+{% endcapture %}
+
 
 <script class="section-data" type="application/json">
 {
@@ -25,7 +55,10 @@
   "id": {{ section.id | json }},
   "settings": {
     "title": {{ section.settings.title | json }},
-    "collection": {{ collection }},
+    "collection": {{ _collection }},
+    "sortOptions": {{ sort_options }},
+    "defaultSortBy": {{ collection.default_sort_by | json }},
+    "sortBy": {{ collection.sort_by | json }},
     "showVendor": {{ section.settings.show_vendor | json }},
     "showViewAll": {{ section.settings.show_view_all | json }}
   },

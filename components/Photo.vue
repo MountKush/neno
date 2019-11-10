@@ -1,19 +1,17 @@
 <template lang='pug'>
-div(class='container-image-ratio-sizer')
-
-  div(
-    class='image-ratio-sizer'
+div(
+  class='image-ratio-sizer'
+)
+  svg(
+    :viewBox='`0 0 ${aspectRatio} 1`'
+    class='image-ratio-sizer__svg'
   )
-    svg(
-      :viewBox='`0 0 ${aspectRatio} 1`'
-      class='image-ratio-sizer__svg'
+  transition(mode='in-out')
+    img(
+      v-lazy='src'
+      :key='src'
+      class='image-ratio-sizer__image'
     )
-    transition(mode='in-out')
-      img(
-        :key='src'
-        v-lazy='src'
-        class='image-ratio-sizer__image'
-      )
 </template>
 
 
@@ -46,15 +44,17 @@ export default {
 .image-ratio-sizer
   display: grid
   background: rgba(252, 252, 252, 1)
+  background: $pri-cl
 
   &__svg,
   &__image
     grid-area: 1 / 1 / 2 / 2
+    max-height: inherit
 
   &__image
     width: 100%
     height: auto
-    object-fit: cover
+    object-fit: contain
     opacity: 0
     transition: opacity 25ms
 
