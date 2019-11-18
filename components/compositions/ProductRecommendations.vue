@@ -37,8 +37,8 @@ export default {
     ProductCard
   },
   props: {
-    product: {
-      type: Object,
+    productId: {
+      type: Number,
       required: true
     }
   },
@@ -50,7 +50,7 @@ export default {
   computed: {},
   methods: {
     async init () {
-      this.products = await this.fetchProductRecommendations(this.product.id)
+      this.products = await this.fetchProductRecommendations(this.productId)
     },
 
 

@@ -4,11 +4,14 @@ header(class='products-header')
   h1(class='products-header__title') {{ title }}
 
   div(class='products-header__buttons-container')
-    button(class='products-header__filter-button')
-      span(class='products-header__filter-button-label') Filter
-      IconFilter(class='products-header__filter-button-icon')
+    //- button(class='products-header__filter-button')
+    //-   span(class='products-header__filter-button-label') Filter
+    //-   IconFilter(class='products-header__filter-button-icon')
 
-    button(class='products-header__sort-by-button')
+    button(
+      @click='$emit("openDrawer")'
+      class='products-header__sort-by-button'
+    )
       span(class='products-header__sort-by-button-label') Sort By
       IconSortBy(class='products-header__sort-by-button-icon')
 </template>
@@ -46,9 +49,6 @@ export default {
   display: flex
   justify-content: space-between
   align-items: center
-  padding: $unit 0
-  +mq-m
-    padding: $unit*3 0
 
   &__title
     font-weight: $fw-bold
@@ -74,14 +74,14 @@ export default {
       height: $unit*2
       user-select: none
 
-  &__filter-button-label
-    display: none
-    +mq-m
-      display: block
+  // &__filter-button-label
+  //   display: none
+  //   +mq-m
+  //     display: block
 
-  &__sort-by-button
-    display: none
-    +mq-m
-      display: flex
-      margin-left: $unit*2
+  // &__sort-by-button
+  //   display: none
+  //   +mq-m
+  //     display: flex
+  //     margin-left: $unit*2
 </style>

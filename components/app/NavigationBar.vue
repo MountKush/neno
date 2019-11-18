@@ -50,7 +50,7 @@ div(class='container-navigation-bar')
     //-
     //- account
     router-link(
-      :to='{ name: "index" }'
+      :to='{ name: "auth" }'
       class='navigation-bar__account'
     )
       IconAccount(

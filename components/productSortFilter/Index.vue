@@ -1,140 +1,43 @@
 <template lang='pug'>
-div(class='container-sort-filter')
+Overlay(
+  :drawerId='"sort-filter"'
+  class='container-sort-filter'
+)
 
-  div(class='sort-filter')
+  template(v-slot:default)
+    div(class='sort-filter')
 
-    //- header(class='sort-filter__header')
-    //-   a(
-    //-     @click='setActiveView("sort by")'
-    //-     class='sort-filter__sort-by-button'
-    //-   )
-    //-     IconSortBy(
-    //-       :class='{ active: activeView === "sort by" }'
-    //-       class='sort-filter__sort-by-button-svg'
-    //-     )
-    //-     span(
-    //-       :class='{ active: activeView === "sort by" }'
-    //-       class='sort-filter__sort-by-button-copy'
-    //-     ) Sort By
-    //-   a(
-    //-     @click='setActiveView("filter")'
-    //-     class='sort-filter__filter-button'
-    //-   )
-    //-     IconFilter(
-    //-       :class='{ active: activeView === "filter" }'
-    //-       class='sort-filter__filter-button-svg'
-    //-     )
-    //-     span(
-    //-       :class='{ active: activeView === "filter" }'
-    //-       class='sort-filter__filter-button-copy'
-    //-     ) Filter
+      div(class='sort-filter__view-wrapper')
 
-
-    div(class='sort-filter__view-wrapper')
-
-      //- sort by
-      h3 Sort By
-      ul(
-        class='sort-filter__sort-by-list'
-      )
-        li(
-          v-for='(option, index) in sortOptions'
-          :key='option + index'
-          class='sort-filter__sort-by-item'
+        ul(
+          class='sort-filter__sort-by-list'
         )
-          a(
-            @click='setSortBy(option.value)'
-            :class='{ active: option.value === activeSortOptionValue }'
-            class='sort-filter__sort-by-option'
-          ) {{ option.name }}
-          IconCheckMark(
-            v-show='option.value === activeSortOptionValue'
-            class='sort-filter__sort-by-svg'
+          li(
+            v-for='(option, index) in sortOptions'
+            :key='option + index'
+            class='sort-filter__sort-by-item'
           )
-
-      //- //- Vendors
-      //- h3 Vendors
-      //- ul(
-      //-   class='sort-filter__sort-by-list'
-      //- )
-      //-   li(
-      //-     v-for='(option, index) in sortOptions'
-      //-     :key='option + index'
-      //-     class='sort-filter__sort-by-item'
-      //-   )
-      //-     a(
-      //-       @click='setSortBy(option.value)'
-      //-       :class='{ active: option.value === activeSortOptionValue }'
-      //-       class='sort-filter__sort-by-option'
-      //-     ) {{ option.name }}
-      //-     IconCheckMark(
-      //-       v-show='option.value === activeSortOptionValue'
-      //-       class='sort-filter__sort-by-svg'
-      //-     )
-
-      //- //- filter
-      //- form(
-      //-   @submit.prevent=''
-      //-   v-show='activeView === "filter"'
-      //-   class='sort-filter__filter-list'
-      //- )
-      //-   div(
-      //-     class='sort-filter__filter-item'
-      //-   )
-      //-     h3(class='sort-filter__filter-label') Price
-      //-     a(
-      //-       @click='toggleActiveFilter("price")'
-      //-       class='sort-filter__filter-checkbox'
-      //-     )
-      //-       IconCheckMark(
-      //-         v-show='filter.active.includes("price")'
-      //-         class='sort-filter__filter-checkbox-svg'
-      //-       )
-      //-     input(
-      //-       v-model='filter.price'
-      //-       type='range'
-      //-       min='0'
-      //-       max='1'
-      //-       step='0.1'
-      //-       class='sort-filter__filter-input'
-      //-     )
-      //-     p(class='sort-filter__filter-price-min') Min
-      //-     p(class='sort-filter__filter-price-max') Max
-      //-
-      //-   div(
-      //-     class='sort-filter__filter-item'
-      //-   )
-      //-     h3(class='sort-filter__filter-label') Color
-      //-     a(
-      //-       @click='toggleActiveFilter("color")'
-      //-       class='sort-filter__filter-checkbox'
-      //-     )
-      //-       IconCheckMark(
-      //-         v-show='filter.active.includes("color")'
-      //-         class='sort-filter__filter-checkbox-svg'
-      //-       )
-      //-     ul(class='sort-filter__filter-color-list')
-      //-       li(
-      //-         v-for='(option, index) in filter.colorOptions'
-      //-         :key='option + index'
-      //-         class='sort-filter__filter-color-item'
-      //-       )
-      //-         a(
-      //-           @click='toggleActiveColors(option)'
-      //-           :style='{ backgroundColor: option }'
-      //-           :class='{ active: filter.activeColors.includes(option) }'
-      //-           class='sort-filter__filter-color-option'
-      //-         )
+            a(
+              @click='setSortBy(option.value)'
+              :class='{ active: option.value === activeSortOptionValue }'
+              class='sort-filter__sort-by-option'
+            ) {{ option.name }}
+            IconCheckMark(
+              v-show='option.value === activeSortOptionValue'
+              class='sort-filter__sort-by-svg'
+            )
 </template>
 
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import Overlay from '~comp/slot/Overlay.vue'
 import IconCheckMark from '~/assets/svg/icon-check-mark.svg'
 
 
 export default {
   components: {
+    Overlay,
     IconCheckMark
   },
   props: {
@@ -149,6 +52,14 @@ export default {
     sortBy: {
       type: String,
       required: true
+    },
+    allVendors: {
+      type: Array,
+      default: () => []
+    },
+    allTypes: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -180,9 +91,24 @@ export default {
 
 <style lang='sass' scoped>
 .container-sort-filter
+  height: calc(100% - #{$unit*7})
+  top: unset
+  bottom: 100%
+  z-index: 49
+  background: rgba(34, 34, 34, 0.2)
+
+  &.is-open
+    transform: translateY(calc(100% + #{$unit*7}))
 
 .sort-filter
   height: 100%
+  display: grid
+  grid-gap: $unit*5
+  background: $white
+  padding: $unit*2
+  margin-left: auto
+  width: 75%
+  max-width: 320px
   // box-shadow: 0 0 $unit*3 rgba(34, 34, 34, 0.05)
 
   &__header

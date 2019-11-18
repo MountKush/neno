@@ -3,18 +3,8 @@ div(class='container-products')
   div(class='products')
 
     ProductsHeader(
-      :title='settings.collection.title'
-      @openDrawer='openDrawer({ id: "sort-filter" })'
+      :title='`Results for "${settings.search.terms}"`'
       class='products__header'
-    )
-
-    ProductSortFilter(
-      :sortOptions='settings.collection.sortOptions'
-      :defaultSortBy='settings.collection.defaultSortBy'
-      :sortBy='settings.collection.sortBy'
-      @setSortBy='setSortBy'
-      @closeDrawer='closeDrawer'
-      class='products__sort-filter'
     )
 
     ProductsGrid(
@@ -35,14 +25,12 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 import axios from 'axios'
 import { parseScriptJson } from '~/utils/parseScriptJson'
 import ProductsHeader from '~comp/modules/ProductsHeader.vue'
-import ProductSortFilter from '~comp/productSortFilter/Index.vue'
 import ProductsGrid from '~comp/modules/ProductsGrid.vue'
 
 
 export default {
   components: {
     ProductsHeader,
-    ProductSortFilter,
     ProductsGrid
   },
   props: {
@@ -73,11 +61,11 @@ export default {
 
 
     async fetchMoreProducts () {
-      const url = `${this.paginateNext}&section_id=static-collection`
+      const url = `${this.paginateNext}&section_id=static-search`
       const { data } = await axios.get(url)
       const json = parseScriptJson({ data, scriptName: '.section-data' })
-      const section = json.find(section => section.type === 'static-collection')
-      const { products, paginate } = section.settings.collection
+      const section = json.find(section => section.type === 'static-search')
+      const { products, paginate } = section.settings.search
       this.paginateNext = paginate.next
       this.addProducts(products)
     },
@@ -95,15 +83,8 @@ export default {
     },
 
 
-    async setSortBy (value) {
-      this.reset()
-      this.$router.push({ query: { sort_by: value }})
-      await this.fetchData()
-    },
-
-
     init () {
-      const { products, paginate } = this.settings.collection
+      const { products, paginate } = this.settings.search
       this.addProducts(products)
       this.paginateNext = paginate.next
       this.paginatePageSize = paginate.pageSize

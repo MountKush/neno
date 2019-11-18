@@ -4,34 +4,25 @@ div(class='container-cart-item')
   li(class='cart-item')
 
     router-link(
-      :to='{ name: "product", params: { id: products[item.id] ? products[item.id].id : "" } }'
+      :to='item.url'
       class='cart-item__image-wrapper'
     )
       Photo(
-        :image='image'
+        :src='item.image'
+        :aspectRatio='1'
         class='cart-item__image'
       )
 
     router-link(
-      :to='{ name: "product", params: { id: products[item.id] ? products[item.id].id : "" } }'
+      :to='item.url'
       class='cart-item__title'
-    ) {{ item.title }}
+    ) {{ item.product_title }}
 
-    p(class='cart-item__price') ${{ price }}
+    p(class='cart-item__price') ${{ item.line_price }}
 
-    p(
-      v-show='color'
-      class='cart-item__color'
-    )
-      IconColor(class='cart-item__color-icon')
-      | {{ color }}
 
-    p(
-      v-show='size'
-      class='cart-item__size'
-    )
-      IconSize(class='cart-item__size-icon')
-      | {{ size }}
+    p(class='cart-item__color') {{ item.variant_title }}
+
 
     div(class='cart-item__quantity')
       a(
@@ -45,8 +36,6 @@ div(class='container-cart-item')
         class='cart-item__quantity-button'
         @click='quantity++'
       ) +
-
-
 </template>
 
 
@@ -54,15 +43,11 @@ div(class='container-cart-item')
 import { mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import Photo from '~comp/Photo.vue'
-import IconColor from '~/assets/svg/icon-color.svg'
-import IconSize from '~/assets/svg/icon-size.svg'
 
 
 export default {
   components: {
-    Photo,
-    IconColor,
-    IconSize
+    Photo
   },
   props: {
     item: {
@@ -76,54 +61,54 @@ export default {
     }
   },
   computed: {
-    variant () {
-      this.products
-      return this.item.variant
-    },
+    // variant () {
+    //   this.products
+    //   return this.item.variant
+    // },
 
 
-    image () {
-      return { src: this.variant.image.src, aspectRatio: '0 0 268 357' }
-    },
+    // image () {
+    //   return { src: this.variant.image.src, aspectRatio: '0 0 268 357' }
+    // },
+    //
+    //
+    // color () {
+    //   const option = this.variant.selectedOptions.find(option => option.name.match(/color/i))
+    //   return option ? option.value : ''
+    // },
+    //
+    //
+    // size () {
+    //   const option = this.variant.selectedOptions.find(option => option.name.match(/size/i))
+    //   return option ? option.value : ''
+    // },
+    //
+    //
+    // price () {
+    //   return Math.round(this.variant.price * this.quantity * 100) / 100
+    // },
 
 
-    color () {
-      const option = this.variant.selectedOptions.find(option => option.name.match(/color/i))
-      return option ? option.value : ''
-    },
-
-
-    size () {
-      const option = this.variant.selectedOptions.find(option => option.name.match(/size/i))
-      return option ? option.value : ''
-    },
-
-
-    price () {
-      return Math.round(this.variant.price * this.quantity * 100) / 100
-    },
-
-
-    ...mapGetters({
-      products: 'checkout/lineItemsProducts'
-    })
+    // ...mapGetters({
+    //   products: 'checkout/lineItemsProducts'
+    // })
   },
-  watch: {
-    quantity (value) {
-      if (value < 0) this.quantity = 0
-      this.updateLineItemsDebounce()
-    }
-  },
+  // watch: {
+  //   quantity (value) {
+  //     if (value < 0) this.quantity = 0
+  //     this.updateLineItemsDebounce()
+  //   }
+  // },
   methods: {
-    updateLineItemsDebounce: _.debounce(function() {
-      const lineItems = [{ id: this.item.id, quantity: this.quantity }]
-      this.updateLineItems({ lineItems })
-    }, 1000),
-
-
-    ...mapActions({
-      updateLineItems: 'checkout/updateLineItems'
-    })
+    // updateLineItemsDebounce: _.debounce(function() {
+    //   const lineItems = [{ id: this.item.id, quantity: this.quantity }]
+    //   this.updateLineItems({ lineItems })
+    // }, 1000),
+    //
+    //
+    // ...mapActions({
+    //   updateLineItems: 'checkout/updateLineItems'
+    // })
   }
 }
 </script>

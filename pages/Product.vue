@@ -16,7 +16,7 @@ main(
 
     ProductRecommendations(
       v-if='section.type === "static-product"'
-      :product='section.settings.product'
+      :productId='section.settings.product.id'
     )
 
     //- ProductDetail(

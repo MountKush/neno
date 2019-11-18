@@ -1,12 +1,16 @@
 <template lang='pug'>
 div
-  account
+  //- account
+  h1 Account
+  router-view(
+    class=''
+  )
 </template>
 
 
 <script>
 import Account from '~comp/account/Index.vue'
-import { auth } from '~/firebase'
+// import { auth } from '~/firebase'
 
 
 export default {
@@ -17,8 +21,9 @@ export default {
     return {}
   },
   beforeRouteEnter (to, from, next) {
-    const authUser = auth().currentUser
-    authUser && !authUser.isAnonymous ? next() : next({ name: 'auth' })
+    // const authUser = auth().currentUser
+    // authUser && !authUser.isAnonymous ? next() : next({ name: 'auth' })
+    next()
   }
 }
 </script>

@@ -8,7 +8,12 @@ div(
     v-scroll-lock='isOpen'
     class='overlay__content'
   )
-    slot
+    div(
+      @click='closeDrawer'
+      class='overlay__backdrop'
+    )
+    div(class='overlay__default-slot')
+      slot
 </template>
 
 
@@ -36,7 +41,11 @@ export default {
       drawer: state => state.app.drawer
     })
   },
-  methods: {}
+  methods: {
+    ...mapMutations({
+      closeDrawer: 'app/CLOSE_DRAWER'
+    })
+  }
 }
 </script>
 
@@ -61,7 +70,20 @@ export default {
 .overlay
 
   &__content
+    position: relative
     overflow-y: auto
     width: 100%
     flex: 1 1 auto
+
+  &__backdrop
+    position: absolute
+    z-index: 1
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+  &__default-slot
+    z-index: 2
+
 </style>

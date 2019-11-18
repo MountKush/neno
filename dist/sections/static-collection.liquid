@@ -1,14 +1,48 @@
+{% capture all_types %}
+  [
+    {% for product_type in collection.all_types %}
+      {
+        "title": {{ product_type | json }},
+        "url": {{ product_type | url_for_type | json }}
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+{% endcapture %}
+
+
+{% capture all_vendors %}
+  [
+    {% for product_vendor in collection.all_vendors %}
+      {
+        "title": {{ product_vendor | json }},
+        "url": {{ product_vendor | url_for_vendor | json }}
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+{% endcapture %}
+
+
+{% capture sort_options %}
+  [
+    {% for option in collection.sort_options %}
+      {
+        "value": {{ option.value | json }},
+        "name": {{ option.name | json }}
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+{% endcapture %}
+
+
 {% capture _collection %}
   {
-    "allVendors": [
-      {% for product_vendor in collection.all_vendors %}
-        {
-          "title": {{ product_vendor | json }},
-          "url": {{ product_vendor | url_for_vendor | json }}
-        }
-        {% unless forloop.last %},{% endunless %}
-      {% endfor %}
-    ],
+    "allTypes": {{ all_types }},
+    "allVendors": {{ all_vendors }},
+    "currentType": {{ collection.current_type | json }},
+    "currentVendor": {{ collection.current_vendor | json }},
     "description": {{ collection.description | json }},
     {% comment %} set limit to 24 because it's divisable by 2/3/4{% endcomment %}
     {% paginate collection.products by 5 %}
@@ -30,22 +64,12 @@
         {% endfor %}
       ],
     {% endpaginate %}
+    "sortOptions": {{ sort_options }},
+    "defaultSortBy": {{ collection.default_sort_by | json }},
+    "sortBy": {{ collection.sort_by | json }},
     "title": {{ collection.title | json }},
     "url": {{ collection.url | json }}
   }
-{% endcapture %}
-
-
-{% capture sort_options %}
-  [
-    {% for option in collection.sort_options %}
-      {
-        "value": {{ option.value | json }},
-        "name": {{ option.name | json }}
-      }
-      {% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ]
 {% endcapture %}
 
 
@@ -56,9 +80,6 @@
   "settings": {
     "title": {{ section.settings.title | json }},
     "collection": {{ _collection }},
-    "sortOptions": {{ sort_options }},
-    "defaultSortBy": {{ collection.default_sort_by | json }},
-    "sortBy": {{ collection.sort_by | json }},
     "showVendor": {{ section.settings.show_vendor | json }},
     "showViewAll": {{ section.settings.show_view_all | json }}
   },
@@ -93,12 +114,6 @@
       "id": "show_view_all",
       "label": "Show 'View all' button",
       "default": false
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured collection",
-      "category": "Collection"
     }
   ]
 }

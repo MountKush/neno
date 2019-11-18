@@ -51,16 +51,17 @@ export default {
     ...mapActions({
       initData: 'app/initData',
       fetchData: 'app/fetchData',
+      fetchCart: 'cart/fetchCart',
       themeEditor: 'shopifyThemeEditor/init'
     })
   },
   created () {
     this.initData()
+    this.fetchCart()
     this.themeEditor()
   },
   beforeRouteUpdate (to, from, next) {
     this.closeDrawer()
-    console.log('????')
     next()
   }
 }

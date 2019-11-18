@@ -49,8 +49,9 @@ export default {
         this.sending = true
         this.buttonText = 'Adding...'
 
-        const lineItems = [{ variantId: this.variant.id, quantity: this.quantity }]
-        await this.addLineItems({ lineItems })
+        // const lineItems = [{ variantId: this.variant.id, quantity: this.quantity }]
+        // await this.addLineItems({ lineItems })
+        await this.addItem({ variantId: this.variant.id, quantity: this.quantity })
         await this.handleSuccess()
       }
       catch (e) {
@@ -84,7 +85,7 @@ export default {
 
 
     ...mapActions({
-      addLineItems: 'checkout/addLineItems'
+      addItem: 'cart/addCart'
     })
   }
 }

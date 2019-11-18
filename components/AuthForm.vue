@@ -21,63 +21,63 @@ div(class='container-auth-form')
       ) Sign In
 
 
-    //- sign in card
-    div(class='auth-form__wrapper')
+    //- //- sign in card
+    //- div(class='auth-form__wrapper')
+    //-
+    //-   //- email
+    //-   div(class='auth-form__email')
+    //-     IconEmail(
+    //-       :class='{ invalid: errors.has("email") }'
+    //-       class='auth-form__svg'
+    //-     )
+    //-     input(
+    //-       v-model='email'
+    //-       v-validate='"required|email"'
+    //-       name='email'
+    //-       placeholder='Email'
+    //-       class='auth-form__input'
+    //-     )
+    //-
+    //-   //- password
+    //-   div(
+    //-     :class='{ visible: activeView === "sign in" || activeView === "sign up"  }'
+    //-     class='auth-form__password'
+    //-   )
+    //-     IconPassword(
+    //-       :class='{ invalid: errors.has("password") }'
+    //-       class='auth-form__svg'
+    //-     )
+    //-     input(
+    //-       v-model='password'
+    //-       v-validate='activeView === "reset password" ? "" : "required|min:6"'
+    //-       name='password'
+    //-       type='password'
+    //-       placeholder='Password'
+    //-       class='auth-form__input'
+    //-     )
 
-      //- email
-      div(class='auth-form__email')
-        IconEmail(
-          :class='{ invalid: errors.has("email") }'
-          class='auth-form__svg'
-        )
-        input(
-          v-model='email'
-          v-validate='"required|email"'
-          name='email'
-          placeholder='Email'
-          class='auth-form__input'
-        )
-
-      //- password
-      div(
-        :class='{ visible: activeView === "sign in" || activeView === "sign up"  }'
-        class='auth-form__password'
-      )
-        IconPassword(
-          :class='{ invalid: errors.has("password") }'
-          class='auth-form__svg'
-        )
-        input(
-          v-model='password'
-          v-validate='activeView === "reset password" ? "" : "required|min:6"'
-          name='password'
-          type='password'
-          placeholder='Password'
-          class='auth-form__input'
-        )
-
-      //- recaptcha
-      div(
-        :class='{ visible: activeView === "reset password" }'
-        class='auth-form__recaptcha'
-      )
-        a(
-          @click='toggleRecaptcha'
-          class='auth-form__recaptcha-checkbox'
-        )
-          IconCheckMark(
-            v-show='recaptcha'
-            class='auth-form__svg'
-          )
-        p(class='auth-form__recaptcha-copy') I'm Not A Robot
-        IconRecaptcha(class='auth-form__svg')
-
-      //- forgot password
-      a(
-        @click='setActiveView("reset password")'
-        :class='{ visible: activeView === "sign in" }'
-        class='auth-form__password-reset'
-      ) Forgot password?
+      //- //- recaptcha
+      //- div(
+      //-   :class='{ visible: activeView === "reset password" }'
+      //-   class='auth-form__recaptcha'
+      //- )
+      //-   a(
+      //-     @click='toggleRecaptcha'
+      //-     class='auth-form__recaptcha-checkbox'
+      //-   )
+      //-     IconCheckMark(
+      //-       v-show='recaptcha'
+      //-       class='auth-form__svg'
+      //-     )
+      //-   p(class='auth-form__recaptcha-copy') I'm Not A Robot
+      //-   IconRecaptcha(class='auth-form__svg')
+      //-
+      //- //- forgot password
+      //- a(
+      //-   @click='setActiveView("reset password")'
+      //-   :class='{ visible: activeView === "sign in" }'
+      //-   class='auth-form__password-reset'
+      //- ) Forgot password?
 
       //- submit
       input(
@@ -87,43 +87,43 @@ div(class='container-auth-form')
         class='auth-form__submit'
       )
 
-      //- providers
-      div(
-        :class='{ visible: activeView === "sign in" || activeView === "sign up" }'
-        class='auth-form__providers'
-      )
-        p(class='auth-form__copy') or
-        a(
-          @click='signInWithFacebook'
-          class='auth-form__icon'
-        )
-          IconFacebook(class='auth-form__svg')
-        a(
-          @click='signInWithGoogle'
-          class='auth-form__icon'
-        )
-          IconGoogle(class='auth-form__svg')
-        a(
-          @click='signInWithTwitter'
-          class='auth-form__icon'
-        )
-          IconTwitter(class='auth-form__svg')
+      //- //- providers
+      //- div(
+      //-   :class='{ visible: activeView === "sign in" || activeView === "sign up" }'
+      //-   class='auth-form__providers'
+      //- )
+      //-   p(class='auth-form__copy') or
+      //-   a(
+      //-     @click='signInWithFacebook'
+      //-     class='auth-form__icon'
+      //-   )
+      //-     IconFacebook(class='auth-form__svg')
+      //-   a(
+      //-     @click='signInWithGoogle'
+      //-     class='auth-form__icon'
+      //-   )
+      //-     IconGoogle(class='auth-form__svg')
+      //-   a(
+      //-     @click='signInWithTwitter'
+      //-     class='auth-form__icon'
+      //-   )
+      //-     IconTwitter(class='auth-form__svg')
 
 
-    //- send status
-    div(
-      :class='{ visible: sending }'
-      class='auth-form__send-status'
-    )
-
-
-    //- error status
-    div(
-      :class='{ visible: error }'
-      class='auth-form__error-status'
-    )
-      h3(class='auth-form__error-status-title') Error Message
-      p(class='auth-form__error-status-copy') {{ errorMessage }}
+    //- //- send status
+    //- div(
+    //-   :class='{ visible: sending }'
+    //-   class='auth-form__send-status'
+    //- )
+    //-
+    //-
+    //- //- error status
+    //- div(
+    //-   :class='{ visible: error }'
+    //-   class='auth-form__error-status'
+    //- )
+    //-   h3(class='auth-form__error-status-title') Error Message
+    //-   p(class='auth-form__error-status-copy') {{ errorMessage }}
 
 
 </template>
@@ -176,14 +176,14 @@ export default {
 
     async validateForm () {
       try {
-        const email = this.email
-        const password = this.password
-        const isValid = await this.$validator.validateAll()
-        console.log('isValid: ', isValid)
-        if (!isValid) return
-        if (this.activeView === 'sign in') this.signIn({ email, password })
-        if (this.activeView === 'sign up') this.signUp({ email, password })
-        if (this.activeView === 'reset password' && this.recaptcha) this.passwordReset({ email })
+        // const email = this.email
+        // const password = this.password
+        // const isValid = await this.$validator.validateAll()
+        // console.log('isValid: ', isValid)
+        // if (!isValid) return
+        // if (this.activeView === 'sign in') this.signIn({ email, password })
+        // if (this.activeView === 'sign up') this.signUp({ email, password })
+        // if (this.activeView === 'reset password' && this.recaptcha) this.passwordReset({ email })
       }
       catch (e) { console.error(e) }
     },
@@ -191,11 +191,11 @@ export default {
 
     async signUp ({ email, password }) {
       try {
-        console.log('signUp')
-        this.sending = true
-        const res = await this.createUserWithEmailAndPassword({ email, password })
-        this.sending = false
-        console.log('res: ', res)
+        // console.log('signUp')
+        // this.sending = true
+        // const res = await this.createUserWithEmailAndPassword({ email, password })
+        // this.sending = false
+        // console.log('res: ', res)
       }
       catch (e) {
         console.error(e)
@@ -207,10 +207,10 @@ export default {
 
     async signIn ({ email, password }) {
       try {
-        console.log('signIn')
-        this.sending = true
-        await this.signInWithEmailAndPassword({ email, password })
-        this.sending = false
+        // console.log('signIn')
+        // this.sending = true
+        // await this.signInWithEmailAndPassword({ email, password })
+        // this.sending = false
       }
       catch (e) {
         console.error(e)
@@ -221,10 +221,10 @@ export default {
 
     async passwordReset ({ email }) {
       try {
-        console.log('passwordReset')
-        this.sending = true
-        await this.sendPasswordResetEmail({ email })
-        this.sending = false
+        // console.log('passwordReset')
+        // this.sending = true
+        // await this.sendPasswordResetEmail({ email })
+        // this.sending = false
       }
       catch (e) {
         console.error(e)
@@ -234,23 +234,23 @@ export default {
 
 
     handleError ({ errorMessage }) {
-      console.log('handleError: ', errorMessage)
-      this.sending = false
-      this.error = true
-      this.errorMessage = errorMessage
-      setTimeout(() => {
-        this.error = false
-        this.errorMessage = ''
-      }, 5000)
+      // console.log('handleError: ', errorMessage)
+      // this.sending = false
+      // this.error = true
+      // this.errorMessage = errorMessage
+      // setTimeout(() => {
+      //   this.error = false
+      //   this.errorMessage = ''
+      // }, 5000)
     },
 
     ...mapActions({
-      signInWithEmailAndPassword: 'auth/signInWithEmailAndPassword',
-      createUserWithEmailAndPassword: 'auth/createUserWithEmailAndPassword',
-      sendPasswordResetEmail: 'auth/sendPasswordResetEmail',
-      signInWithFacebook: 'auth/signInWithFacebook',
-      signInWithGoogle: 'auth/signInWithGoogle',
-      signInWithTwitter: 'auth/signInWithTwitter'
+      // signInWithEmailAndPassword: 'auth/signInWithEmailAndPassword',
+      // createUserWithEmailAndPassword: 'auth/createUserWithEmailAndPassword',
+      // sendPasswordResetEmail: 'auth/sendPasswordResetEmail',
+      // signInWithFacebook: 'auth/signInWithFacebook',
+      // signInWithGoogle: 'auth/signInWithGoogle',
+      // signInWithTwitter: 'auth/signInWithTwitter'
     })
   }
 }

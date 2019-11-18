@@ -1,14 +1,12 @@
 import Vue from 'vue'
 
 export default {
-  SET_AUTH_USER (state, { authUser }) {
-    state.authUser = authUser.toJSON()
-    console.log('SET_AUTH_USER: ', authUser)
+  SET_CUSTOMER (state, { customer }) {
+    Vue.set(state, 'customer', customer)
   },
 
 
-  DELETE_AUTH_USER (state) {
-    state.authUser = null
-    console.log('DELETE_AUTH_USER')
+  DELETE_CUSTOMER (state) {
+    Vue.delete(state, 'customer')
   }
 }

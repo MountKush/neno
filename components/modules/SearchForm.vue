@@ -6,9 +6,9 @@ form(
 )
   IconSearch(class='search-form__icon')
   input(
-    v-model='search'
+    v-model.trim='search'
     ref='search'
-    placeholder='Search inventory'
+    :placeholder='placeholder'
     class='search-form__input'
   )
   a(
@@ -35,6 +35,7 @@ export default {
   props: {},
   data () {
     return {
+      placeholder: 'Search products',
       search: ''
     }
   },
@@ -80,7 +81,7 @@ export default {
     async blur () {
       console.log('submitted: ', this.search)
       if (!this.search) return
-      this.$router.push(`/search?q=${this.search}`)
+      this.$router.push(`/search?type=product&q=${this.search}`)
       this.$refs.search.blur()
       this.clearSearch()
       // this.fetchSection({sectionId: 'static-search'})

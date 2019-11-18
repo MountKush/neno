@@ -2,8 +2,11 @@
 div(class='container-header')
 
   header(class='header')
-    h2(class='header__title') Shopping Bag
-    p(class='header__copy') Review of {{ lineItemsQuantityTotal }} item(s)
+    h2(class='header__title') Cart
+    div(class='header__copy')
+      p 0 Items
+      span |
+      p $0.00
 
 </template>
 
@@ -15,11 +18,7 @@ export default {
   data () {
     return {}
   },
-  computed: {
-    ...mapGetters({
-      lineItemsQuantityTotal: 'checkout/lineItemsQuantityTotal'
-    })
-  },
+  computed: {},
   methods: {}
 }
 </script>
@@ -32,12 +31,15 @@ export default {
   display: grid
   grid-gap: $unit 0
   justify-items: center
+  +mq-m
+    justify-items: start
 
   &__title
     font-size: $fs1
-    +mq-m
-      font-size: $fs2
+    font-weight: $fw-bold
 
   &__copy
+    +mq-m
+      display: none
 
 </style>

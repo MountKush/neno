@@ -11,21 +11,19 @@ div(class='container-cart')
     )
 
     CartList(
-      :checkout='checkout'
+      :cart='cart'
       class='cart__list'
     )
 
-    DiscountEntry(class='cart__discount-entry')
-
-    Estimation(
-      :checkout='checkout'
-      class='cart__estimation'
+    CartSummary(
+      :cart='cart'
+      class='cart__summary'
     )
 
-    Submit(
-      :checkout='checkout'
-      class='cart__submit'
-    )
+  ProductRecommendations(
+    v-if='cart.items.length'
+    :productId='cart.items[0].product_id'
+  )
 </template>
 
 
@@ -34,18 +32,16 @@ import { mapState } from 'vuex'
 import _ from 'lodash'
 import Header from '~comp/cart/Header.vue'
 import CartList from '~comp/cart/CartList.vue'
-import DiscountEntry from '~comp/cart/DiscountEntry.vue'
-import Estimation from '~comp/cart/Estimation.vue'
-import Submit from '~comp/cart/Submit.vue'
+import CartSummary from '~comp/cart/Summary.vue'
+import ProductRecommendations from '~comp/compositions/ProductRecommendations.vue'
 
 
 export default {
   components: {
     CartHeader: Header,
     CartList,
-    DiscountEntry,
-    Estimation,
-    Submit
+    CartSummary,
+    ProductRecommendations
   },
   props: {},
   data () {
@@ -53,12 +49,12 @@ export default {
   },
   computed: {
     isCheckoutEmpty () {
-      return _.isEmpty(this.checkout)
+      return _.isEmpty(this.cart)
     },
 
 
     ...mapState({
-      checkout: state => state.checkout
+      cart: state => state.cart.cart
     })
   },
   methods: {}
@@ -69,28 +65,22 @@ export default {
 <style lang='sass' scoped>
 .container-cart
 
-
 .cart
-  width: 75%
-  max-width: 1024px
-  margin: $unit*10 auto 0 auto
+  @extend %content
+  margin: $unit*5 auto $unit*10 auto
   display: grid
-  grid-template-rows: repeat(5, auto)
-  grid-gap: $unit*10 0
+  +mq-m
+    grid-template-rows: repeat(2, auto)
+    grid-template-columns: 1fr auto
+    grid-gap: $unit*5
 
   &__header
-    grid-row: 1 / 2
 
   &__list
-    grid-row: 2 / 3
 
-  &__discount-entry
-    grid-row: 3 / 4
-
-  &__estimation
-    grid-row: 4 / 5
-
-  &__submit
-    grid-row: 5 / 6
+  &__summary
+    +mq-m
+      grid-row: 1 / -1
+      grid-column: 2 / 3
 
 </style>

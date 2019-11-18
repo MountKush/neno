@@ -9,6 +9,8 @@ import shopifyThemeEditor from './modules/shopify-theme-editor'
 import catalog from './modules/catalog'
 // import checkout from './modules/checkout'
 // import account from './modules/account'
+import cart from './modules/cart'
+
 
 Vue.use(Vuex)
 
@@ -19,6 +21,7 @@ export default new Vuex.Store({
     shopifyThemeEditor,
     // auth,
     catalog,
+    cart,
     // checkout,
     // account
   },

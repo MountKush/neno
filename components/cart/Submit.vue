@@ -6,27 +6,21 @@ div(class='container-submit')
     class='submit'
   )
     input(
-      :class='{ valid: checkout.lineItems.length }'
+      :class='{ valid: cart.items.length }'
       type='submit'
       value='Checkout'
       class='submit__checkout'
     )
-
-    p(class='submit__disclosure') Taxes calculated at checkout
-
 </template>
 
 
 <script>
-import IconOrder from '~/assets/svg/icon-order.svg'
 
 
 export default {
-  components: {
-    IconOrder
-  },
+  components: {},
   props: {
-    checkout: {
+    cart: {
       type: Object,
       required: true
     }
@@ -34,17 +28,10 @@ export default {
   data () {
     return {}
   },
-  computed: {
-    discount () {
-      const { totalPrice, subtotalPrice } = this.checkout
-      const discount = Math.round((subtotalPrice - totalPrice) * 100) / 100
-      return discount ? `- $${discount}` : `$0.00`
-    }
-  },
+  computed: {},
   methods: {
     goToCheckout () {
-      const { webUrl, lineItems } = this.checkout
-      lineItems.length ? window.open(webUrl, '_blank') : null
+
     }
   }
 }
@@ -53,6 +40,16 @@ export default {
 
 <style lang='sass' scoped>
 .container-submit
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  z-index: 10
+  padding: $unit*3 $unit*2
+  background: $white
+  +mq-m
+    position: static
+    padding: 0
 
 .submit
   display: grid

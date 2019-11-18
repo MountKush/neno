@@ -23,12 +23,12 @@ export default {
   },
   computed: {
     ...mapState({
-      authUser: state => state.auth.authUser
+      // authUser: state => state.auth.authUser
     })
   },
   watch: {
     authUser () {
-      this.authUser ? this.$router.replace({ name: 'account' }) : null
+      // this.authUser ? this.$router.replace({ name: 'account' }) : null
     }
   },
   methods: {}

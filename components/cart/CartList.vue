@@ -2,12 +2,12 @@
 div(class='container-cart-list')
 
   ul(
-    v-if='checkout.lineItems.length'
+    v-if='cart.items.length'
     class='cart-list'
   )
 
     CartItem(
-      v-for='(item, index) in checkout.lineItems'
+      v-for='(item, index) in cart.items'
       :key='item.id'
       :item='item'
       class='cart-list__item'
@@ -32,7 +32,7 @@ export default {
     CartItem
   },
   props: {
-    checkout: {
+    cart: {
       type: Object,
       required: true
     }

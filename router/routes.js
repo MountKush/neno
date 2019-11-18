@@ -1,6 +1,6 @@
 import Index from '../pages/index.vue'
-// const Auth = () => import('~/views/Auth.vue')
-// const Account = () => import('~/views/Account.vue')
+import Auth from '~/pages/Auth.vue'
+import Account from '~/pages/Account.vue'
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
 import Collection from '~/pages/Collection.vue'
@@ -8,6 +8,7 @@ import Collection from '~/pages/Collection.vue'
 import Cart from '~/pages/Cart.vue'
 // const Menu = () => import('~/views/Menu.vue')
 // const Search = () => import('~/views/Search.vue')
+import Search from '~/pages/Search.vue'
 // const Faq = () => import('~/views/Faq.vue')
 // const ReferralShare = () => import('~/views/ReferralShare.vue')
 
@@ -19,15 +20,22 @@ export const routes = [
     component: Index
   },
   // {
-  //   path: '/auth',
+  //   path: '/account/login',
   //   name: 'auth',
   //   component: Auth
   // },
-  // {
-  //   path: '/account',
-  //   name: 'account',
-  //   component: Account
-  // },
+  {
+    path: '/account',
+    name: 'account',
+    component: Account,
+    children: [
+      {
+        path: 'login',
+        name: 'auth',
+        component: Auth
+      }
+    ]
+  },
   {
     path: '/products/:id',
     name: 'product',
@@ -63,11 +71,11 @@ export const routes = [
   //   name: 'menu',
   //   component: Menu
   // },
-  // {
-  //   path: '/search',
-  //   name: 'search',
-  //   component: Search
-  // },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search
+  },
   // {
   //   path: '/faq',
   //   name: 'faq',
