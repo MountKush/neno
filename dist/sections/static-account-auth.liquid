@@ -1,0 +1,49 @@
+{% capture form_create_customer %}
+  {% form 'create_customer' %}
+    {{ form.errors | default_errors }}
+    <label for="first_name">First Name</label>
+    <input type="text" value="" name="customer[first_name]" size="30" />
+    <label for="last_name">Last Name</label>
+    <input type="text" value="" name="customer[last_name]" size="30" />
+    <label for="email">Email Address</label>
+    <input type="email" value="" name="customer[email]" size="30" />
+    <label for="password">Password</label>
+    <input type="password" value="" name="customer[password]" size="30" />
+    <input type="submit" value="Create" />
+  {% endform %}
+{% endcapture %}
+
+
+{% capture form_customer_login %}
+  {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <label for="customer_email">Email Address</label>
+    <input type="email" name="customer[email]" />
+    <label for="customer_password">Password</label>
+    <input type="password" name="customer[password]" />
+    <input type="submit" value="Sign In" />
+  {% endform %}
+{% endcapture %}
+
+
+<script class="section-data" type="application/json">
+{
+  "type": "static-account-auth",
+  "id": {{ section.id | json }},
+  "settings": {
+    "form": {
+      "createCustomer": {{ form_create_customer | json }},
+      "customerLogin": {{ form_customer_login | json }}
+    }
+  },
+  "blocks": []
+}
+</script>
+
+
+{% schema %}
+{
+  "name": "Customer Account Auth",
+  "settings": []
+}
+{% endschema %}

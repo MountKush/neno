@@ -5,11 +5,14 @@ div(class='container-auth')
 
     AuthForm(class='auth__form')
 
+    div(
+      v-html='html'
+    )
 </template>
 
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import AuthForm from '~comp/AuthForm.vue'
 
 
@@ -19,7 +22,9 @@ export default {
   },
   props: {},
   data () {
-    return {}
+    return {
+      html: ''
+    }
   },
   computed: {
     ...mapState({
@@ -31,7 +36,14 @@ export default {
       // this.authUser ? this.$router.replace({ name: 'account' }) : null
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions({
+      signIn: 'auth/signIn'
+    })
+  },
+  async created () {
+    this.html = await this.signIn()
+  }
 }
 </script>
 

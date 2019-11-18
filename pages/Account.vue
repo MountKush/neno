@@ -9,21 +9,16 @@ div
 
 
 <script>
-import Account from '~comp/account/Index.vue'
+// import Account from '~comp/account/Index.vue'
 // import { auth } from '~/firebase'
 
 
 export default {
   components: {
-    Account
+    // Account
   },
   data () {
     return {}
-  },
-  beforeRouteEnter (to, from, next) {
-    // const authUser = auth().currentUser
-    // authUser && !authUser.isAnonymous ? next() : next({ name: 'auth' })
-    next()
   }
 }
 </script>

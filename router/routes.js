@@ -1,6 +1,7 @@
 import Index from '../pages/index.vue'
 import Auth from '~/pages/Auth.vue'
 import Account from '~/pages/Account.vue'
+import CustomerRegister from '~/pages/account/Register.vue'
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
 import Collection from '~/pages/Collection.vue'
@@ -33,6 +34,11 @@ export const routes = [
         path: 'login',
         name: 'auth',
         component: Auth
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: CustomerRegister
       }
     ]
   },

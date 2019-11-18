@@ -31,6 +31,7 @@ export default {
     try {
       console.log('fetchData')
       const { path, fullPath, query } = rootState.route
+      console.log('path: ', path)
       const { themeData } = state
       // if (themeData[path]) {
       //   console.log('already have data')
