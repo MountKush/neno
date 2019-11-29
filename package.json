@@ -12,6 +12,7 @@
     "sync": "browser-sync start --proxy 'https://feed-me-sugar.myshopify.com/' --files 'dist/assets/*.*' --reload-delay 3000"
   },
   "dependencies": {
+    "@babel/runtime": "^7.7.4",
     "@shopify/theme-predictive-search": "^3.0.3",
     "axios": "^0.19.0",
     "dotenv-webpack": "^1.7.0",
@@ -33,6 +34,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/preset-env": "^7.6.3",
     "autoprefixer": "^9.7.0",
     "babel-loader": "^8.0.6",

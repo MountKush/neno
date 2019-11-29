@@ -5,9 +5,9 @@ div(class='container-auth')
 
     AuthForm(class='auth__form')
 
-    div(
-      v-html='html'
-    )
+    //- div(
+    //-   v-html='html'
+    //- )
 </template>
 
 

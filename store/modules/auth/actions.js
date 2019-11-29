@@ -1,52 +1,79 @@
 import axios from 'axios'
+import { storefront } from '~/utils/shopify-storefront'
+
 
 export default {
   async signIn ({ commit }) {
+    // const data = `
+    //   {
+    //     shop {
+    //       name
+    //       primaryDomain {
+    //         url
+    //         host
+    //       }
+    //     }
+    //   }
+    // `
+    const data = `
+      mutation {
+        customerAccessTokenCreate(input: {
+          email: "test11@gmail.com",
+          password: "192837465"
+        }) {
+          userErrors {
+            field
+            message
+          }
+          customerAccessToken {
+            accessToken
+            expiresAt
+          }
+        }
+      }
+    `
+    
 
-    const config = {
-      method: 'post',
-      url: '/account/login',
-      data: {
-        'customer[email]': 'tes2@gmail.com',
-        'customer[password]': '192837465',
-        form_type: 'customer_login',
-        utf8: '✓'
-      },
-      params: {
-        view: 'endpoint'
-      },
-      responseType: 'document'
-    }
-
-    // const config = {
-    //   method: 'post',
-    //   url: '/account',
-    //   data: {
-    //     'customer[email]': 'jumastevens@gmail.com',
-    //     'customer[password]': '192837465',
-    //     'customer[first_name]': 'juma test',
-    //     'customer[last_name]': 'test lastname',
-    //     form_type: 'create_customer',
-    //     utf8: '✓'
-    //   },
-    //   params: {
-    //     view: 'endpoint'
-    //   },
-    //   responseType: 'document'
-    // }
-
-    const res = await axios(config)
+    const res = await storefront({ data })
     console.log('res: ', res)
-
-    const customer = {
-      name: 'test'
-    }
-    commit('SET_CUSTOMER', { customer })
-    return res.data.body.innerHTML
   },
 
 
   async signOut ({ commit }) {
     commit('DELETE_CUSTOMER')
+  },
+
+
+  async createCustomer ({ commit }, { email, password }) {
+    // const data = `
+    //   {
+    //     shop {
+    //       name
+    //       primaryDomain {
+    //         url
+    //         host
+    //       }
+    //     }
+    //   }
+    // `
+    const data = `
+      mutation {
+        customerCreate(input: {
+          email: "${email}",
+          password: "${password}"
+        }) {
+          customerUserErrors {
+            field
+            message
+          }
+          customer {
+            id
+          }
+        }
+      }
+    `
+
+    const res = await storefront({ data })
+    console.log('res: ', res)
   },
 }
