@@ -8,7 +8,7 @@ const storefront = async ({ data }) => {
     method: 'post',
     headers: {
       'Accept': 'application/json',
-      'Content-type': 'application/graphql',
+      'Content-Type': 'application/graphql',
       'X-Shopify-Storefront-Access-Token': storefrontAccessToken
     },
     data

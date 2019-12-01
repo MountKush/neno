@@ -2,7 +2,7 @@
 div(class='container-auth-form')
 
   form(
-    @submit.prevent='validateForm'
+    @submit.prevent='activeView === "sign up" ? signUp() : signIn()'
     class='auth-form'
   )
 
@@ -21,40 +21,36 @@ div(class='container-auth-form')
       ) Sign In
 
 
-    //- //- sign in card
-    //- div(class='auth-form__wrapper')
-    //-
-    //-   //- email
-    //-   div(class='auth-form__email')
-    //-     IconEmail(
-    //-       :class='{ invalid: errors.has("email") }'
-    //-       class='auth-form__svg'
-    //-     )
-    //-     input(
-    //-       v-model='email'
-    //-       v-validate='"required|email"'
-    //-       name='email'
-    //-       placeholder='Email'
-    //-       class='auth-form__input'
-    //-     )
-    //-
-    //-   //- password
-    //-   div(
-    //-     :class='{ visible: activeView === "sign in" || activeView === "sign up"  }'
-    //-     class='auth-form__password'
-    //-   )
-    //-     IconPassword(
-    //-       :class='{ invalid: errors.has("password") }'
-    //-       class='auth-form__svg'
-    //-     )
-    //-     input(
-    //-       v-model='password'
-    //-       v-validate='activeView === "reset password" ? "" : "required|min:6"'
-    //-       name='password'
-    //-       type='password'
-    //-       placeholder='Password'
-    //-       class='auth-form__input'
-    //-     )
+    //- sign in card
+    div(class='auth-form__wrapper')
+
+      //- email
+      div(class='auth-form__email')
+        IconEmail(
+          class='auth-form__svg'
+        )
+        input(
+          v-model='email'
+          name='email'
+          placeholder='Email'
+          class='auth-form__input'
+        )
+
+      //- password
+      div(
+        :class='{ visible: activeView === "sign in" || activeView === "sign up"  }'
+        class='auth-form__password'
+      )
+        IconPassword(
+          class='auth-form__svg'
+        )
+        input(
+          v-model='password'
+          name='password'
+          type='password'
+          placeholder='Password'
+          class='auth-form__input'
+        )
 
       //- //- recaptcha
       //- div(
@@ -81,7 +77,6 @@ div(class='container-auth-form')
 
       //- submit
       input(
-        :class='{ valid: (email && recaptcha && activeView === "reset password" && !errors.has("email")) || (email && password && !errors.has("email") && !errors.has("password")) }'
         value='enter'
         type='submit'
         class='auth-form__submit'
@@ -189,9 +184,10 @@ export default {
     },
 
 
-    async signUp ({ email, password }) {
+    async signUp () {
       try {
-        // console.log('signUp')
+        await this.createUserWithEmailAndPassword({ email: this.email, password: this.password })
+        console.log('signUp')
         // this.sending = true
         // const res = await this.createUserWithEmailAndPassword({ email, password })
         // this.sending = false
@@ -205,9 +201,11 @@ export default {
     },
 
 
-    async signIn ({ email, password }) {
+    async signIn () {
       try {
-        // console.log('signIn')
+        console.log('signIn')
+        const res = await this.signInWithEmailAndPassword({ email: this.email, password: this.password })
+        console.log('res: ', res)
         // this.sending = true
         // await this.signInWithEmailAndPassword({ email, password })
         // this.sending = false
@@ -245,8 +243,8 @@ export default {
     },
 
     ...mapActions({
-      // signInWithEmailAndPassword: 'auth/signInWithEmailAndPassword',
-      // createUserWithEmailAndPassword: 'auth/createUserWithEmailAndPassword',
+      signInWithEmailAndPassword: 'auth/signIn',
+      createUserWithEmailAndPassword: 'auth/createCustomer',
       // sendPasswordResetEmail: 'auth/sendPasswordResetEmail',
       // signInWithFacebook: 'auth/signInWithFacebook',
       // signInWithGoogle: 'auth/signInWithGoogle',

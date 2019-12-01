@@ -1,6 +1,6 @@
 export default {
   isAuthUser (state) {
-    return state.authUser !== null
+    return state.customer !== null
   },
 
 

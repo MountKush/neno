@@ -1,12 +1,13 @@
 import Vue from 'vue'
 
 export default {
-  SET_CUSTOMER (state, { customer }) {
+  SET_CUSTOMER (state, { accessToken, expiresAt }) {
+    const customer = { accessToken, expiresAt }
     Vue.set(state, 'customer', customer)
   },
 
 
   DELETE_CUSTOMER (state) {
-    Vue.delete(state, 'customer')
+    Vue.set(state, 'customer', null)
   }
 }

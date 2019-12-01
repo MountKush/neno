@@ -7,11 +7,11 @@ div(class='container-account')
       h2(class='account__header-title') Your Account
       p(class='account__header-copy') Referral Credit: {{ referralCredit }}
 
-    //- Referrals(class='account__referrals')
+    Referrals(class='account__referrals')
 
-    //- AuthSettings(class='account__auth-settings')
+    AuthSettings(class='account__auth-settings')
 
-    //- Orders(class='account__orders')
+    Orders(class='account__orders')
 
     //-  Reviews
 
@@ -46,13 +46,13 @@ export default {
   },
   computed: {
     referralCredit () {
-      const { referralCredit } = this.customer
-      return referralCredit
+      // const { referralCredit } = this.customer
+      // return referralCredit
     },
 
 
     ...mapState({
-      customer: state => state.account.customer
+      // customer: state => state.account.customer
     }),
 
 

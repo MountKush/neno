@@ -1,7 +1,12 @@
 import Index from '../pages/index.vue'
-import Auth from '~/pages/Auth.vue'
-import Account from '~/pages/Account.vue'
-import CustomerRegister from '~/pages/account/Register.vue'
+import Account from '~/pages/account/Index.vue'
+import AccountOrders from '~/pages/account/Orders.vue'
+import Auth from '~/pages/auth/Index.vue'
+import AuthActivateAccount from '~/pages/auth/ActivateAccount.vue'
+import AuthLogin from '~/pages/auth/Login.vue'
+import AuthRegister from '~/pages/auth/Register.vue'
+import AuthRecoverPassword from '~/pages/auth/RecoverPassword.vue'
+import AuthResetPassword from '~/pages/auth/ResetPassword.vue'
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
 import Collection from '~/pages/Collection.vue'
@@ -10,6 +15,7 @@ import Cart from '~/pages/Cart.vue'
 // const Menu = () => import('~/views/Menu.vue')
 // const Search = () => import('~/views/Search.vue')
 import Search from '~/pages/Search.vue'
+import Error404 from '~/pages/Error404.vue'
 // const Faq = () => import('~/views/Faq.vue')
 // const ReferralShare = () => import('~/views/ReferralShare.vue')
 
@@ -20,26 +26,53 @@ export const routes = [
     name: 'index',
     component: Index
   },
-  // {
-  //   path: '/account/login',
-  //   name: 'auth',
-  //   component: Auth
-  // },
+  {
+    path: '/account/',
+    name: 'auth',
+    component: Auth,
+    children: [
+      {
+        path: 'activate/:customerId/:activationToken',
+        name: 'activate',
+        component: AuthActivateAccount
+      },
+      {
+        path: 'login',
+        name: 'auth',
+        component: AuthLogin
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: AuthRegister
+      },
+      {
+        path: 'reset',
+        name: 'reset',
+        component: AuthRecoverPassword
+      },
+      {
+        path: 'reset/:customerId/:resetToken',
+        name: 'reset',
+        component: AuthResetPassword
+      }
+    ]
+  },
   {
     path: '/account',
     name: 'account',
     component: Account,
     children: [
       {
-        path: 'login',
-        name: 'auth',
-        component: Auth
+        path: 'order',
+        name: 'order',
+        component: AccountOrders
       },
-      {
-        path: 'register',
-        name: 'register',
-        component: CustomerRegister
-      }
+      // {
+      //   path: 'register',
+      //   name: 'register',
+      //   component: CustomerRegister
+      // }
     ]
   },
   {
@@ -92,4 +125,9 @@ export const routes = [
   //   name: 'referralShare',
   //   component: ReferralShare
   // }
+  {
+    path: '*',
+    name: 'error404',
+    component: Error404
+  }
 ]

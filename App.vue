@@ -52,12 +52,14 @@ export default {
       initData: 'app/initData',
       fetchData: 'app/fetchData',
       fetchCart: 'cart/fetchCart',
-      themeEditor: 'shopifyThemeEditor/init'
+      themeEditor: 'shopifyThemeEditor/init',
+      initCustomerState: 'auth/initCustomerState'
     })
   },
   created () {
     this.initData()
     this.fetchCart()
+    this.initCustomerState()
     this.themeEditor()
   },
   beforeRouteUpdate (to, from, next) {
@@ -75,11 +77,11 @@ export default {
   display: grid
 
   &__navigation-bar
-    height: $unit*7
+    height: $navigation-bar
 
   &__error,
   &__view
-    min-height: calc(100vh - #{$unit*7})
+    min-height: calc(100vh - #{$navigation-bar})
 
 .fade-enter-active,
 .fade-leave-active

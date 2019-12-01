@@ -18,7 +18,7 @@
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.15",
     "v-scroll-lock": "^1.0.1",
-    "vee-validate": "^3.0.11",
+    "vee-validate": "^3.1.1",
     "vue": "^2.6.10",
     "vue-carousel": "^0.18.0",
     "vue-dragscroll": "^1.10.2",
