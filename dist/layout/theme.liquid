@@ -11,12 +11,23 @@
     {% render 'app-styles' %}
   </head>
   <body>
+    {% comment %}
+      * The application mounting hook
+    {% endcomment %}
     <div id='vue-app'></div>
+
+    {% comment %}
+      * Hides the initially loaded sections that are solely used as data references
+    {% endcomment %}
     <div style='display: none;'>
       {% section 'static-header' %}
       {{ content_for_layout }}
       {% section 'static-footer' %}
     </div>
+
+    {% comment %}
+      * The theme scripts
+    {% endcomment %}
     {% render 'app-scripts' %}
 
 

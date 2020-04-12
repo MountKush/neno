@@ -1,6 +1,7 @@
 import Index from '../pages/index.vue'
 import Account from '~/pages/account/Index.vue'
 import AccountOrders from '~/pages/account/Orders.vue'
+import AccountPersonalData from '~/pages/account/PersonalData.vue'
 import Auth from '~/pages/auth/Index.vue'
 import AuthActivateAccount from '~/pages/auth/ActivateAccount.vue'
 import AuthLogin from '~/pages/auth/Login.vue'
@@ -68,11 +69,11 @@ export const routes = [
         name: 'order',
         component: AccountOrders
       },
-      // {
-      //   path: 'register',
-      //   name: 'register',
-      //   component: CustomerRegister
-      // }
+      {
+        path: 'personalData',
+        name: 'personalData',
+        component: AccountPersonalData
+      }
     ]
   },
   {

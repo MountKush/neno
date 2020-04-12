@@ -1,11 +1,11 @@
 <template lang='pug'>
-div(class='container-orders')
-  div(class='orders')
-
+div(class='container-personal-data')
+  div(class='personal-data')
 </template>
 
 
 <script>
+
 
 
 export default {

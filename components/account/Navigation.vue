@@ -42,7 +42,7 @@ export default {
         },
         {
           text: 'Personal data',
-          to: '/account/order'
+          to: '/account/personalData'
         },
         {
           text: 'Change password',

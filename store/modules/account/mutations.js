@@ -1,7 +1,9 @@
+import Vue from 'vue'
+
+
 export default {
-  SET_CUSTOMER (state, { customer }) {
-    state.customer = customer
-    console.log('SET_CUSTOMER_DETAILS: ', customer)
+  SET_ORDERS (state, { orders }) {
+    Vue.set(state, 'orders', orders)
   },
 
 

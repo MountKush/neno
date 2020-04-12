@@ -8,7 +8,7 @@ import shopifyThemeEditor from './modules/shopify-theme-editor'
 import auth from './modules/auth'
 import catalog from './modules/catalog'
 // import checkout from './modules/checkout'
-// import account from './modules/account'
+import account from './modules/account'
 import cart from './modules/cart'
 
 
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     catalog,
     cart,
     // checkout,
-    // account
+    account
   },
   strict: process.env.NODE_ENV !== 'production'
 })
