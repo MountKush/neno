@@ -1,10 +1,10 @@
 import axios from 'axios'
+import { storefrontAccessToken } from '~/utils/constants'
 
 
 const storefront = async ({ data }) => {
-  const storefrontAccessToken = window.app.settings.storefront_access_token
   const config = {
-    url: '/api/2019-10/graphql',
+    url: '/api/2020-07/graphql',
     method: 'post',
     headers: {
       'Accept': 'application/json',

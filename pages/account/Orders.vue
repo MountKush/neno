@@ -1,9 +1,10 @@
 <template lang='pug'>
 div(class='container-orders')
   div(class='orders')
-    Orders
-    pre {{ orders }}
-
+    Orders(
+      :orders='orders'
+    )
+    //- pre {{ orders }}
 </template>
 
 

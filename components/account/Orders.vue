@@ -5,30 +5,31 @@ div(class='container-orders')
     h3(class='orders__title') Orders
 
     ul(class='orders__list')
-      li(class='orders__item')
-        a(
-          @click='show.order = !show.order'
-          class='orders__header'
+      li(
+        v-for='(order, index) in orders'
+        class='orders__item'
+      )
+        OrderCard(
+          :order='order'
         )
-          h4(class='orders__header-title') #0001112444444
-          p(class='orders__header-copy') Sept 24, 2018
-        OrderDetail(
-          v-show='show.order'
-          class='orders__detail'
-        )
-
 </template>
 
 
 <script>
+import OrderCard from '~comp/modules/OrderCard.vue'
 import OrderDetail from '~comp/account/OrderDetail.vue'
 
 
 export default {
   components: {
-    OrderDetail
+    OrderCard
   },
-  props: {},
+  props: {
+    orders: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
       show: {
@@ -47,7 +48,7 @@ export default {
 
 .orders
   width: 100%
-  max-width: 320px
+  // max-width: 320px
 
   &__title
     padding: $unit*3 0
@@ -58,7 +59,15 @@ export default {
     padding: $unit*3 $unit*2
     user-select: none
 
-  &__item
-    box-shadow: 0 0 $unit*3 rgba(34, 34, 34, 0.05)
+  &__gallery
+    display: grid
+    grid-auto-flow: column
+    grid-gap: $unit
+
+    &-item
+      box-shadow: 0 0 $unit*3 rgba(34, 34, 34, 0.05)
+
+    &-image
+      width: 40px
 
 </style>
