@@ -7,6 +7,7 @@ export const customerOrders = ({ accessToken }) => `
             canceledAt
             financialStatus
             fulfillmentStatus
+            id
             name
             orderNumber
             processedAt

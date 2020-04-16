@@ -1,17 +1,29 @@
+// Index page
 import Index from '../pages/index.vue'
-import Account from '~/pages/account/Index.vue'
-import AccountOrders from '~/pages/account/Orders.vue'
+
+// Account page(s)
+import Account from '~/pages/account/index.vue'
+import AccountOrders from '~/pages/account/orders/index.vue'
+import AccountOrder from '~/pages/account/orders/_id.vue'
 import AccountPersonalData from '~/pages/account/PersonalData.vue'
+
+// Authorization page(s)
 import Auth from '~/pages/auth/Index.vue'
 import AuthActivateAccount from '~/pages/auth/ActivateAccount.vue'
 import AuthLogin from '~/pages/auth/Login.vue'
 import AuthRegister from '~/pages/auth/Register.vue'
 import AuthRecoverPassword from '~/pages/auth/RecoverPassword.vue'
 import AuthResetPassword from '~/pages/auth/ResetPassword.vue'
+
+// Product page(s)
 import Product from '~/pages/Product.vue'
 // const Products = () => import('~/views/Products.vue')
+
+// Collection page(s)
 import Collection from '~/pages/Collection.vue'
 // const Collection = () => import('~/pages/Collection.vue')
+
+// Cart page
 import Cart from '~/pages/Cart.vue'
 // const Menu = () => import('~/views/Menu.vue')
 // const Search = () => import('~/views/Search.vue')
@@ -27,54 +39,55 @@ export const routes = [
     name: 'index',
     component: Index
   },
+  // {
+  //   path: '/account',
+  //   name: 'auth',
+  //   component: Auth
+  // },
   {
-    path: '/account/',
+    path: '/account/activate/:customerId/:activationToken',
+    name: 'activate',
+    component: AuthActivateAccount
+  },
+  {
+    path: '/account/login',
     name: 'auth',
-    component: Auth,
-    children: [
-      {
-        path: 'activate/:customerId/:activationToken',
-        name: 'activate',
-        component: AuthActivateAccount
-      },
-      {
-        path: 'login',
-        name: 'auth',
-        component: AuthLogin
-      },
-      {
-        path: 'register',
-        name: 'register',
-        component: AuthRegister
-      },
-      {
-        path: 'reset',
-        name: 'reset',
-        component: AuthRecoverPassword
-      },
-      {
-        path: 'reset/:customerId/:resetToken',
-        name: 'reset',
-        component: AuthResetPassword
-      }
-    ]
+    component: AuthLogin
+  },
+  {
+    path: '/account/register',
+    name: 'register',
+    component: AuthRegister
+  },
+  {
+    path: '/account/reset',
+    name: 'reset',
+    component: AuthRecoverPassword
+  },
+  {
+    path: '/account/reset/:customerId/:resetToken',
+    name: 'reset',
+    component: AuthResetPassword
   },
   {
     path: '/account',
     name: 'account',
-    component: Account,
-    children: [
-      {
-        path: 'order',
-        name: 'order',
-        component: AccountOrders
-      },
-      {
-        path: 'personalData',
-        name: 'personalData',
-        component: AccountPersonalData
-      }
-    ]
+    component: Account
+  },
+  {
+    path: '/account/orders',
+    name: 'orders',
+    component: AccountOrders
+  },
+  {
+    path: '/account/orders/:id',
+    name: 'orders-id',
+    component: AccountOrder
+  },
+  {
+    path: '/account/personalData',
+    name: 'personalData',
+    component: AccountPersonalData
   },
   {
     path: '/products/:id',

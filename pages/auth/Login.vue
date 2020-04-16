@@ -37,7 +37,7 @@ div(class='container-login')
 
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 
 export default {
@@ -49,7 +49,19 @@ export default {
       password: '',
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      isAuthUser: 'auth/isAuthUser'
+    })
+  },
+  watch: {
+    isAuthUser () {
+      this.isAuthUser ? this.$router.replace({ name: 'account' }) : null
+    }
+  },
+  mounted () {
+    this.isAuthUser ? this.$router.replace({ name: 'account' }) : null
+  },
   methods: {
     async signIn () {
       try {
@@ -57,13 +69,13 @@ export default {
           email: this.email,
           password: this.password
         })
+        this.$router.push({ name: 'account' })
       }
       catch (e) {
         // console.error(e)
         // this.handleError({ errorMessage: e })
       }
     },
-
 
     ...mapActions({
       signInWithEmailAndPassword: 'auth/signIn'

@@ -5,8 +5,6 @@ import router from './router'
 import plugins from './plugins'
 // import filters from './filters'
 
-
-
 window.onload = () => {
   new Vue({
     el: '#vue-app',

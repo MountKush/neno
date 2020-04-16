@@ -6,6 +6,9 @@ export default {
     Vue.set(state, 'orders', orders)
   },
 
+  SET_ACTIVE_ORDER (state, { order }) {
+    Vue.set(state, 'activeOrder', order)
+  },
 
   DELETE_CUSTOMER (state) {
     state.customer = {}

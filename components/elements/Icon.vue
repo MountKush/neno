@@ -1,12 +1,20 @@
 <template lang='pug'>
-div(class='')
+component(
+  :is='icon'
+  class='icon'
+)
 </template>
 
 <script>
 export default {
   components: {},
-  props: {},
-  data() {
+  props: {
+    icon: {
+      type: Object,
+      required: true
+    }
+  },
+  data () {
     return {}
   },
   computed: {},
@@ -15,5 +23,7 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-
+.icon
+  width: $unit*3
+  fill: currentColor
 </style>

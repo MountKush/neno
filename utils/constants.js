@@ -37,3 +37,15 @@ export const orderFinancialStatusMap = {
   REFUNDED: 'Refunded',
   VOIDED: 'Voided'
 }
+
+/**
+ * Order cancel reason UI friendly equivalent values
+ * @see https://shopify.dev/docs/storefront-api/reference/object/order/ordercancelreason?api[version]=2020-07
+ */
+export const orderCancelReason = {
+  CUSTOMER: 'The customer wanted to cancel the order',
+  DECLINED: 'Payment was declined',
+  FRAUD: 'The order was fraudulent',
+  INVENTORY: 'There was insufficient inventory',
+  OTHER: 'The order was canceled for an unlisted reason'
+}
