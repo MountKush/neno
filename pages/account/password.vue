@@ -1,17 +1,22 @@
 <template lang='pug'>
 div(class='container')
   ViewHeader(
-    title='Addresses'
+    title='Change Password'
     secondaryActionLabel='Back'
     @secondaryActionClick='routerGoBack'
   )
   div(class='')
-    h1 Addresses
     form()
-      BaseInput()
-      BaseInput()
+      BaseInput(
+        label='New Password'
+        type='password'
+      )
+      BaseInput(
+        label='Confirm New Password'
+        type='password'
+      )
       BaseButton(
-        text='Save'
+        text='Change Password'
       )
 </template>
 

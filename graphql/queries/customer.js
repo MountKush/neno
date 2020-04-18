@@ -1,3 +1,27 @@
+/**
+ * Queries a customer's addresses
+ */
+export const customerAddresses = ({ accessToken }) => `
+  query {
+    customer(customerAccessToken: "${accessToken}") {
+      addresses(first: 5) {
+        edges {
+          node {
+            formatted(withName: true)
+            id
+          }
+        }
+      }
+      defaultAddress {
+        id
+      }
+    }
+  }
+`
+
+/**
+ * Queries a customer's orders
+ */
 export const customerOrders = ({ accessToken }) => `
   query {
     customer(customerAccessToken: "${accessToken}") {

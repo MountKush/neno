@@ -1,14 +1,10 @@
 <template lang='pug'>
 div(class='container')
-
   div(class='')
 
 </template>
 
-
 <script>
-
-
 export default {
   components: {},
   props: {},
@@ -19,7 +15,6 @@ export default {
   methods: {}
 }
 </script>
-
 
 <style lang='sass' scoped>
 .container

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { storefrontAccessToken } from '~/utils/constants'
 
 
-const storefront = async ({ data }) => {
+export const storefront = async ({ data }) => {
   const config = {
     url: '/api/2020-07/graphql',
     method: 'post',
@@ -16,6 +16,3 @@ const storefront = async ({ data }) => {
   const res = await axios(config)
   return res
 }
-
-
-export { storefront }

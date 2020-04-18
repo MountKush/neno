@@ -3,9 +3,13 @@ import Index from '../pages/index.vue'
 
 // Account page(s)
 import Account from '~/pages/account/index.vue'
+import AccountAddresses from '~/pages/account/addresses/index.vue'
+import AccountAddress from '~/pages/account/addresses/_id.vue'
+import AccountAddressNew from '~/pages/account/addresses/new.vue'
 import AccountOrders from '~/pages/account/orders/index.vue'
 import AccountOrder from '~/pages/account/orders/_id.vue'
 import AccountPersonalData from '~/pages/account/PersonalData.vue'
+import AccountPassword from '~/pages/account/password.vue'
 
 // Authorization page(s)
 import Auth from '~/pages/auth/Index.vue'
@@ -34,16 +38,17 @@ import Error404 from '~/pages/Error404.vue'
 
 
 export const routes = [
+  /**
+   * Index route
+   */
   {
     path: '/',
     name: 'index',
     component: Index
   },
-  // {
-  //   path: '/account',
-  //   name: 'auth',
-  //   component: Auth
-  // },
+  /**
+   * Authorization route(s)
+   */
   {
     path: '/account/activate/:customerId/:activationToken',
     name: 'activate',
@@ -69,10 +74,28 @@ export const routes = [
     name: 'reset',
     component: AuthResetPassword
   },
+  /**
+   * Account route(s)
+   */
   {
     path: '/account',
     name: 'account',
     component: Account
+  },
+  {
+    path: '/account/addresses',
+    name: 'account-addresses',
+    component: AccountAddresses
+  },
+  {
+    path: '/account/addresses/new',
+    name: 'account-addresses-new',
+    component: AccountAddressNew
+  },
+  {
+    path: '/account/addresses/:id',
+    name: 'account-addresses-id',
+    component: AccountAddress
   },
   {
     path: '/account/orders',
@@ -85,10 +108,18 @@ export const routes = [
     component: AccountOrder
   },
   {
+    path: '/account/password',
+    name: 'account-password',
+    component: AccountPassword
+  },
+  {
     path: '/account/personalData',
     name: 'personalData',
     component: AccountPersonalData
   },
+  /**
+   * Product route(s)
+   */
   {
     path: '/products/:id',
     name: 'product',
@@ -99,6 +130,9 @@ export const routes = [
   //   name: 'products',
   //   component: Products
   // },
+  /**
+   * Collection route(s)
+   */
   {
     path: '/collections/:id',
     name: 'collection',
@@ -114,6 +148,9 @@ export const routes = [
   //   name: 'collections',
   //   component: Collections
   // },
+  /**
+   * Cart route(s)
+   */
   {
     path: '/cart',
     name: 'cart',
@@ -124,6 +161,9 @@ export const routes = [
   //   name: 'menu',
   //   component: Menu
   // },
+  /**
+   * Search route(s)
+   */
   {
     path: '/search',
     name: 'search',

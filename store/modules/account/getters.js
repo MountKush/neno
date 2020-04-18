@@ -4,6 +4,7 @@ import {
   orderCancelReason
 } from '~/utils/constants'
 import { formatCurrency } from '~/utils/format-currency'
+import { processGraphQLEdges } from '~/utils/process-graphql-edges'
 
 export default {
   activeOrder(state) {
@@ -36,7 +37,7 @@ export default {
   },
 
   orders(state) {
-    const ordersEdges = state.orders.edges || []
+    const ordersEdges = state.orders?.edges || []
     const orders = ordersEdges.map(order => {
       const {
         canceledAt,
@@ -66,5 +67,32 @@ export default {
     })
     console.log('orders: ', orders)
     return orders
+  },
+
+  activeAddress(state) {
+    const address = state.activeAddress
+    if (!address) return
+    return {
+      address1: address.address1,
+      address2: address.address2,
+      city: address.city,
+      countryCode: address.countryCodeV2,
+      firstName: address.firstName,
+      id: address.id,
+      lastName: address.lastName,
+      phone: address.phone,
+      provinceCode: address.provinceCode,
+      zip: address.zip
+    }
+  },
+
+  addresses(state) {
+    const { addresses, defaultAddress } = state
+    const edges = addresses?.edges || []
+    return processGraphQLEdges(edges)
+      .map((address) => ({
+        ...address,
+        isDefaultAddress: address.id === defaultAddress.id
+      }))
   }
 }

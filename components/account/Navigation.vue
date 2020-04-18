@@ -65,12 +65,12 @@ export default {
         },
         {
           text: 'Change Password',
-          to: '/account/orders',
+          to: '/account/password',
           icon: IconLock
         },
         {
           text: 'Addresses',
-          to: '/account/orders',
+          to: '/account/addresses',
           icon: IconAddress
         }
       ],

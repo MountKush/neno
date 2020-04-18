@@ -1,4 +1,7 @@
 export default {
   activeOrder: null,
-  orders: []
+  orders: null,
+  activeAddress: null,
+  addresses: null,
+  defaultAddress: null
 }
