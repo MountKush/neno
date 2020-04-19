@@ -1,12 +1,5 @@
 <template lang='pug'>
 div(class='container')
-  ViewHeader(
-    title='Addresses'
-    primaryActionLabel='Create'
-    @primaryActionClick='$router.push({ name: "account-addresses-new" })'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   div(class='')
     ul(class='addresses__list')
       li(
@@ -15,10 +8,12 @@ div(class='container')
       )
         span(
           v-if='address.isDefaultAddress'
+          class='addresses__label'
         ) Default Address
-        span(
-          v-for='(row, index) in address.formatted'
-        ) {{ row }}
+        p(class='addresses__address')
+          span(
+            v-for='(row, index) in address.formatted'
+          ) {{ row }}
         router-link(
           :to='{ name: "account-addresses-id", params: { id: address.id }}'
           class='addresses__edit'
@@ -27,21 +22,14 @@ div(class='container')
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
 import Icon from '~/components/elements/Icon.vue'
 import IconAddress from '~/assets/svg/icon-address.svg'
 
 export default {
   components: {
-    ViewHeader,
     Icon
   },
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {
       iconAddress: IconAddress
@@ -70,13 +58,26 @@ export default {
 
   &__list
     display: grid
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
     grid-gap: $unit*2
 
   &__item
     display: grid
-    grid-gap: $unit
+    align-items: end
     padding: $unit*2
     background: $pri-cl
 
+  &__label
+    font-weight: $fw-bold
+    margin-bottom: $unit
+
+  &__address
+    display: grid
+    margin-bottom: auto
+
+  &__edit
+    justify-self: start
+    margin-top: $unit
+    text-decoration: underline
+    color: $blue
 </style>

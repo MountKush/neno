@@ -1,10 +1,5 @@
 <template lang='pug'>
 div(class='order')
-  ViewHeader(
-    :title='order ? order.name : ""'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   OrderOverview(
     v-if='order'
     :cancelReason='order.cancelReason ? order.cancelReason : ""'
@@ -26,22 +21,15 @@ div(class='order')
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
 import OrderSummary from '~comp/modules/OrderSummary.vue'
 import OrderOverview from '~/components/modules/OrderOverview.vue'
 
 export default {
   components: {
-    ViewHeader,
     OrderSummary,
     OrderOverview
   },
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {}
   },

@@ -42,7 +42,7 @@ aside(class='order-card')
       span(class='order-card__total-label') Total
       span(class='order-card__total-value') {{ order.totalPrice }}
     router-link(
-      :to='{ name: "orders-id", params: { id: order.id }}'
+      :to='{ name: "account-orders-id", params: { id: order.id }}'
       class='order-card__footer-action'
     ) View order
 </template>

@@ -53,6 +53,7 @@ export default {
   height: $unit*7
   background: $white
   background: rgba(255, 255, 255, 0.97)
+  height: min-content
 
   &__title
     grid-column: 2 / 3

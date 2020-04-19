@@ -1,10 +1,5 @@
 <template lang='pug'>
 div(class='container-personal-data')
-  ViewHeader(
-    title='Personal Data'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   div(class='personal-data')
     form
       BaseInput(
@@ -20,7 +15,6 @@ div(class='container-personal-data')
         label='Phone Number'
       )
       BaseCheckbox(
-        label='Accept Marketing'
         text='Consent to be sent marketing material via email'
       )
       BaseButton(
@@ -29,18 +23,9 @@ div(class='container-personal-data')
 </template>
 
 <script>
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
-
 export default {
-  components: {
-    ViewHeader
-  },
+  components: {},
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {}
   },
@@ -53,5 +38,9 @@ export default {
 .container-orders
 
 .orders
+
+.personal-data
+  margin: 0 auto
+  max-width: 600px
 
 </style>

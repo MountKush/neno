@@ -1,10 +1,5 @@
 <template lang='pug'>
 div(class='container')
-  ViewHeader(
-    title='Addresses'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   div(class='')
     h1 Addresses
     form()
@@ -16,18 +11,9 @@ div(class='container')
 </template>
 
 <script>
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
-
 export default {
-  components: {
-    ViewHeader
-  },
+  components: {},
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {}
   },

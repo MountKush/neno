@@ -1,10 +1,5 @@
 <template lang='pug'>
 div(class='container-orders')
-  ViewHeader(
-    title='Orders'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   div(class='orders')
     Orders(
       :orders='orders'
@@ -15,19 +10,12 @@ div(class='container-orders')
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Orders from '~comp/account/Orders.vue'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
-import useRouterBack from '~/compositions/useRouterBack'
 
 export default {
   components: {
-    ViewHeader,
     Orders
   },
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data() {
     return {}
   },

@@ -80,42 +80,44 @@ export const routes = [
   {
     path: '/account',
     name: 'account',
-    component: Account
-  },
-  {
-    path: '/account/addresses',
-    name: 'account-addresses',
-    component: AccountAddresses
-  },
-  {
-    path: '/account/addresses/new',
-    name: 'account-addresses-new',
-    component: AccountAddressNew
-  },
-  {
-    path: '/account/addresses/:id',
-    name: 'account-addresses-id',
-    component: AccountAddress
-  },
-  {
-    path: '/account/orders',
-    name: 'orders',
-    component: AccountOrders
-  },
-  {
-    path: '/account/orders/:id',
-    name: 'orders-id',
-    component: AccountOrder
-  },
-  {
-    path: '/account/password',
-    name: 'account-password',
-    component: AccountPassword
-  },
-  {
-    path: '/account/personalData',
-    name: 'personalData',
-    component: AccountPersonalData
+    component: Account,
+    children: [
+      {
+        path: 'addresses',
+        name: 'account-addresses',
+        component: AccountAddresses
+      },
+      {
+        path: 'addresses/new',
+        name: 'account-addresses-new',
+        component: AccountAddressNew
+      },
+      {
+        path: 'addresses/:id',
+        name: 'account-addresses-id',
+        component: AccountAddress
+      },
+      {
+        path: 'orders',
+        name: 'account-orders',
+        component: AccountOrders
+      },
+      {
+        path: 'orders/:id',
+        name: 'account-orders-id',
+        component: AccountOrder
+      },
+      {
+        path: 'password',
+        name: 'account-password',
+        component: AccountPassword
+      },
+      {
+        path: 'personalData',
+        name: 'account-personal-data',
+        component: AccountPersonalData
+      }
+    ]
   },
   /**
    * Product route(s)

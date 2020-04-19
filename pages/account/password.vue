@@ -1,11 +1,6 @@
 <template lang='pug'>
 div(class='container')
-  ViewHeader(
-    title='Change Password'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
-  div(class='')
+  div(class='password')
     form()
       BaseInput(
         label='New Password'
@@ -21,18 +16,9 @@ div(class='container')
 </template>
 
 <script>
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
-
 export default {
-  components: {
-    ViewHeader
-  },
+  components: {},
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {}
   },
@@ -43,5 +29,9 @@ export default {
 
 <style lang='sass' scoped>
 .container
+
+.password
+  margin: 0 auto
+  max-width: 600px
 
 </style>

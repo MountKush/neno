@@ -1,10 +1,5 @@
 <template lang='pug'>
 div(class='container')
-  ViewHeader(
-    title='Address'
-    secondaryActionLabel='Back'
-    @secondaryActionClick='routerGoBack'
-  )
   div(
     v-if='!!address'
     class='address-new__content'
@@ -25,20 +20,13 @@ div(class='container')
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import useRouterBack from '~/compositions/useRouterBack'
-import ViewHeader from '~/components/modules/ViewHeader.vue'
 import AddressForm from '~/components/modules/AddressForm.vue'
 
 export default {
   components: {
-    ViewHeader,
     AddressForm
   },
   props: {},
-  setup() {
-    const { routerGoBack } = useRouterBack()
-    return { routerGoBack }
-  },
   data () {
     return {}
   },
