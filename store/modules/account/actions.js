@@ -6,6 +6,10 @@ import {
 } from '~/graphql/queries/customer'
 import { order } from '~/graphql/queries/order'
 import { mailingAddress } from '~/graphql/queries/mailing-address'
+import {
+  customerAddressCreate
+} from '~/graphql/mutations/customer'
+import { encodeCustomerId } from '~/utils/encode-customer-id'
 
 
 export default {
@@ -44,5 +48,15 @@ export default {
     const { addresses, defaultAddress } = data.data.customer
     commit('SET_ADDRESSES', { addresses })
     commit('SET_DEFAULT_ADDRESS', { defaultAddress })
+  },
+
+  async createAddress ({ commit, rootState }, address) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerAddressCreate({ accessToken, address })
+    })
+    console.log('createAddress data: ', data)
+    const { customerAddress, customerUserErrors } = data.data.customerAddressCreate
+    if (customerUserErrors) throw customerUserErrors[0]
   },
 }

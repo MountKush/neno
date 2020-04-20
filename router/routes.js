@@ -8,7 +8,7 @@ import AccountAddress from '~/pages/account/addresses/_id.vue'
 import AccountAddressNew from '~/pages/account/addresses/new.vue'
 import AccountOrders from '~/pages/account/orders/index.vue'
 import AccountOrder from '~/pages/account/orders/_id.vue'
-import AccountPersonalData from '~/pages/account/PersonalData.vue'
+import AccountPersonalData from '~/pages/account/personalData.vue'
 import AccountPassword from '~/pages/account/password.vue'
 
 // Authorization page(s)

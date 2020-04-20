@@ -1,68 +1,73 @@
 <template lang='pug'>
-form(
-  class='address-form'
-)
-  BaseInput(
-    v-model='firstName'
-    label='First Name'
-    placeholder='First Name'
-    class='address-form__input'
+ValidationObserver(v-slot='{ invalid, handleSubmit }')
+  form(
+    @submit.prevent='handleSubmit(onSubmit)'
+    class='address-form'
   )
-  BaseInput(
-    v-model='lastName'
-    label='Last Name'
-    placeholder='Last Name'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='address1'
-    label='Address'
-    placeholder='Address'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='address2'
-    placeholder='Apartment, suite, etc (optional)'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='city'
-    label='City'
-    placeholder='City'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='countryCode'
-    label='Country'
-    placeholder='Country'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='provinceCode'
-    label='State'
-    placeholder='State'
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='zip'
-    label='Zipcode'
-    placeholder=''
-    class='address-form__input'
-  )
-  BaseInput(
-    v-model='phone'
-    label='Phone Number'
-    placeholder='Phone Number'
-    class='address-form__input'
-  )
-  BaseCheckbox(
-    text='Make this your default shipping address?'
-    class='address-form__input'
-  )
-  BaseButton(
-    text='Create'
-    class='address-form__button'
-  )
+    BaseInput(
+      v-model='address.firstName'
+      rules='required|isAlpha'
+      label='First Name'
+      placeholder='First Name'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.lastName'
+      rules='required|isAlpha'
+      label='Last Name'
+      placeholder='Last Name'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.address1'
+      label='Address'
+      placeholder='Address'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.address2'
+      placeholder='Apartment, suite, etc (optional)'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.city'
+      label='City'
+      placeholder='City'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.country'
+      label='Country'
+      placeholder='Country'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.province'
+      label='State'
+      placeholder='State'
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.zip'
+      label='Zipcode'
+      placeholder=''
+      class='address-form__input'
+    )
+    BaseInput(
+      v-model='address.phone'
+      label='Phone Number'
+      placeholder='Phone Number'
+      class='address-form__input'
+    )
+    BaseCheckbox(
+      text='Make this your default shipping address?'
+      class='address-form__input'
+    )
+    BaseButton(
+      :disabled='invalid'
+      text='Save'
+      class='address-form__button'
+    )
 </template>
 
 <script>
@@ -70,12 +75,11 @@ const addressData = {
   address1: '',
   address2: '',
   city: '',
-  countryCode: '',
+  country: '',
   firstName: '',
-  id: '',
   lastName: '',
   phone: '',
-  provinceCode: '',
+  province: '',
   zip: ''
 }
 
@@ -94,15 +98,15 @@ export default {
       type: String,
       default: ''
     },
-    countryCode: {
+    country: {
       type: String,
       default: ''
+    },
+    error: {
+      type: Object,
+      default: () => null
     },
     firstName: {
-      type: String,
-      default: ''
-    },
-    id: {
       type: String,
       default: ''
     },
@@ -114,7 +118,7 @@ export default {
       type: String,
       default: ''
     },
-    provinceCode: {
+    province: {
       type: String,
       default: ''
     },
@@ -134,7 +138,11 @@ export default {
       (addressKey) => this.address[addressKey] = this[addressKey]
     )
   },
-  methods: {}
+  methods: {
+    onSubmit() {
+      this.$emit('submit', this.address)
+    }
+  }
 }
 </script>
 

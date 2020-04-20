@@ -39,6 +39,36 @@ export const customerActivate = ({ id, activationToken, password }) => `
   }
 `
 
+/**
+ * Creates a new address for a customer
+ * @param {string} accessToken The access token used to identify the customer
+ * @param {object} address The customer mailing address to create
+ */
+export const customerAddressCreate = ({ accessToken, address }) => `
+  mutation {
+    customerAddressCreate(customerAccessToken: "${accessToken}", address: {
+      address1: "${address.address1}",
+      address2: "${address.address2}",
+      city: "${address.city}",
+      country: "${address.country}",
+      firstName: "${address.firstName}",
+      lastName: "${address.lastName}",
+      phone: "${address.phone}",
+      province: "${address.province}",
+      zip: "${address.zip}"
+    }) {
+      customerAddress {
+        id
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`
+
 export const customerCreate = ({ email, password }) => `
   mutation {
     customerCreate(input: {

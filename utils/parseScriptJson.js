@@ -7,5 +7,4 @@ const parseScriptJson = ({ data, scriptName }) => {
   return json
 }
 
-
 export { parseScriptJson }

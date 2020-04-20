@@ -1,6 +1,5 @@
 import PredictiveSearch from '@shopify/theme-predictive-search'
 
-
 const predictiveSearch = (query) => new Promise((resolve, reject) => {
   const predictiveSearch = new PredictiveSearch({
     resources: {

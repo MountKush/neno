@@ -2,7 +2,7 @@
 div(class='container-orders')
 
   section(class='orders')
-    h3(class='orders__title') Orders
+    //- h3(class='orders__title') Orders
 
     ul(class='orders__list')
       li(

@@ -1,11 +1,13 @@
 <template lang='pug'>
-div(class='container')
-  div(class='address-new__content')
-    h1 New Address
-    AddressForm
+div(class='new-address')
+  AddressForm(
+    :error='error'
+    @submit='handleSubmit'
+  )
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import AddressForm from '~/components/modules/AddressForm.vue'
 
 export default {
@@ -14,18 +16,36 @@ export default {
   },
   props: {},
   data () {
-    return {}
+    return {
+      error: null
+    }
   },
   computed: {},
-  methods: {}
+  methods: {
+    async handleSubmit(address) {
+      try {
+        console.log('address: ', address)
+        await this.createCustomerAddress(address)
+        this.$router.push({ name: 'account-addresses' })
+      } catch (e) {
+        console.error(e)
+        this.error = e
+        this.$toasted.global.error({
+          title: 'Error',
+          message: `${e.message}`
+        })
+      }
+    },
+
+    ...mapActions({
+      createCustomerAddress: 'account/createAddress'
+    })
+  }
 }
 </script>
 
 <style lang='sass' scoped>
-.container
-
-.address-new__content
+.new-address
   margin: 0 auto
   max-width: 600px
-
 </style>

@@ -6,7 +6,6 @@ div(class='container-orders')
     )
 </template>
 
-
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Orders from '~comp/account/Orders.vue'
@@ -34,7 +33,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang='sass' scoped>
 .container-orders

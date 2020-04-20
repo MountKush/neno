@@ -2,6 +2,17 @@
 div(class='container')
   div(class='')
     ul(class='addresses__list')
+      li(class='addresses__item')
+        router-link(
+          :to='{ name: "account-addresses-new" }'
+          class='addresses__link-new'
+        )
+          Icon(
+            :icon='iconAddress'
+            class='addresses__icon'
+          )
+          | New Address
+
       li(
         v-for='(address, index) in addresses'
         class='addresses__item'
@@ -62,6 +73,8 @@ export default {
     grid-gap: $unit*2
 
   &__item
+    min-height: $unit*20
+    position: relative
     display: grid
     align-items: end
     padding: $unit*2
@@ -75,9 +88,25 @@ export default {
     display: grid
     margin-bottom: auto
 
+  &__link-new
+    @extend %flex--column-center
+    position: absolute
+    width: 100%
+    height: 100%
+    color: $blue
+
+    &:hover
+      color: $white
+      background: $blue
+
+  &__icon
+    margin-bottom: $unit
+
   &__edit
     justify-self: start
     margin-top: $unit
-    text-decoration: underline
     color: $blue
+
+    &:hover
+      text-decoration: underline
 </style>

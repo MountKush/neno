@@ -1,23 +1,30 @@
 <template lang='pug'>
-label(class='base-label')
-  span(
-    v-if='label'
-    class='base-label__text'
-  ) {{ label }}
-  input(
-    v-bind='$attrs'
-    v-on='listeners'
-    class='base-input'
-  )
+ValidationProvider(
+  :rules='rules'
+  v-slot='{ failed }'
+)
+  label(class='base-label')
+    span(
+      v-if='label'
+      class='base-label__text'
+    ) {{ label }}
+    input(
+      v-bind='$attrs'
+      v-on='listeners'
+      :class='{ failed }'
+      class='base-input'
+    )
 </template>
 
-
 <script>
-
 export default {
   inheritAttrs: false,
   props: {
     label: {
+      type: String,
+      default: ''
+    },
+    rules: {
       type: String,
       default: ''
     }
@@ -35,7 +42,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang='sass' scoped>
 .base-label
@@ -59,4 +65,7 @@ export default {
 
   &:focus
     border-color: $success
+
+  &.failed
+    border-color: $error
 </style>

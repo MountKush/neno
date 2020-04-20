@@ -41,11 +41,11 @@ export default {
   padding: 0 $unit*6
   border-radius: $unit/2
   background: $success
+  color: $white
   cursor: pointer
 
   &__text
-    font-size: 14px
-    color: $white
+    color: currentColor
 
   &__loader
     position: absolute
@@ -54,10 +54,12 @@ export default {
     transform: translate(-50%, -50%)
     visibility: hidden
 
-  &.invalid
-    cursor: default
+  &:disabled
+    cursor: not-allowed
+    background: $dark
 
   &.loading
+    cursor: progress
 
     & .base-button__text
       visibility: hidden
