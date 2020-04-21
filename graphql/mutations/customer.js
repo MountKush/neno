@@ -69,6 +69,59 @@ export const customerAddressCreate = ({ accessToken, address }) => `
   }
 `
 
+/**
+ * Permanently deletes the address of an existing customer.
+ * @param {string} accessToken The access token used to identify the customer.
+ * @param {object} id Specifies the address to delete.
+ */
+export const customerAddressDelete = ({ accessToken, id }) => `
+  mutation {
+    customerAddressDelete(customerAccessToken: "${accessToken}", id: "${id}") {
+      deletedCustomerAddressId
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`
+
+/**
+ * Creates a new address for a customer.
+ * @param {string} accessToken The access token used to identify the customer.
+ * @param {object} address The customer mailing address to create.
+ * @param {string} id Specifies the customer address to update.
+ */
+export const customerAddressUpdate = ({ accessToken, address, id }) => `
+  mutation {
+    customerAddressUpdate(
+      customerAccessToken: "${accessToken}",
+      id: "${id}",
+      address: {
+        address1: "${address.address1}",
+        address2: "${address.address2}",
+        city: "${address.city}",
+        country: "${address.country}",
+        firstName: "${address.firstName}",
+        lastName: "${address.lastName}",
+        phone: "${address.phone}",
+        province: "${address.province}",
+        zip: "${address.zip}"
+      }
+    ) {
+      customerAddress {
+        id
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`
+
 export const customerCreate = ({ email, password }) => `
   mutation {
     customerCreate(input: {
@@ -82,6 +135,23 @@ export const customerCreate = ({ email, password }) => `
       }
       customer {
         id
+      }
+    }
+  }
+`
+
+/**
+ * Updates the default address of an existing customer.
+ * @param {string} accessToken The access token used to identify the customer.
+ * @param {object} addressId ID of the address to set as the new default for the customer.
+ */
+export const customerDefaultAddressUpdate = ({ accessToken, addressId }) => `
+  mutation {
+    customerDefaultAddressUpdate(customerAccessToken: "${accessToken}", addressId: "${addressId}") {
+      customerUserErrors {
+        code
+        field
+        message
       }
     }
   }

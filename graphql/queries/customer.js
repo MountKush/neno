@@ -20,6 +20,19 @@ export const customerAddresses = ({ accessToken }) => `
 `
 
 /**
+ * Queries a customer's default address
+ */
+export const customerDefaultAddress = ({ accessToken }) => `
+  query {
+    customer(customerAccessToken: "${accessToken}") {
+      defaultAddress {
+        id
+      }
+    }
+  }
+`
+
+/**
  * Queries a customer's orders
  */
 export const customerOrders = ({ accessToken }) => `

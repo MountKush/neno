@@ -12,13 +12,11 @@ main(class='vue-app')
   AppFooter
 </template>
 
-
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import AppFooter from '~comp/app/Footer.vue'
 import AppNavigationBar from '~comp/app/NavigationBar.vue'
 import AppPredictiveSearch from '~comp/compositions/PredictiveSearch.vue'
-
 
 export default {
   components: {
@@ -69,7 +67,6 @@ export default {
 }
 </script>
 
-
 <style lang='sass'>
 @import './assets/sass/main.sass'
 
@@ -90,5 +87,4 @@ export default {
 .fade-enter,
 .fade-leave-to
   opacity: 0
-
 </style>

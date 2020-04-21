@@ -5,10 +5,18 @@ import {
   extend,
   setInteractionMode
 } from 'vee-validate'
-import { required } from 'vee-validate/dist/rules'
+import {
+  alpha_spaces,
+  required
+} from 'vee-validate/dist/rules'
 import {
   isAlpha,
-  isEmail
+  isAlphanumeric,
+  isAscii,
+  isBoolean,
+  isEmail,
+  isMobilePhone,
+  isNumeric
 } from 'validator'
 
 /**
@@ -20,12 +28,37 @@ setInteractionMode('eager')
 /**
  * Check if the string contains only letters (a-zA-Z)
  */
-extend('isAlpha', (value) => isAlpha(value))
+extend('isAlpha', alpha_spaces)
+
+/**
+ * Check if the string contains only letters and numbers
+ */
+extend('isAlphanumeric', (value) => isAlphanumeric(value))
+
+/**
+ * Check if the string contains ASCII chars only
+ */
+extend('isAscii', (value) => isAscii(value))
+
+/**
+ * Check if a string is a boolean
+ */
+extend('isBoolean', (value) => isBoolean(value.toString()))
 
 /**
  * Check if the string is an email
  */
 extend('isEmail', (value) => isEmail(value))
+
+/**
+ * Check if the string is a mobile phone number
+ */
+extend('isMobilePhone', (value) => isMobilePhone(value))
+
+/**
+ * Check if the string contains only numbers
+ */
+extend('isNumeric', (value) => isNumeric(value))
 
 /**
  * Check if the string is present

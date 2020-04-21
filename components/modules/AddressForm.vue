@@ -1,5 +1,5 @@
 <template lang='pug'>
-ValidationObserver(v-slot='{ invalid, handleSubmit }')
+ValidationObserver(v-slot='{ pristine, invalid, handleSubmit }')
   form(
     @submit.prevent='handleSubmit(onSubmit)'
     class='address-form'
@@ -20,57 +20,69 @@ ValidationObserver(v-slot='{ invalid, handleSubmit }')
     )
     BaseInput(
       v-model='address.address1'
+      rules='required|isAscii'
       label='Address'
       placeholder='Address'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.address2'
+      rules='isAscii'
       placeholder='Apartment, suite, etc (optional)'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.city'
+      rules='required|isAlpha'
       label='City'
       placeholder='City'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.country'
+      rules='required|isAlpha'
       label='Country'
       placeholder='Country'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.province'
+      rules='required|isAlpha'
       label='State'
       placeholder='State'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.zip'
+      rules='required|isNumeric'
       label='Zipcode'
-      placeholder=''
+      placeholder='Zipcode'
       class='address-form__input'
     )
     BaseInput(
       v-model='address.phone'
+      rules='required|isNumeric'
       label='Phone Number'
       placeholder='Phone Number'
       class='address-form__input'
     )
-    BaseCheckbox(
-      text='Make this your default shipping address?'
-      class='address-form__input'
-    )
     BaseButton(
-      :disabled='invalid'
+      :disabled='invalid || pristine'
       text='Save'
       class='address-form__button'
+    )
+    Button(
+      v-if='showDeleteButton'
+      @click='$emit("delete")'
+      text='Delete'
+      type='button'
+      class='address-form__button address-form__button--danger'
     )
 </template>
 
 <script>
+import Button from '~/components/elements/Button.vue'
+
 const addressData = {
   address1: '',
   address2: '',
@@ -84,7 +96,9 @@ const addressData = {
 }
 
 export default {
-  components: {},
+  components: {
+    Button
+  },
   props: {
     address1: {
       type: String,
@@ -101,10 +115,6 @@ export default {
     country: {
       type: String,
       default: ''
-    },
-    error: {
-      type: Object,
-      default: () => null
     },
     firstName: {
       type: String,
@@ -125,6 +135,10 @@ export default {
     zip: {
       type: String,
       default: ''
+    },
+    showDeleteButton: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -160,4 +174,9 @@ export default {
     &:nth-child(n+3):nth-child(-n+5),
     &:nth-child(10)
       grid-column: 1 / -1
+
+  &__button
+
+    &--danger
+      background: $error
 </style>

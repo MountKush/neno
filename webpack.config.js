@@ -82,10 +82,5 @@ module.exports = {
       '~': srcDir,
       '~comp': path.join(srcDir, 'components')
     }
-  },
-  devServer: {
-    proxy: {
-      '/': 'http://feed-me-sugar.myshopify.com'
-    }
   }
 }

@@ -1,16 +1,20 @@
 <template lang='pug'>
-label(class='base-label')
-  span(
-    v-if='label'
-    class='base-label__text'
-  ) {{ label }}
-  input(
-    v-bind='$attrs'
-    v-on='listeners'
-    type='checkbox'
-    class='base-input'
-  )
-  p {{ text }}
+ValidationProvider(
+  :rules='rules'
+  v-slot='{ failed }'
+)
+  label(class='base-label')
+    span(
+      v-if='label'
+      class='base-label__text'
+    ) {{ label }}
+    input(
+      v-bind='$attrs'
+      v-on='listeners'
+      type='checkbox'
+      class='base-input'
+    )
+    p {{ text }}
 </template>
 
 <script>
@@ -24,6 +28,10 @@ export default {
     text: {
       type: String,
       default: ''
+    },
+    rules: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -33,7 +41,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: event => this.$emit('input', event.target.value)
+        input: event => this.$emit('input', event.target.checked)
       }
     }
   }

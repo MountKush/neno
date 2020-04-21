@@ -14,6 +14,10 @@ export default {
     Vue.set(state, 'activeAddress', address)
   },
 
+  DELETE_ACTIVE_ADDRESS (state) {
+    Vue.delete(state, 'activeAddress')
+  },
+
   SET_ADDRESSES (state, { addresses }) {
     Vue.set(state, 'addresses', addresses)
   },

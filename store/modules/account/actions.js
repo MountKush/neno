@@ -1,15 +1,22 @@
 import axios from 'axios'
+import { isEmpty } from 'lodash'
 import { storefront } from '~/utils/shopify-storefront'
+import { encodeCustomerId } from '~/utils/encode-customer-id'
+/** Storefront queries */
 import {
-  customerOrders,
-  customerAddresses
+  customerAddresses,
+  customerDefaultAddress,
+  customerOrders
 } from '~/graphql/queries/customer'
 import { order } from '~/graphql/queries/order'
 import { mailingAddress } from '~/graphql/queries/mailing-address'
+/** Storefront mutations */
 import {
-  customerAddressCreate
+  customerAddressCreate,
+  customerAddressDelete,
+  customerAddressUpdate,
+  customerDefaultAddressUpdate
 } from '~/graphql/mutations/customer'
-import { encodeCustomerId } from '~/utils/encode-customer-id'
 
 
 export default {
@@ -17,7 +24,6 @@ export default {
     const { data, status } = await storefront({
       data: order({ orderId })
     })
-    console.log('fetchOrder: ', data)
     const { node } = data.data
     commit('SET_ACTIVE_ORDER', { order: node })
   },
@@ -35,7 +41,6 @@ export default {
     const { data, status } = await storefront({
       data: mailingAddress({ addressId })
     })
-    console.log('fetchOrder: ', data)
     const { node } = data.data
     commit('SET_ACTIVE_ADDRESS', { address: node })
   },
@@ -50,13 +55,51 @@ export default {
     commit('SET_DEFAULT_ADDRESS', { defaultAddress })
   },
 
-  async createAddress ({ commit, rootState }, address) {
+  async fetchDefaultAddress ({ commit, rootState }) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerDefaultAddress({ accessToken })
+    })
+    const { defaultAddress } = data.data.customer
+    commit('SET_DEFAULT_ADDRESS', { defaultAddress })
+  },
+
+  async createAddress ({ commit, dispatch, rootState }, address) {
     const { accessToken } = rootState.auth.customer
     const { data, status } = await storefront({
       data: customerAddressCreate({ accessToken, address })
     })
-    console.log('createAddress data: ', data)
     const { customerAddress, customerUserErrors } = data.data.customerAddressCreate
-    if (customerUserErrors) throw customerUserErrors[0]
+    if (!isEmpty(customerUserErrors)) throw customerUserErrors[0]
+    if (address.isDefault) await dispatch('updateDefaultAddress', customerAddress.id)
+  },
+
+  async deleteAddress ({ commit, dispatch, rootState }, id) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerAddressDelete({ accessToken, id })
+    })
+    const { customerUserErrors } = data.data.customerAddressDelete
+    if (!isEmpty(customerUserErrors)) throw customerUserErrors[0]
+  },
+
+  async updateAddress ({ commit, dispatch, rootState }, { address, id }) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerAddressUpdate({ accessToken, address, id })
+    })
+    const { customerUserErrors } = data.data.customerAddressUpdate
+    if (!isEmpty(customerUserErrors)) throw customerUserErrors[0]
+    if (address.isDefault) await dispatch('updateDefaultAddress', id)
+  },
+
+  async updateDefaultAddress ({ commit, rootState }, addressId) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerDefaultAddressUpdate({ accessToken, addressId })
+    })
+    const { customerUserErrors } = data.data.customerDefaultAddressUpdate
+    if (!isEmpty(customerUserErrors)) throw customerUserErrors[0]
+    commit('SET_DEFAULT_ADDRESS', { defaultAddress: { id: addressId }})
   },
 }

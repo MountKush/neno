@@ -1,13 +1,17 @@
 <template lang='pug'>
 ValidationProvider(
   :rules='rules'
-  v-slot='{ failed }'
+  v-slot='{ failed, required }'
 )
   label(class='base-label')
     span(
       v-if='label'
       class='base-label__text'
     ) {{ label }}
+      span(
+        v-if='required'
+        class='base-label__required'
+      ) &nbsp;*
     input(
       v-bind='$attrs'
       v-on='listeners'
@@ -49,7 +53,9 @@ export default {
   grid-gap: $unit/2 0
 
   &__label
-    font-size: 14px
+
+  &__required
+    color: $error
 
 .base-input
   height: $unit*6

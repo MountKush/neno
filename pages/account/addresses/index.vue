@@ -14,21 +14,26 @@ div(class='container')
           | New Address
 
       li(
-        v-for='(address, index) in addresses'
+        v-for='(address, index) in addresses.sort((a, b) => b.isDefaultAddress - a.isDefaultAddress)'
         class='addresses__item'
       )
-        span(
-          v-if='address.isDefaultAddress'
-          class='addresses__label'
-        ) Default Address
         p(class='addresses__address')
           span(
             v-for='(row, index) in address.formatted'
           ) {{ row }}
         router-link(
           :to='{ name: "account-addresses-id", params: { id: address.id }}'
-          class='addresses__edit'
+          class='addresses__link'
         ) Edit
+        button(
+          v-if='!address.isDefaultAddress'
+          @click='updateDefaultAddress(address.id)'
+          class='addresses__link'
+        ) Make Default
+        p(
+          v-else
+          class='addresses__label'
+        ) Default Address
 </template>
 
 <script>
@@ -53,7 +58,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchAddresses: 'account/fetchAddresses'
+      fetchAddresses: 'account/fetchAddresses',
+      updateDefaultAddress: 'account/updateDefaultAddress'
     })
   },
   created() {
@@ -76,17 +82,19 @@ export default {
     min-height: $unit*20
     position: relative
     display: grid
-    align-items: end
+    grid-template-rows: 1fr auto
+    grid-template-columns: auto 1fr
+    grid-gap: $unit*2
+    justify-items: start
     padding: $unit*2
     background: $pri-cl
 
   &__label
     font-weight: $fw-bold
-    margin-bottom: $unit
 
   &__address
+    grid-column: 1 / -1
     display: grid
-    margin-bottom: auto
 
   &__link-new
     @extend %flex--column-center
@@ -102,9 +110,8 @@ export default {
   &__icon
     margin-bottom: $unit
 
-  &__edit
-    justify-self: start
-    margin-top: $unit
+  &__link
+    background: transparent
     color: $blue
 
     &:hover

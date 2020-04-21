@@ -1,7 +1,6 @@
 <template lang='pug'>
 div(class='new-address')
   AddressForm(
-    :error='error'
     @submit='handleSubmit'
   )
 </template>
@@ -16,20 +15,15 @@ export default {
   },
   props: {},
   data () {
-    return {
-      error: null
-    }
+    return {}
   },
   computed: {},
   methods: {
     async handleSubmit(address) {
       try {
-        console.log('address: ', address)
         await this.createCustomerAddress(address)
         this.$router.push({ name: 'account-addresses' })
       } catch (e) {
-        console.error(e)
-        this.error = e
         this.$toasted.global.error({
           title: 'Error',
           message: `${e.message}`
