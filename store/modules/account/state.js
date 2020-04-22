@@ -3,5 +3,6 @@ export default {
   orders: null,
   activeAddress: null,
   addresses: null,
-  defaultAddress: null
+  defaultAddress: null,
+  personalData: null
 }

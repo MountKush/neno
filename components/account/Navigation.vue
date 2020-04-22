@@ -60,7 +60,7 @@ export default {
         },
         {
           text: 'Personal Data',
-          to: '/account/personalData',
+          to: '/account/personal-data',
           icon: IconPersonalInfo
         },
         {

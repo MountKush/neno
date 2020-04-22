@@ -74,3 +74,18 @@ export const customerOrders = ({ accessToken }) => `
     }
   }
 `
+
+/**
+ * Queries a customer's personal data
+ */
+export const customerPersonalData = ({ accessToken }) => `
+  query {
+    customer(customerAccessToken: "${accessToken}") {
+      acceptsMarketing
+      email
+      firstName
+      lastName
+      phone
+    }
+  }
+`

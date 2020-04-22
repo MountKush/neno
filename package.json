@@ -18,6 +18,7 @@
     "axios": "^0.19.2",
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.15",
+    "phone": "^2.4.9",
     "v-scroll-lock": "^1.1.0",
     "validator": "^13.0.0",
     "vee-validate": "^3.2.5",

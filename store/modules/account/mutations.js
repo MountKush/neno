@@ -26,7 +26,7 @@ export default {
     Vue.set(state, 'defaultAddress', defaultAddress)
   },
 
-  DELETE_CUSTOMER (state) {
-    state.customer = {}
+  SET_PERSONAL_DATA (state, { customer }) {
+    Vue.set(state, 'personalData', customer)
   }
 }

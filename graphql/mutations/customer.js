@@ -209,3 +209,57 @@ export const customerResetByUrl = ({ resetUrl, password }) => `
     }
   }
 `
+
+/**
+ * Updates an existing customer.
+ * @param {string} accessToken The access token used to identify the customer.
+ * @param {object} customer The customer object input.
+ */
+export const customerPersonalDataUpdate = ({ accessToken, customer }) => `
+  mutation {
+    customerUpdate(
+      customerAccessToken: "${accessToken}",
+      customer: {
+        acceptsMarketing: ${customer.acceptsMarketing},
+        email: "${customer.email}",
+        firstName: "${customer.firstName}",
+        lastName: "${customer.lastName}",
+        phone: "${customer.phone}"
+      }
+    ) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`
+
+/**
+ * Updates an existing customer.
+ * @param {string} accessToken The access token used to identify the customer.
+ * @param {string} password The login password used by the customer.
+ */
+export const customerPasswordUpdate = ({ accessToken, password }) => `
+  mutation {
+    customerUpdate(
+      customerAccessToken: "${accessToken}",
+      customer: { password: "${password}" }
+    ) {
+      customerAccessToken {
+        accessToken
+        expiresAt
+      }
+      customerUserErrors {
+        code
+        field
+        message
+      }
+    }
+  }
+`

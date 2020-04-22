@@ -113,7 +113,7 @@ export const routes = [
         component: AccountPassword
       },
       {
-        path: 'personalData',
+        path: 'personal-data',
         name: 'account-personal-data',
         component: AccountPersonalData
       }

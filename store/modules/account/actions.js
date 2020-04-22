@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { isEmpty } from 'lodash'
+import phone from 'phone'
 import { storefront } from '~/utils/shopify-storefront'
 import { encodeCustomerId } from '~/utils/encode-customer-id'
 /** Storefront queries */
 import {
   customerAddresses,
   customerDefaultAddress,
-  customerOrders
+  customerOrders,
+  customerPersonalData
 } from '~/graphql/queries/customer'
 import { order } from '~/graphql/queries/order'
 import { mailingAddress } from '~/graphql/queries/mailing-address'
@@ -15,7 +17,9 @@ import {
   customerAddressCreate,
   customerAddressDelete,
   customerAddressUpdate,
-  customerDefaultAddressUpdate
+  customerDefaultAddressUpdate,
+  customerPersonalDataUpdate,
+  customerPasswordUpdate
 } from '~/graphql/mutations/customer'
 
 
@@ -102,4 +106,39 @@ export default {
     if (!isEmpty(customerUserErrors)) throw customerUserErrors[0]
     commit('SET_DEFAULT_ADDRESS', { defaultAddress: { id: addressId }})
   },
+
+  async fetchPersonalData ({ commit, rootState }) {
+    const { accessToken } = rootState.auth.customer
+    const { data, status } = await storefront({
+      data: customerPersonalData({ accessToken })
+    })
+    const { customer } = data.data
+    console.log('customer: ', customer)
+    commit('SET_PERSONAL_DATA', { customer })
+  },
+
+  async updatePersonalData ({ commit, rootState }, customer) {
+    const { data, status } = await storefront({
+      data: customerPersonalDataUpdate({
+        accessToken: rootState.auth.customer.accessToken,
+        customer: { ...customer, phone: phone(customer.phone)[0] }
+      })
+    })
+    const { customerUpdate } = data.data
+    // const { accessToken, expiresAt } = customerUpdate.customerAccessToken
+    // commit('auth/SET_CUSTOMER', { accessToken, expiresAt }, { root: true })
+  },
+
+  async updatePassword ({ commit, rootState }, password) {
+    const { data, status } = await storefront({
+      data: customerPasswordUpdate({
+        accessToken: rootState.auth.customer.accessToken,
+        customer: { password }
+      })
+    })
+    const { customerUpdate } = data.data
+    console.log('customerUpdate: ', customerUpdate)
+    const { accessToken, expiresAt } = customerUpdate.customerAccessToken
+    commit('auth/SET_CUSTOMER', { accessToken, expiresAt }, { root: true })
+  }
 }

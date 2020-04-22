@@ -6,7 +6,7 @@ div(class='container-login')
       h2(class='login__title') RESET PASSWORD
 
     form(
-      @submit.prevent='resetPassword'
+      @submit.prevent='recoverPassword'
       class='login__form'
     )
       BaseInput(
