@@ -2,18 +2,27 @@
 button(
   v-on='listeners'
   class='base-button'
+  :class='{ loading }'
 )
   span(class='base-button__text') {{ text }}
-  BaseLoader(class='base-button__loader')
+  Loader(class='base-button__loader')
 </template>
 
-
 <script>
+import Loader from '~/components/elements/Loader.vue'
+
 export default {
+  components: {
+    Loader
+  },
   props: {
     text: {
       type: String,
       default: 'Submit'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -30,7 +39,6 @@ export default {
   methods: {}
 }
 </script>
-
 
 <style lang='sass' scoped>
 .base-button

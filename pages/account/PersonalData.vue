@@ -40,8 +40,9 @@ div(class='personal-data')
         text='Consent to be sent marketing material via email'
         class='personal-data__input'
       )
-      BaseButton(
-        :disabled='invalid || pristine'
+      Button(
+        :disabled='invalid || pristine || isSubmitInProgress'
+        :loading='isSubmitInProgress'
         text='Save'
         class='personal-data__button'
       )
@@ -49,6 +50,7 @@ div(class='personal-data')
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import Button from '~/components/elements/Button.vue'
 
 const formData = {
   acceptsMarketing: false,
@@ -59,11 +61,14 @@ const formData = {
 }
 
 export default {
-  components: {},
+  components: {
+    Button
+  },
   props: {},
   data () {
     return {
-      form: { ...formData }
+      form: { ...formData },
+      isSubmitInProgress: false
     }
   },
   computed: {
@@ -73,11 +78,8 @@ export default {
   },
   watch: {
     personalData(personalData) {
-      if (personalData) {
-        Object.keys(this.form).forEach(
-          (key) => this.form[key] = personalData[key]
-        )
-      }
+      if (personalData) Object.keys(this.form)
+        .forEach((key) => this.form[key] = personalData[key])
     }
   },
   created() {
@@ -85,7 +87,21 @@ export default {
   },
   methods: {
     async onSubmit() {
-      await this.updatePersonalData(this.form)
+      try {
+        this.isSubmitInProgress = true
+        await this.updatePersonalData(this.form)
+        this.$toasted.global.success({
+          title: 'Success',
+          message: `Personal data has been updated.`
+        })
+      } catch (e) {
+        this.$toasted.global.error({
+          title: 'Error',
+          message: `${e.message}`
+        })
+      } finally {
+        this.isSubmitInProgress = false
+      }
     },
 
     ...mapActions({

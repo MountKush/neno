@@ -48,6 +48,11 @@ export default {
           password: this.password
         })
         console.log('reset password')
+        this.$toasted.global.success({
+          title: 'Success',
+          message: `Password has been changed.`
+        })
+        this.$router.push({ name: 'account' })
       }
       catch (e) {
         // console.error(e)

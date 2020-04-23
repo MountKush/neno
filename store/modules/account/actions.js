@@ -130,6 +130,7 @@ export default {
   },
 
   async updatePassword ({ commit, rootState }, password) {
+    console.log('password: ', password)
     const { data, status } = await storefront({
       data: customerPasswordUpdate({
         accessToken: rootState.auth.customer.accessToken,
@@ -138,7 +139,7 @@ export default {
     })
     const { customerUpdate } = data.data
     console.log('customerUpdate: ', customerUpdate)
-    const { accessToken, expiresAt } = customerUpdate.customerAccessToken
-    commit('auth/SET_CUSTOMER', { accessToken, expiresAt }, { root: true })
+    // const { accessToken, expiresAt } = customerUpdate.customerAccessToken
+    // commit('auth/SET_CUSTOMER', { accessToken, expiresAt }, { root: true })
   }
 }

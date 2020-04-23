@@ -1,32 +1,77 @@
 <template lang='pug'>
 div(class='password')
-  form(class='password__form')
-    BaseInput(
-      label='New Password'
-      type='password'
-      class='password__input'
+  ValidationObserver(v-slot='{ pristine, invalid, handleSubmit }')
+    form(
+      @submit.prevent='handleSubmit(onSubmit)'
+      class='password__form'
     )
-    BaseInput(
-      label='Confirm New Password'
-      type='password'
-      class='password__input'
-    )
-    BaseButton(
-      text='Change Password'
-    )
+      Input(
+        v-model='password'
+        rules='required|matchValue:@confirm'
+        label='New Password'
+        placeholder='Password'
+        type='password'
+        class='password__input'
+      )
+      Input(
+        v-model='passwordConfirmation'
+        name='confirm'
+        rules='required'
+        label='Confirm New Password'
+        placeholder='Confirm Password'
+        type='password'
+        class='password__input'
+      )
+      Button(
+        :disabled='invalid || pristine || isSubmitInProgress'
+        :loading='isSubmitInProgress'
+        text='Change Password'
+      )
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import Button from '~/components/elements/Button.vue'
+import Input from '~/components/elements/Input.vue'
+
 export default {
-  components: {},
+  components: {
+    Input,
+    Button
+  },
   props: {},
   data () {
     return {
-      password: ''
+      password: '',
+      passwordConfirmation: '',
+      isSubmitInProgress: false
     }
   },
   computed: {},
-  methods: {}
+  methods: {
+    async onSubmit() {
+      try {
+        this.isSubmitInProgress = true
+        await this.updatePassword(this.password)
+        this.$toasted.global.success({
+          title: 'Success',
+          message: `Password has been updated.`
+        })
+      } catch (e) {
+        console.error(e)
+        this.$toasted.global.error({
+          title: 'Error',
+          message: `${e.message}`
+        })
+      } finally {
+        this.isSubmitInProgress = false
+      }
+    },
+
+    ...mapActions({
+      updatePassword: 'account/updatePassword'
+    })
+  }
 }
 </script>
 

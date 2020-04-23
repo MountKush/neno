@@ -11,7 +11,6 @@ import {
 import { encodeCustomerId } from '~/utils/encode-customer-id'
 
 
-
 export default {
   initCustomerState ({ commit }) {
     const customer = JSON.parse(
@@ -27,9 +26,12 @@ export default {
 
 
   async signIn ({ commit }, { email, password }) {
+    console.log('email: ', email)
+    console.log('password: ', password)
     const { data, status } = await storefront({
       data: customerAccessTokenCreate({ email, password })
     })
+    console.log('data: ', data)
     const { accessToken, expiresAt } = data.data.customerAccessTokenCreate.customerAccessToken
     commit('SET_CUSTOMER', { accessToken, expiresAt })
     localStorage.setItem('customer', JSON.stringify({ accessToken, expiresAt }))

@@ -61,6 +61,17 @@ extend('isMobilePhone', (value) => isMobilePhone(value))
 extend('isNumeric', (value) => isNumeric(value))
 
 /**
+ * Check if the string matches target value
+ */
+extend('matchValue', {
+  params: ['target'],
+  validate(value, { target }) {
+    return value === target
+  },
+  message: 'Password confirmation does not match'
+});
+
+/**
  * Check if the string is present
  */
 extend('required', required)

@@ -72,7 +72,7 @@ export default {
         this.$router.push({ name: 'account' })
       }
       catch (e) {
-        // console.error(e)
+        console.error(e)
         // this.handleError({ errorMessage: e })
       }
     },
