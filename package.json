@@ -17,7 +17,7 @@
     "@vue/composition-api": "^0.5.0",
     "axios": "^0.19.2",
     "dotenv-webpack": "^1.7.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "phone": "^2.4.9",
     "v-scroll-lock": "^1.1.0",
     "validator": "^13.0.0",
