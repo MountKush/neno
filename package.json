@@ -20,7 +20,7 @@
     "lodash": "^4.17.15",
     "phone": "^2.4.9",
     "v-scroll-lock": "^1.1.0",
-    "validator": "^13.0.0",
+    "validator": "^13.7.0",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
