@@ -46,7 +46,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.2",
     "file-loader": "^6.0.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
